@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KingdomsReborn — Wiki</title>
+<style>
+  :root {
+    --bg: #0b0c10;
+    --bg2: #13151c;
+    --bg3: #1c1f2b;
+    --bg4: #242838;
+    --border: #2e3348;
+    --gold: #f0b429;
+    --gold2: #d97706;
+    --gold-dim: #7c5a1a;
+    --text: #cdd6f4;
+    --text2: #a6adc8;
+    --text3: #6c7086;
+    --green: #a6e3a1;
+    --red: #f38ba8;
+    --blue: #89b4fa;
+    --aqua: #94e2d5;
+    --yellow: #f9e2af;
+    --purple: #cba6f7;
+    --sidebar-w: 280px;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-logo {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo h1 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--gold), #fde68a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sidebar-logo p {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  .sidebar-section {
+    padding: 14px 12px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    font-size: 13.5px;
+    color: var(--text2);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    border-radius: 0 6px 6px 0;
+    margin-right: 8px;
+  }
+  .sidebar-nav a:hover {
+    color: var(--text);
+    background: var(--bg3);
+    border-left-color: var(--gold-dim);
+  }
+  .sidebar-nav a.active {
+    color: var(--gold);
+    background: rgba(240,180,41,0.08);
+    border-left-color: var(--gold);
+    font-weight: 600;
+  }
+  .sidebar-nav a .icon { font-size: 14px; width: 18px; text-align: center; }
+  .sidebar-sub { padding-left: 28px; }
+  .sidebar-sub a { font-size: 13px; padding: 5px 12px; }
+
+  /* ── MAIN ── */
+  #content {
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 56px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADINGS ── */
+  h1.page-title {
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold) 0%, #fde68a 60%, var(--gold2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .page-subtitle {
+    color: var(--text3);
+    font-size: 15px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 48px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text2);
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  p { color: var(--text2); margin-bottom: 12px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ── SECTION CARDS ── */
+  .section { margin-bottom: 16px; }
+
+  /* ── COMMAND TABLE ── */
+  .cmd-grid {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .cmd-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    align-items: start;
+    transition: border-color 0.15s;
+  }
+  .cmd-item:hover { border-color: var(--gold-dim); }
+  .cmd-name {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    color: var(--gold);
+    background: rgba(240,180,41,0.1);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .cmd-desc { color: var(--text2); font-size: 13.5px; }
+  .cmd-perm {
+    grid-column: 1 / -1;
+    font-size: 11.5px;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .badge-all { background: rgba(166,227,161,0.15); color: var(--green); }
+  .badge-owner { background: rgba(249,226,175,0.15); color: var(--yellow); }
+  .badge-admin { background: rgba(137,180,250,0.15); color: var(--blue); }
+  .badge-member { background: rgba(148,226,213,0.15); color: var(--aqua); }
+
+  /* ── GUI CARDS ── */
+  .gui-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .gui-card-header {
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .gui-card-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gui-card-meta {
+    font-size: 12px;
+    color: var(--text3);
+    background: var(--bg4);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ── SLOT GRID ── */
+  .slot-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .slot-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text3);
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .slot-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(46,51,72,0.5);
+    font-size: 13.5px;
+    vertical-align: top;
+  }
+  .slot-table tr:last-child td { border-bottom: none; }
+  .slot-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .slot-num {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    white-space: nowrap;
+  }
+  .slot-item {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .slot-desc { color: var(--text2); font-size: 13px; }
+  .slot-note {
+    font-size: 11.5px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  /* ── COLOR LEGEND ── */
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .legend-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .legend-label { color: var(--text2); }
+
+  /* ── CONFIG TABLE ── */
+  .config-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  .config-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text3);
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .config-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(46,51,72,0.5);
+    vertical-align: top;
+  }
+  .config-table tr:last-child td { border-bottom: none; }
+  .config-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .config-key {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 12.5px;
+    color: var(--blue);
+  }
+  .config-val {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 12.5px;
+    color: var(--green);
+  }
+  .config-desc { color: var(--text2); }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 14px 0;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  code {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    background: var(--bg3);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: var(--gold);
+    border: 1px solid var(--border);
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+    color: inherit;
+  }
+  .code-comment { color: var(--text3); }
+  .code-key { color: var(--blue); }
+  .code-val { color: var(--green); }
+  .code-str { color: var(--yellow); }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    margin: 16px 0;
+    border-left: 3px solid;
+    font-size: 13.5px;
+  }
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { color: var(--text2); }
+  .callout-body strong { display: block; margin-bottom: 3px; }
+  .callout-tip {
+    background: rgba(166,227,161,0.07);
+    border-color: var(--green);
+  }
+  .callout-tip .callout-icon { color: var(--green); }
+  .callout-warn {
+    background: rgba(249,226,175,0.07);
+    border-color: var(--yellow);
+  }
+  .callout-warn .callout-icon { color: var(--yellow); }
+  .callout-info {
+    background: rgba(137,180,250,0.07);
+    border-color: var(--blue);
+  }
+  .callout-info .callout-icon { color: var(--blue); }
+
+  /* ── STEPS ── */
+  .steps { margin: 16px 0; }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #000;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content { color: var(--text2); font-size: 14px; }
+  .step-content strong { color: var(--text); }
+
+  /* ── MECHANIC CARDS ── */
+  .mech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .mech-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .mech-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+  .mech-card-icon { font-size: 24px; margin-bottom: 8px; }
+  .mech-card h4 { color: var(--gold); margin: 0 0 6px; text-transform: none; letter-spacing: 0; font-size: 14px; }
+  .mech-card p { font-size: 13px; margin: 0; }
+
+  /* ── INVENTORY VISUAL ── */
+  .inv-preview {
+    background: #2d2d2d;
+    border: 3px solid #555;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 16px 0;
+    display: inline-block;
+  }
+  .inv-row { display: flex; gap: 4px; margin-bottom: 4px; }
+  .inv-slot {
+    width: 40px;
+    height: 40px;
+    background: #8b8b8b;
+    border: 2px solid;
+    border-top-color: #fff;
+    border-left-color: #fff;
+    border-bottom-color: #373737;
+    border-right-color: #373737;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    position: relative;
+    cursor: default;
+    border-radius: 2px;
+  }
+  .inv-slot.center { background: #d4a017; border-color: #ffd700; }
+  .inv-slot.owned { background: #1e3a5f; }
+  .inv-slot.enemy { background: #5f1e1e; }
+  .inv-slot.selected { background: #1e5f1e; }
+  .inv-slot.free { background: #2e5f2e; }
+  .inv-slot.nav { background: #3d4455; }
+  .inv-slot.black { background: #1a1a1a; }
+  .inv-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    position: absolute;
+    bottom: 1px;
+    right: 2px;
+    line-height: 1;
+  }
+
+  /* ── BIOME TABLE ── */
+  .biome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 6px;
+    margin: 12px 0;
+  }
+  .biome-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 12.5px;
+    color: var(--text2);
+  }
+  .biome-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text3);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    padding: 12px 12px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--gold-dim); }
+  .search-input::placeholder { color: var(--text3); }
+
+  /* ── SCROLLSPY HIGHLIGHT ── */
+  section { scroll-margin-top: 24px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #sidebar { display: none; }
+    #content { padding: 24px 20px; max-width: 100%; }
+    .mech-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .legend-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <h1>🏰 KingdomsReborn</h1>
+    <p>Plugin-Dokumentation · v1.0 MVP</p>
+  </div>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" placeholder="Suchen…" id="searchInput" oninput="filterNav(this.value)">
+  </div>
+
+  <div id="navLinks">
+    <div class="sidebar-section">Einführung</div>
+    <div class="sidebar-nav">
+      <a href="#overview" class="active"><span class="icon">📖</span> Überblick</a>
+      <a href="#quickstart"><span class="icon">⚡</span> Schnellstart</a>
+    </div>
+
+    <div class="sidebar-section">Befehle</div>
+    <div class="sidebar-nav">
+      <a href="#cmd-kingdom"><span class="icon">⚔</span> /kingdom</a>
+      <a href="#cmd-war"><span class="icon">🔥</span> /war</a>
+    </div>
+
+    <div class="sidebar-section">GUIs</div>
+    <div class="sidebar-nav">
+      <a href="#gui-main"><span class="icon">🏠</span> Hauptmenü</a>
+      <a href="#gui-create"><span class="icon">✨</span> Kingdom erstellen</a>
+      <a href="#gui-browser"><span class="icon">🌍</span> Kingdoms erkunden</a>
+      <a href="#gui-map"><span class="icon">🗺</span> Gebiets-Karte</a>
+      <a href="#gui-bank"><span class="icon">💰</span> Bank</a>
+      <a href="#gui-members"><span class="icon">👥</span> Mitglieder</a>
+      <a href="#gui-settings"><span class="icon">⚙</span> Einstellungen</a>
+      <a href="#gui-transfer"><span class="icon">💸</span> Überweisung</a>
+      <a href="#gui-debt"><span class="icon">📋</span> Schulden</a>
+      <a href="#gui-shop"><span class="icon">🛒</span> Shop</a>
+      <a href="#gui-war"><span class="icon">⚔</span> Krieg</a>
+    </div>
+
+    <div class="sidebar-section">Konfiguration</div>
+    <div class="sidebar-nav">
+      <a href="#config-main"><span class="icon">🔧</span> config.yml</a>
+      <a href="#config-lang"><span class="icon">💬</span> Sprache</a>
+    </div>
+
+    <div class="sidebar-section">Mechaniken</div>
+    <div class="sidebar-nav">
+      <a href="#mech-bank"><span class="icon">🏦</span> Bank-Block</a>
+      <a href="#mech-claim"><span class="icon">🗺</span> Gebiete</a>
+      <a href="#mech-war"><span class="icon">⚔</span> Kriege</a>
+      <a href="#mech-display"><span class="icon">📊</span> Scoreboard & Tab</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════ -->
+<main id="content">
+
+  <!-- HERO -->
+  <h1 class="page-title">🏰 KingdomsReborn Wiki</h1>
+  <p class="page-subtitle">Vollständige Dokumentation — Befehle · GUIs · Konfiguration · Mechaniken</p>
+
+  <!-- ─── ÜBERBLICK ─── -->
+  <section id="overview">
+    <h2>📖 Überblick</h2>
+    <p>KingdomsReborn ist ein PaperMC 1.21-Plugin für Kingdom-basiertes Gruppenspiel. Spieler gründen Kingdoms, beanspruchen Chunks, verwalten eine Bank und führen Kriege gegen andere Kingdoms.</p>
+
+    <div class="mech-grid">
+      <div class="mech-card">
+        <div class="mech-card-icon">🏰</div>
+        <h4>Kingdoms</h4>
+        <p>Erstelle und verwalte dein eigenes Kingdom mit Mitgliedern, Rollen und eigenem Namen & Farbe.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">🗺</div>
+        <h4>Gebiete</h4>
+        <p>Beanspruche Chunks per Karten-GUI. Navigiere zu jedem Chunk um ihn zu sichern.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">💰</div>
+        <h4>Bank</h4>
+        <p>Verwalte Gold mit Barrel-Bank-Blocks, Erweiterungen, Lagerstufen und Überweisungen.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">⚔</div>
+        <h4>Kriege</h4>
+        <p>Kämpfe um Chunks feindlicher Kingdoms. Kills entscheiden den Sieger.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ</span>
+      <div class="callout-body">
+        <strong>Kein Chat nötig</strong>
+        Alle Texteingaben (Kingdom-Name, Überweisung, Suche, Umbenennen) laufen über einen <strong>Amboss-Dialog</strong> direkt im GUI — der Chat bleibt unberührt.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SCHNELLSTART ─── -->
+  <section id="quickstart">
+    <h2>⚡ Schnellstart</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Kingdom gründen:</strong> Tippe <code>/k</code> → klicke <em>Kingdom erstellen</em> → gib einen Namen im Amboss ein.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Bank-Block setzen:</strong> Platziere einen Barrel in deinem Gebiet → klicke ihn als Admin an → Bank ist registriert.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Chunks beanspruchen:</strong> <code>/k claim</code> → Chunks auf der Karte anklicken (grün) → "Beanspruchen" klicken → Navigationspfad folgen.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Mitglieder einladen:</strong> <code>/k invite &lt;Spieler&gt;</code> — der Spieler nimmt mit <code>/k accept</code> an.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Gold verdienen:</strong> Mitglieder sind online → passives Einkommen fließt automatisch in die Kingdom-Bank.</div></div>
+    </div>
+  </section>
+
+  <!-- ─── /KINGDOM ─── -->
+  <section id="cmd-kingdom">
+    <h2>⚔ Befehl: /kingdom</h2>
+    <p>Alias: <code>/k</code>. Ohne Argumente öffnet sich das <strong>Hauptmenü</strong>.</p>
+    <div class="cmd-grid">
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k</div>
+        <div class="cmd-desc">Öffnet das Kingdom-Hauptmenü (GUI).</div>
+        <div class="cmd-perm"><span class="badge badge-all">Alle Spieler</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k create &lt;Name&gt;</div>
+        <div class="cmd-desc">Gründet ein Kingdom. Name: 3–20 Zeichen, nur <code>[a-zA-Z0-9_]</code>. Alternativ per GUI-Amboss.</div>
+        <div class="cmd-perm"><span class="badge badge-all">Alle · Kein eigenes Kingdom</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k invite &lt;Spieler&gt;</div>
+        <div class="cmd-desc">Lädt einen Online-Spieler ein. Der Empfänger bestätigt mit <code>/k accept</code>. Läuft nach 120 Sekunden ab.</div>
+        <div class="cmd-perm"><span class="badge badge-owner">Owner</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k accept</div>
+        <div class="cmd-desc">Nimmt eine ausstehende Kingdom-Einladung an.</div>
+        <div class="cmd-perm"><span class="badge badge-all">Alle · Mit Einladung</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k leave</div>
+        <div class="cmd-desc">Verlässt das aktuelle Kingdom. Der Owner muss das Kingdom erst übertragen oder auflösen.</div>
+        <div class="cmd-perm"><span class="badge badge-member">Mitglied (nicht Owner)</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k info [Name]</div>
+        <div class="cmd-desc">Zeigt Kingdom-Informationen im Chat. Ohne Argument: eigenes Kingdom. Mit Name: beliebiges Kingdom.</div>
+        <div class="cmd-perm"><span class="badge badge-all">Alle</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k list</div>
+        <div class="cmd-desc">Listet alle Kingdoms mit Anführer und Mitgliederzahl im Chat auf.</div>
+        <div class="cmd-perm"><span class="badge badge-all">Alle</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k claim</div>
+        <div class="cmd-desc">Öffnet die Gebiets-Karten-GUI auf der aktuellen Position des Spielers.</div>
+        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k transfer</div>
+        <div class="cmd-desc">Öffnet die Überweisungs-GUI zum Senden von Gold an ein anderes Kingdom.</div>
+        <div class="cmd-perm"><span class="badge badge-admin">Admin+</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k debt</div>
+        <div class="cmd-desc">Öffnet die Schulden-GUI — zeigt alle offenen Schulden und ermöglicht Rückzahlung.</div>
+        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k rename [Name]</div>
+        <div class="cmd-desc">Benennt das Kingdom um. Ohne Argument öffnet sich ein Amboss-Dialog mit dem aktuellen Namen vorausgefüllt.</div>
+        <div class="cmd-perm"><span class="badge badge-owner">Owner</span></div>
+      </div>
+
+      <div class="cmd-item">
+        <div class="cmd-name">/k admin &lt;Unterbefehl&gt;</div>
+        <div class="cmd-desc">Admin-Befehle (reload, force-claim, etc.). Erfordert die Berechtigung <code>kingdomsreborn.admin.reload</code>.</div>
+        <div class="cmd-perm"><span class="badge badge-owner">Admin-Berechtigung</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── /WAR ─── -->
+  <section id="cmd-war">
+    <h2>🔥 Befehl: /war</h2>
+    <div class="cmd-grid">
+      <div class="cmd-item">
+        <div class="cmd-name">/war</div>
+        <div class="cmd-desc">Öffnet das Kriegs-GUI mit allen aktiven Kriegen deines Kingdoms. Als Verteidiger kann man hier kapitulieren.</div>
+        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUI: HAUPTMENÜ ─── -->
+  <section id="gui-main">
+    <h2>🏠 GUI: Hauptmenü</h2>
+    <p>Geöffnet per <code>/k</code>. Zentrales Hub für alle Kingdom-Aktionen. Schwarze Glasscheiben füllen alle ungenutzten Slots.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">🏰 &lt;KingdomName&gt; — Kingdom Hub</div>
+        <div class="gui-card-meta">6 Reihen · 54 Slots</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Kingdom-Info</strong>: Name, Anführer, eigene Rolle (👑 König / ⚔ Admin / Mitglied), Mitgliederanzahl, Einfluss, beanspruchte Chunks, Gründungsdatum. <span class="slot-note">Kein Klick-Handler — nur Anzeige.</span></td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder</strong>: öffnet die Mitglieder-GUI zum Einladen, Kicken und Befördern.</td></tr>
+          <tr><td class="slot-num">14</td><td class="slot-item">🛢 Barrel</td><td class="slot-desc"><strong>Bank-Info</strong>: Zeigt Guthaben und Schulden. Die Bank selbst wird am registrierten Barrel-Block geöffnet — dieser Slot ist nur Anzeige.</td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">💎 Emerald</td><td class="slot-desc"><strong>Kingdom-Shop</strong>: Kaufe Farben, Bank-Erweiterungen und Mitglieder-Slots.</td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">🗺 Karte</td><td class="slot-desc"><strong>Gebiete beanspruchen</strong>: Öffnet die Gebiets-Karte zentriert auf die aktuelle Spielerposition.</td></tr>
+          <tr><td class="slot-num">30</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Überweisung</strong>: Gold an ein anderes Kingdom senden (nur Admin+).</td></tr>
+          <tr><td class="slot-num">32</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong>Schulden</strong>: Rot wenn Schulden vorhanden, grün wenn schuldenfrei. Zeigt Gesamtbetrag.</td></tr>
+          <tr><td class="slot-num">38</td><td class="slot-item">⚙ Komparator</td><td class="slot-desc"><strong>Einstellungen</strong>: Farbe ändern, umbenennen, Mitglieder verwalten. <span class="slot-note">Nur sichtbar für Admin+.</span></td></tr>
+          <tr><td class="slot-num">41</td><td class="slot-item">🚪 Tür / 💥 TNT</td><td class="slot-desc">Mitglieder: <strong>Kingdom verlassen</strong> (ohne Bestätigung). Owner: <strong>Kingdom auflösen</strong> (mit Bestätigungs-GUI).</td></tr>
+          <tr><td class="slot-num">44</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Inventar schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── GUI: KINGDOM ERSTELLEN ─── -->
+  <section id="gui-create">
+    <h2>✨ GUI: Kingdom erstellen</h2>
+    <p>Erscheint wenn ein Spieler <strong>ohne Kingdom</strong> <code>/k</code> öffnet.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">🏰 Kingdoms Reborn — Kein Kingdom</div>
+        <div class="gui-card-meta">3 Reihen · Grauer Hintergrund</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">4</td><td class="slot-item">📖 Buch</td><td class="slot-desc">Info: Anzahl aller aktiven Kingdoms auf dem Server. Kein Klick.</td></tr>
+          <tr><td class="slot-num">11</td><td class="slot-item">⭐ Nether-Star (leuchtend)</td><td class="slot-desc"><strong>Kingdom erstellen</strong>: Öffnet Amboss-Dialog. Name eingeben → Ergebnis-Slot anklicken = Bestätigen. Schließen = Abbrechen → zurück zu diesem GUI.</td></tr>
+          <tr><td class="slot-num">15</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong>Kingdoms erkunden</strong>: Öffnet den Kingdom-Browser mit allen aktiven Kingdoms.</td></tr>
+          <tr><td class="slot-num">26</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Inventar schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✓</span>
+      <div class="callout-body">
+        <strong>Amboss-Eingabe für Kingdom-Namen</strong>
+        Das erste Eingabe-Slot enthält ein Papier mit dem Platzhaltertext <em>"Kingdom-Name..."</em>. Tippe den Namen ins Umbenennen-Feld. Beim Klick auf den Ergebnis-Slot (Slot 3 im Amboss) wird validiert und das Kingdom erstellt. Regeln: <strong>3–20 Zeichen, nur a–z, A–Z, 0–9, _</strong>. Name muss einzigartig sein.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUI: KINGDOMS ERKUNDEN ─── -->
+  <section id="gui-browser">
+    <h2>🌍 GUI: Kingdoms erkunden</h2>
+    <p>Paginierte Übersicht aller Kingdoms, sortiert nach Mitgliederzahl. Klick auf ein Kingdom zeigt Details.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">🌍 Kingdoms erkunden</div>
+        <div class="gui-card-meta">6 Reihen · 45 Kingdoms/Seite</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong>Kingdom-Items</strong>: Anführer-Kopf mit Kingdom-Farbe. Lore zeigt: Anführer, Mitglieder, Gebiete (Chunks), Einfluss, Kriegsstatus, ob es das eigene Kingdom ist.</td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc">Vorherige Seite (nur sichtbar wenn Seite &gt; 1).</td></tr>
+          <tr><td class="slot-num">46</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Filter löschen (nur sichtbar wenn Filter aktiv). Zeigt aktuellen Filter-Text in der Lore.</td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">📄 Papier</td><td class="slot-desc">Seitenanzeige "Seite X / Y", Gesamtanzahl Kingdoms, aktiver Filter.</td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">🔍 Spyglass</td><td class="slot-desc"><strong>Suchen</strong>: Öffnet Amboss-Dialog mit aktuellem Filter vorausgefüllt. Zurück-Klick = Filter bleibt.</td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc">Nächste Seite (nur sichtbar wenn weitere Seiten vorhanden).</td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü / Erstell-Menü.</td></tr>
+          <tr><td class="slot-num">51</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── GUI: GEBIETS-KARTE ─── -->
+  <section id="gui-map">
+    <h2>🗺 GUI: Gebiets-Karte</h2>
+    <p>Geöffnet per <code>/k claim</code> oder über das Hauptmenü. Zeigt eine 9×5-Chunk-Karte um die Spielerposition.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">🗺 Gebiets-Karte — Kingdom</div>
+        <div class="gui-card-meta">6 Reihen · Slots 0–44 = Karte · Slots 45–53 = Steuerung</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Karten-Slots</td><td class="slot-desc">9×5 Chunk-Raster. Jeder Slot = ein Chunk. Klick = Auswahl umschalten (nur freie Chunks).</td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc"><strong>Westen</strong>: Karte 1 Chunk nach links verschoben (centerX − 1).</td></tr>
+          <tr><td class="slot-num">46</td><td class="slot-item">▲ Pfeil</td><td class="slot-desc"><strong>Norden</strong>: Karte 1 Chunk nach oben (centerZ − 1).</td></tr>
+          <tr><td class="slot-num">47</td><td class="slot-item">▼ Pfeil</td><td class="slot-desc"><strong>Süden</strong>: Karte 1 Chunk nach unten (centerZ + 1).</td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc"><strong>Osten</strong>: Karte 1 Chunk nach rechts (centerX + 1).</td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong>Zu mir</strong>: Karte neu auf die aktuelle Spielerposition zentrieren.</td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">⚔ Goldschwert</td><td class="slot-desc"><strong>Beanspruchen (N)</strong>: Startet Navigationspfad für alle ausgewählten Chunks. Zeigt Anzahl der Auswahl.</td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">Barrier</td><td class="slot-desc">Kein Klick möglich wenn keine Auswahl vorhanden.</td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">💣 TNT</td><td class="slot-desc"><strong>Auswahl löschen</strong>: Alle markierten Chunks abwählen und Karte neu laden.</td></tr>
+          <tr><td class="slot-num">51</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü (löscht Auswahl).</td></tr>
+          <tr><td class="slot-num">52</td><td class="slot-item">✗</td><td class="slot-desc">Schließen (löscht Auswahl).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Chunk-Farben auf der Karte</h3>
+    <div class="legend-grid">
+      <div class="legend-item"><div class="legend-color" style="background:#d4a017;"></div><div class="legend-label"><strong>Gelb</strong> — Deine Position (Mittelpunkt)</div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div><div class="legend-label"><strong>Grün (Glas)</strong> — Ausgewählt</div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div><div class="legend-label"><strong>Blau (Glas)</strong> — Euer Gebiet</div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#dc2626;"></div><div class="legend-label"><strong>Rot (Glas)</strong> — Feindliches Gebiet</div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#84cc16;"></div><div class="legend-label"><strong>Wolle (biom)</strong> — Freies Land</div></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ</span>
+      <div class="callout-body">
+        <strong>Deine Position zeigt Besitzstatus</strong>
+        Der gelbe Mittelpunkt-Slot zeigt in seiner Lore immer: <em>"★ Deine Position"</em> + den aktuellen Besitzstatus (frei / euer Gebiet / feindlich besetzt). So siehst du sofort ob du auf eigenem oder fremdem Gebiet stehst.
+      </div>
+    </div>
+
+    <h3>Biom-Farben (freie Chunks)</h3>
+    <div class="biome-grid">
+      <div class="biome-item"><div class="biome-swatch" style="background:#2563eb;"></div>Ozean, Fluss, Strand</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#eab308;"></div>Wüste</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#16a34a;"></div>Wald, Dschungel, Taiga</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#84cc16;"></div>Ebene, Savanne, Wiese</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#6b7280;"></div>Berge, Hügel</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#e5e7eb;"></div>Schnee, Eis</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#78350f;"></div>Sumpf, Mangrove</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#dc2626;"></div>Nether</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#7c3aed;"></div>The End</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#db2777;"></div>Pilzinsel</div>
+    </div>
+
+    <h3>Chunk-Lore — Was wird angezeigt?</h3>
+    <p>Jeder Chunk zeigt beim Hover:</p>
+    <ul style="margin: 8px 0 0 20px; color: var(--text2); font-size: 13.5px; line-height: 2;">
+      <li>Koordinaten: <code>X:&lt;cx&gt; Z:&lt;cz&gt;</code></li>
+      <li><strong>Deine Position:</strong> "★ Deine Position" + Besitzstatus</li>
+      <li><strong>Frei:</strong> "Status: Frei" + Klick-Hinweis</li>
+      <li><strong>Euer Gebiet:</strong> "Status: Euer Gebiet (KingdomName)"</li>
+      <li><strong>Feindlich:</strong> "Status: Besetzt von KingdomName"</li>
+      <li><strong>Ausgewählt:</strong> zusätzlich "✔ Ausgewählt"</li>
+    </ul>
+  </section>
+
+  <!-- ─── GUI: BANK ─── -->
+  <section id="gui-bank">
+    <h2>💰 GUI: Bank</h2>
+    <p>Geöffnet durch <strong>Rechtsklick auf den registrierten Barrel-Block</strong> (als Mitglied des Kingdoms). Auch erreichbar über Bank-GUI-Button im Hauptmenü.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">💰 &lt;KingdomName&gt; — Bank</div>
+        <div class="gui-card-meta">4 Reihen · 36 Slots</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">10</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc"><strong>Guthaben</strong>: aktuell / max, Bank-Block-Koordinaten, Einkommens-Multiplikator, Zinsen aktiv/inaktiv.</td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">🟢 Grüner Farbstoff</td><td class="slot-desc"><strong>Einzahlen (Stapel)</strong>: Bis zu 64 Gold-Ingots aus dem Inventar einzahlen. Zeigt verfügbare Items und freien Platz.</td></tr>
+          <tr><td class="slot-num">13</td><td class="slot-item">🟢 Grüne Glasscheibe</td><td class="slot-desc"><strong>Alles einzahlen</strong>: Alle Gold-Ingots im Inventar einzahlen (bis Kapazitätsgrenze).</td></tr>
+          <tr><td class="slot-num">15</td><td class="slot-item">🔴 Roter Farbstoff</td><td class="slot-desc"><strong>Auszahlen (Stapel)</strong>: Bis zu 64 Gold-Ingots auszahlen. <span class="slot-note">Nur Admin+.</span></td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">🔴 Rote Glasscheibe</td><td class="slot-desc"><strong>Alles auszahlen</strong>: Gesamtes Guthaben abheben. <span class="slot-note">Nur Admin+.</span></td></tr>
+          <tr><td class="slot-num">19</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong>Bank-Erweiterungen</strong>: Verwalte bis zu 5 Extension-Slots für passive Einkommen, Zinsen etc. Zeigt aktuelle Anzahl.</td></tr>
+          <tr><td class="slot-num">21</td><td class="slot-item">📦 Truhe</td><td class="slot-desc"><strong>Lager-Upgrades</strong>: Erhöhe die maximale Bank-Kapazität (bis Level 80, je +1.000 pro Level).</td></tr>
+          <tr><td class="slot-num">23</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Überweisung</strong>: Gold an ein anderes Kingdom überweisen.</td></tr>
+          <tr><td class="slot-num">25</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong>Schulden</strong>: Öffnet Schulden-Übersicht.</td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
+          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠</span>
+      <div class="callout-body">
+        <strong>Bank-Block erforderlich</strong>
+        Einzahlen und Auszahlen funktionieren nur wenn ein Barrel-Block als Bank registriert wurde. Kein registrierter Block → Slots sind grau und deaktiviert.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUI: MITGLIEDER ─── -->
+  <section id="gui-members">
+    <h2>👥 GUI: Mitglieder</h2>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">👥 &lt;KingdomName&gt; — Mitglieder</div>
+        <div class="gui-card-meta">6 Reihen · bis 28 Mitglieder sichtbar</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">4</td><td class="slot-item">📄 Papier</td><td class="slot-desc">Info: Mitgliederanzahl, Tipp zur Verwaltung, Rollen-Legende (👑 / ⚔ / ·).</td></tr>
+          <tr><td class="slot-num">8</td><td class="slot-item">💚 Emerald</td><td class="slot-desc"><strong>Einladen</strong>: Zeigt alle Online-Spieler ohne Kingdom im Chat. Einladen per <code>/k invite &lt;Name&gt;</code>. <span class="slot-note">Nur Admin+.</span></td></tr>
+          <tr><td class="slot-num">9–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong>Mitglieder</strong>: Jeder Kopf zeigt Rollen-Icon, Name, Online-Status. Als Admin: Klick öffnet Aktions-Menü.</td></tr>
+          <tr><td class="slot-num">52</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mitglieder-Aktionen (Admin-Klick auf Spielerkopf)</h3>
+    <p>Öffnet das <strong>MemberAction-GUI</strong> mit:</p>
+    <ul style="margin: 8px 0 0 20px; color: var(--text2); font-size: 13.5px; line-height: 2;">
+      <li>👢 <strong>Kicken</strong> → Bestätigungs-GUI</li>
+      <li>⬆ <strong>Befördern</strong> (Mitglied → Admin / Admin → Owner-Transfer)</li>
+      <li>⬇ <strong>Degradieren</strong> (Admin → Mitglied)</li>
+      <li>👑 <strong>Ownership übertragen</strong> → Bestätigungs-GUI (nur Owner)</li>
+    </ul>
+  </section>
+
+  <!-- ─── GUI: EINSTELLUNGEN ─── -->
+  <section id="gui-settings">
+    <h2>⚙ GUI: Einstellungen</h2>
+    <p>Nur für Admin und Owner. Geöffnet über Slot 38 im Hauptmenü.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">⚙ &lt;KingdomName&gt; — Einstellungen</div>
+        <div class="gui-card-meta">4 Reihen · 36 Slots</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Kingdom-Übersicht</strong>: Name, Mitglieder, Guthaben, eigene Rolle. Nur Anzeige.</td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong>Farbe ändern</strong>: Zeigt aktuelle Farbe → öffnet Farb-Shop-GUI. <span class="slot-note">Admin+.</span></td></tr>
+          <tr><td class="slot-num">14</td><td class="slot-item">🏷 Namensschild</td><td class="slot-desc"><strong>Kingdom umbenennen</strong>: Öffnet Amboss mit aktuellem Namen vorausgefüllt. <span class="slot-note">Nur Owner.</span></td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder verwalten</strong>: Öffnet die Mitglieder-GUI.</td></tr>
+          <tr><td class="slot-num">34</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
+          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">✓</span>
+      <div class="callout-body">
+        <strong>Umbenennen per Amboss</strong>
+        Klick auf "Kingdom umbenennen" öffnet den Amboss mit dem <em>aktuellen Kingdom-Namen vorausgefüllt</em>. Einfach ändern und Ergebnis-Slot anklicken. Gleiche Validierung: 3–20 Zeichen, [a–z A–Z 0–9 _], Name muss einzigartig sein.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUI: ÜBERWEISUNG ─── -->
+  <section id="gui-transfer">
+    <h2>💸 GUI: Überweisung</h2>
+    <p>Paginierte Liste aller anderen Kingdoms. Klick auf ein Kingdom öffnet Amboss-Betragseingabe.</p>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">💸 Überweisung — &lt;KingdomName&gt;</div>
+        <div class="gui-card-meta">6 Reihen · 45 Kingdoms/Seite</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc">Alle anderen Kingdoms: Guthaben, freier Platz. Klick → Amboss für Betrag (Zahlen eingeben → bestätigen).</td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀</td><td class="slot-desc">Vorherige Seite.</td></tr>
+          <tr><td class="slot-num">47</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc">Eigenes Guthaben — nur Anzeige.</td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zur Bank.</td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">📄 Seite</td><td class="slot-desc">Seitenanzeige + Klick zum Suchen (Amboss-Eingabe für Filter).</td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">▶</td><td class="slot-desc">Nächste Seite.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── GUI: SCHULDEN ─── -->
+  <section id="gui-debt">
+    <h2>📋 GUI: Schulden</h2>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">📋 Schulden — &lt;KingdomName&gt;</div>
+        <div class="gui-card-meta">4 Reihen</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">10</td><td class="slot-item">📖 Buch</td><td class="slot-desc"><strong>Übersicht</strong>: Gesamtschulden + Bank-Guthaben.</td></tr>
+          <tr><td class="slot-num">12–16</td><td class="slot-item">🟥 Roter Beton</td><td class="slot-desc">Je eine Schuld: Gläubiger, Betrag. Als Admin mit genug Guthaben: Klick = sofort begleichen.</td></tr>
+          <tr><td class="slot-num">13</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc">Erscheint wenn keine Schulden vorhanden.</td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zur Bank.</td></tr>
+          <tr><td class="slot-num">34</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Schulden entstehen wenn ein Chunk im Kriegsgebiet abgebaut wird. Jeder Block hat einen konfigurierbaren Wert (siehe <a href="#config-main" style="color: var(--gold);">config.yml</a>).</p>
+  </section>
+
+  <!-- ─── GUI: SHOP ─── -->
+  <section id="gui-shop">
+    <h2>🛒 GUI: Shop</h2>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">🛒 &lt;KingdomName&gt; — Shop</div>
+        <div class="gui-card-meta">5 Reihen</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">4</td><td class="slot-item">Goldnugget</td><td class="slot-desc">Aktuelles Kingdom-Guthaben — nur Anzeige.</td></tr>
+          <tr><td class="slot-num">20</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong>Farben kaufen</strong> (50–600 Gold). Öffnet Farb-Shop mit allen verfügbaren Farben. <span class="slot-note">Admin+.</span></td></tr>
+          <tr><td class="slot-num">22</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong>Bank-Erweiterungen</strong>: Bis zu 5 Extensions kaufbar (Einkommen, Zinsen, etc.). <span class="slot-note">Admin+.</span></td></tr>
+          <tr><td class="slot-num">24</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder-Slots</strong>: +10 Slots für 1.000 Gold. Zeigt aktuelles Maximum und Bonus. <span class="slot-note">Admin+.</span></td></tr>
+          <tr><td class="slot-num">31</td><td class="slot-item">📖 Buch</td><td class="slot-desc">Shop-Info: Wie verdient man Kingdom-Gold.</td></tr>
+          <tr><td class="slot-num">43</td><td class="slot-item">◀</td><td class="slot-desc">Zurück.</td></tr>
+          <tr><td class="slot-num">44</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── GUI: KRIEG ─── -->
+  <section id="gui-war">
+    <h2>⚔ GUI: Krieg</h2>
+
+    <div class="gui-card">
+      <div class="gui-card-header">
+        <div class="gui-card-title">⚔ Kriegs-Übersicht</div>
+        <div class="gui-card-meta">5 Reihen</div>
+      </div>
+      <table class="slot-table">
+        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <tbody>
+          <tr><td class="slot-num">10, 19, 28</td><td class="slot-item">⚔ Netherit-Schwert (leuchtend)</td><td class="slot-desc">Je ein aktiver Krieg: Angreifer vs Verteidiger, aktuelle Kill-Stände beider Seiten.</td></tr>
+          <tr><td class="slot-num">12, 21, 30</td><td class="slot-item">🏳 Weißes Banner</td><td class="slot-desc"><strong>Aufgeben</strong>: Nur als Verteidiger (Admin+). Alle umkämpften Chunks gehen an den Angreifer.</td></tr>
+          <tr><td class="slot-num">22</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc">Erscheint wenn kein aktiver Krieg vorhanden.</td></tr>
+          <tr><td class="slot-num">40</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Während eines Krieges läuft oben eine <strong>Action-Bar</strong> und eine <strong>Boss-Bar</strong> mit Kill-Ständen und Timer für alle beteiligten Spieler.</p>
+  </section>
+
+  <!-- ─── KONFIGURATION ─── -->
+  <section id="config-main">
+    <h2>🔧 Konfiguration: config.yml</h2>
+    <p>Alle Einstellungen befinden sich in <code>plugins/KingdomsReborn/config.yml</code>.</p>
+
+    <h3>Allgemein</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">language</td><td class="config-val">de_DE</td><td class="config-desc">Sprachdatei. Optionen: <code>de_DE</code>, <code>en_EN</code></td></tr>
+        <tr><td class="config-key">storage.type</td><td class="config-val">sqlite</td><td class="config-desc">Speichertyp: <code>sqlite</code> oder <code>yaml</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Wirtschaft</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">economy.name</td><td class="config-val">"Gold"</td><td class="config-desc">Name der Währung</td></tr>
+        <tr><td class="config-key">economy.symbol</td><td class="config-val">"⛃"</td><td class="config-desc">Symbol der Währung in GUIs</td></tr>
+        <tr><td class="config-key">economy.currency-item</td><td class="config-val">GOLD_INGOT</td><td class="config-desc">Minecraft-Item das als Währung gilt. Beim Einzahlen wird es aus dem Inventar entfernt.</td></tr>
+        <tr><td class="config-key">economy.income-per-member</td><td class="config-val">1</td><td class="config-desc">Passives Einkommen pro Online-Mitglied pro Minute</td></tr>
+        <tr><td class="config-key">economy.bank-block</td><td class="config-val">BARREL</td><td class="config-desc">Block-Typ der als Bank registriert wird</td></tr>
+        <tr><td class="config-key">economy.storage.max-level</td><td class="config-val">80</td><td class="config-desc">Maximales Lager-Upgrade-Level</td></tr>
+        <tr><td class="config-key">economy.storage.capacity-per-level</td><td class="config-val">1000</td><td class="config-desc">Kapazitäts-Bonus pro Lager-Level</td></tr>
+        <tr><td class="config-key">economy.storage.base-upgrade-cost</td><td class="config-val">200</td><td class="config-desc">Basiskosten für Level 0 → 1</td></tr>
+        <tr><td class="config-key">economy.storage.cost-increment</td><td class="config-val">150</td><td class="config-desc">Zusatzkosten pro bestehendem Level</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Kingdom</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">kingdom.min-name-length</td><td class="config-val">3</td><td class="config-desc">Minimale Kingdom-Namenslänge</td></tr>
+        <tr><td class="config-key">kingdom.max-name-length</td><td class="config-val">20</td><td class="config-desc">Maximale Kingdom-Namenslänge</td></tr>
+        <tr><td class="config-key">kingdom.max-members</td><td class="config-val">50</td><td class="config-desc">Maximale Mitgliederzahl (ohne Shop-Erweiterungen)</td></tr>
+        <tr><td class="config-key">kingdom.invite-expiry-seconds</td><td class="config-val">120</td><td class="config-desc">Sekunden bis eine Einladung abläuft</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Einfluss</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">influence.block-place-gain</td><td class="config-val">2</td><td class="config-desc">Einfluss pro platziertem Block</td></tr>
+        <tr><td class="config-key">influence.move-gain</td><td class="config-val">1</td><td class="config-desc">Einfluss pro Beweg-Tick (gedrosselt)</td></tr>
+        <tr><td class="config-key">influence.decay-interval-seconds</td><td class="config-val">300</td><td class="config-desc">Sekunden zwischen Einfluss-Verfall-Ticks</td></tr>
+        <tr><td class="config-key">influence.decay-amount</td><td class="config-val">1</td><td class="config-desc">Einfluss-Verfall pro Tick</td></tr>
+        <tr><td class="config-key">influence.move-throttle-ms</td><td class="config-val">5000</td><td class="config-desc">Millisekunden zwischen Bewegungs-Einfluss-Events pro Spieler</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Krieg</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">war.duration-minutes</td><td class="config-val">5</td><td class="config-desc">Kriegsdauer in Minuten (danach automatisches Ende)</td></tr>
+        <tr><td class="config-key">war.timer-interval-seconds</td><td class="config-val">10</td><td class="config-desc">Prüfintervall für abgelaufene Kriege</td></tr>
+        <tr><td class="config-key">war.influence-transfer-per-chunk</td><td class="config-val">50</td><td class="config-desc">Einfluss-Transfer pro Chunk bei Kriegsende</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Gebiete</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">claim.contest-duration-seconds</td><td class="config-val">300</td><td class="config-desc">Dauer eines Chunk-Kampfes (Walk-to-Claim auf feindlichem Gebiet)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Anzeige</h3>
+    <table class="config-table">
+      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td class="config-key">display.enabled</td><td class="config-val">true</td><td class="config-desc">Schaltet Scoreboard, TAB und Nametags global ein/aus</td></tr>
+        <tr><td class="config-key">display.refresh-ticks</td><td class="config-val">40</td><td class="config-desc">Aktualisierungsrate (Ticks; 40 = 2 Sekunden)</td></tr>
+        <tr><td class="config-key">display.scoreboard.enabled</td><td class="config-val">true</td><td class="config-desc">Sidebar-Scoreboard</td></tr>
+        <tr><td class="config-key">display.tab.enabled</td><td class="config-val">true</td><td class="config-desc">Tab-Liste mit Kingdom-Prefix</td></tr>
+        <tr><td class="config-key">display.nametag.enabled</td><td class="config-val">true</td><td class="config-desc">Nametags über Spielerköpfen</td></tr>
+        <tr><td class="config-key">chat.enabled</td><td class="config-val">true</td><td class="config-desc">Chat-Format-Plugin. false = Chat unverändert lassen</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Block-Werte (Schulden)</h3>
+    <p>Unter <code>debt.block-values</code> steht für jeden Block-Typ der Gold-Wert bei Zerstörung im Kriegsgebiet.</p>
+    <pre><span class="code-comment"># Beispiel-Einträge</span>
+<span class="code-key">debt</span>:
+  <span class="code-key">block-values</span>:
+    <span class="code-key">STONE</span>: <span class="code-val">1</span>
+    <span class="code-key">OAK_LOG</span>: <span class="code-val">5</span>
+    <span class="code-key">GOLD_BLOCK</span>: <span class="code-val">100</span>
+    <span class="code-key">DIAMOND_BLOCK</span>: <span class="code-val">250</span>
+    <span class="code-key">NETHERITE_BLOCK</span>: <span class="code-val">10000</span>
+    <span class="code-key">BEACON</span>: <span class="code-val">5000</span></pre>
+  </section>
+
+  <!-- ─── SPRACHE ─── -->
+  <section id="config-lang">
+    <h2>💬 Sprachdatei</h2>
+    <p>Alle Nachrichten, GUI-Titel und Lore-Texte befinden sich in <code>plugins/KingdomsReborn/language/de_DE.yml</code> (oder <code>en_EN.yml</code>).</p>
+    <p>Format: <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). Platzhalter in <code>{geschweifte Klammern}</code>.</p>
+
+    <pre><span class="code-comment"># Beispiel — Sprache ändern</span>
+<span class="code-key">bank</span>:
+  <span class="code-key">deposit-success</span>: <span class="code-str">"&lt;green&gt;+{amount} {currency} eingezahlt. Guthaben: &lt;gold&gt;{balance}"</span>
+
+<span class="code-key">kingdom</span>:
+  <span class="code-key">rename-done</span>: <span class="code-str">"&lt;green&gt;✔ Kingdom umbenannt: &lt;gold&gt;{old} &lt;gray&gt;→ &lt;gold&gt;{new}"</span>
+
+<span class="code-key">gui</span>:
+  <span class="code-key">main-title</span>: <span class="code-str">"&lt;gold&gt;🏰 &lt;white&gt;{name} &lt;dark_gray&gt;– Kingdom Hub"</span></pre>
+  </section>
+
+  <!-- ─── MECHANIKEN: BANK-BLOCK ─── -->
+  <section id="mech-bank">
+    <h2>🏦 Mechanik: Bank-Block registrieren</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Barrel platzieren</strong> in eurem beanspruchten Gebiet (oder dem Gebiet das ihr gleich beansprucht).</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Als Admin oder Owner</strong> den Barrel mit Rechtsklick anklicken → Bank wird registriert. Bestätigung im Chat.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Ab sofort kann <strong>jedes Mitglied</strong> Gold einzahlen, Admins können abheben.</div></div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠</span>
+      <div class="callout-body">
+        <strong>Bank stehlen</strong>
+        Feindliche Spieler können im Krieg den Bank-Block stehlen. Sichert euren Barrel gut!
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MECHANIKEN: GEBIETE ─── -->
+  <section id="mech-claim">
+    <h2>🗺 Mechanik: Gebiete beanspruchen</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content">Öffne <code>/k claim</code> — die Karte zentriert sich auf deine Position.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Klicke auf <strong>freie Chunks</strong> (Wolle/Grasblock) um sie zu markieren (grüne Glasscheibe). Mehrere möglich.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Klicke auf <strong>"⚔ Beanspruchen (N)"</strong> — ein Navigations-Partikel-Pfad startet.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Laufe zu jedem markierten Chunk</strong> — sobald du in den Chunk eintrittst wird er automatisch beansprucht. Broadcast an alle Spieler.</div></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ</span>
+      <div class="callout-body">
+        Die Pfeiltasten in der Karte verschieben die Ansicht jeweils <strong>1 Chunk</strong> in die gewählte Himmelsrichtung. Mit dem 🧭 Kompass springst du jederzeit zurück zu deiner aktuellen Position.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MECHANIKEN: KRIEGE ─── -->
+  <section id="mech-war">
+    <h2>⚔ Mechanik: Kriege</h2>
+    <p>Kriege starten automatisch wenn ein Spieler eines Kingdoms in ein beanspruchtes Gebiet eines anderen Kingdoms eindringt und dessen Einfluss angreift.</p>
+    <div class="mech-grid">
+      <div class="mech-card">
+        <div class="mech-card-icon">⏱</div>
+        <h4>Kriegsdauer</h4>
+        <p>Standard: 5 Minuten. Konfigurierbar. Danach endet der Krieg automatisch.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">🏆</div>
+        <h4>Sieger</h4>
+        <p>Mehr Kills gewinnt. Bei Gleichstand: Unentschieden. Der Sieger bekommt Einfluss pro Chunk.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">🏳</div>
+        <h4>Kapitulation</h4>
+        <p>Verteidiger-Admins können über <code>/war</code> aufgeben. Alle umkämpften Chunks gehen an den Angreifer.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-card-icon">💸</div>
+        <h4>Schulden</h4>
+        <p>Blöcke abbauen im Kriegsgebiet generiert Schulden. Wert pro Block-Typ konfigurierbar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MECHANIKEN: ANZEIGE ─── -->
+  <section id="mech-display">
+    <h2>📊 Scoreboard, TAB & Chat</h2>
+
+    <h3>Scoreboard (Sidebar)</h3>
+    <p>Permanent sichtbar für alle Spieler in einem Kingdom. Zeigt:</p>
+    <pre><span class="code-comment"># Sidebar-Zeilen (konfigurierbar via config.yml)</span>
+Name:    %player_name%
+Kingdom: %kingdom_color%%kingdom_name%
+Kills:   %stats_kills%  Deaths: %stats_deaths%
+KD:      %stats_kd%
+
+Chunk:   %chunk_x%, %chunk_z%
+Gebiet:  %chunk_owner%</pre>
+
+    <h3>TAB-Liste</h3>
+    <p>Format: <code>[KingdomName] SpielerName</code> in der Kingdom-Farbe.</p>
+
+    <h3>Nametags</h3>
+    <p>Über Spielerköpfen: <code>[KingdomName]</code> in der Kingdom-Farbe.</p>
+
+    <h3>Chat</h3>
+    <p>Format: <code>[LuckPerms-Prefix] [⚔ KingdomName] SpielerName: Nachricht</code>. Konfigurierbar in <code>config.yml</code> unter <code>chat.format</code>.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>🏰 KingdomsReborn · PaperMC 1.21 · v1.0.0-MVP</span>
+    <span>Letzte Aktualisierung: 2026-06-07</span>
+  </div>
+
+</main>
+
+<script>
+// ── SCROLLSPY ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks  = document.querySelectorAll('.sidebar-nav a');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+
+// ── SEARCH / FILTER ──
+function filterNav(query) {
+  const q = query.toLowerCase().trim();
+  navLinks.forEach(a => {
+    const text = a.textContent.toLowerCase();
+    a.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+  document.querySelectorAll('.sidebar-section').forEach(sec => {
+    const next = sec.nextElementSibling;
+    if (!next) return;
+    const visible = Array.from(next.querySelectorAll('a')).some(a => a.style.display !== 'none');
+    sec.style.display = visible ? '' : 'none';
+  });
+}
+
+// ── SMOOTH SCROLL OFFSET FIX ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
