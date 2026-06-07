@@ -9,7 +9,7 @@
 > Ein vollständiges, GUI-gesteuertes Kingdom-Plugin für PaperMC 1.21.  
 > Baue dein Imperium, beanspruche Territorien, verwalte deine Schatzkammer und führe Kriege — ganz ohne Chat-Eingaben.
 
-📖 **[Vollständiges Wiki →](https://your-username.github.io/KingdomsReborn-Wiki/)**
+📖 **[Vollständiges Wiki →](https://janluca22467.github.io/)**
 
 ### ✨ Features
 
@@ -107,7 +107,7 @@ Kein DRM, keine Lizenzprüfungen, keine externen Verbindungen. Funktioniert voll
 > A feature-complete, GUI-driven kingdom plugin for PaperMC 1.21.  
 > Build your empire, claim territory, manage your treasury and wage war — no chat input required.
 
-📖 **[Full Wiki →](https://your-username.github.io/KingdomsReborn-Wiki/)**
+📖 **[Full Wiki →](https://janluca22467.github.io/)**
 
 ### ✨ Features
 
