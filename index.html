@@ -563,6 +563,33 @@
   .search-input:focus { border-color: var(--gold-dim); }
   .search-input::placeholder { color: var(--text3); }
 
+  .lang-de, .lang-en { display: none !important; }
+  body.lang-de .lang-de, body.lang-en .lang-en { display: revert !important; }
+
+  .lang-switch {
+    display: flex;
+    gap: 8px;
+    margin: 14px 16px;
+    padding-bottom: 8px;
+  }
+  .lang-btn {
+    flex: 1;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text2);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .lang-btn.active,
+  .lang-btn:hover {
+    background: rgba(240,180,41,0.12);
+    color: var(--text);
+    border-color: var(--gold-dim);
+  }
+
   /* ── SCROLLSPY HIGHLIGHT ── */
   section { scroll-margin-top: 24px; }
 
@@ -577,7 +604,7 @@
   }
 </style>
 </head>
-<body>
+<body class="lang-de">
 
 <!-- ════════════════════════════════════════════
      SIDEBAR
@@ -585,56 +612,61 @@
 <nav id="sidebar">
   <div class="sidebar-logo">
     <h1>🏰 KingdomsReborn</h1>
-    <p>Plugin-Dokumentation · v1.0 MVP</p>
+    <p><span class="lang-de">Plugin-Dokumentation · v1.0 MVP</span><span class="lang-en">Plugin documentation · v1.0 MVP</span></p>
+  </div>
+
+  <div class="lang-switch">
+    <button class="lang-btn active" type="button" data-lang="de" onclick="setLanguage('de')">DE</button>
+    <button class="lang-btn" type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
   </div>
 
   <div class="search-wrap">
-    <input class="search-input" type="text" placeholder="Suchen…" id="searchInput" oninput="filterNav(this.value)">
+    <input class="search-input" type="text" placeholder="Suchen… / Search…" id="searchInput" oninput="filterNav(this.value)">
   </div>
 
   <div id="navLinks">
-    <div class="sidebar-section">Einführung</div>
+    <div class="sidebar-section"><span class="lang-de">Einführung</span><span class="lang-en">Introduction</span></div>
     <div class="sidebar-nav">
-      <a href="#overview" class="active"><span class="icon">📖</span> Überblick</a>
-      <a href="#quickstart"><span class="icon">⚡</span> Schnellstart</a>
+      <a href="#overview" class="active"><span class="icon">📖</span> <span class="lang-de">Überblick</span><span class="lang-en">Overview</span></a>
+      <a href="#quickstart"><span class="icon">⚡</span> <span class="lang-de">Schnellstart</span><span class="lang-en">Quickstart</span></a>
     </div>
 
-    <div class="sidebar-section">Befehle</div>
+    <div class="sidebar-section"><span class="lang-de">Befehle</span><span class="lang-en">Commands</span></div>
     <div class="sidebar-nav">
       <a href="#cmd-kingdom"><span class="icon">⚔</span> /kingdom</a>
       <a href="#cmd-war"><span class="icon">🔥</span> /war</a>
     </div>
 
-    <div class="sidebar-section">GUIs</div>
+    <div class="sidebar-section"><span class="lang-de">GUIs</span><span class="lang-en">GUIs</span></div>
     <div class="sidebar-nav">
-      <a href="#gui-main"><span class="icon">🏠</span> Hauptmenü</a>
-      <a href="#gui-create"><span class="icon">✨</span> Kingdom erstellen</a>
-      <a href="#gui-browser"><span class="icon">🌍</span> Kingdoms erkunden</a>
-      <a href="#gui-map"><span class="icon">🗺</span> Gebiets-Karte</a>
-      <a href="#gui-bank"><span class="icon">💰</span> Bank</a>
-      <a href="#gui-members"><span class="icon">👥</span> Mitglieder</a>
-      <a href="#gui-settings"><span class="icon">⚙</span> Einstellungen</a>
-      <a href="#gui-transfer"><span class="icon">💸</span> Überweisung</a>
-      <a href="#gui-debt"><span class="icon">📋</span> Schulden</a>
-      <a href="#gui-shop"><span class="icon">🛒</span> Shop</a>
-      <a href="#gui-war"><span class="icon">⚔</span> Krieg</a>
-      <a href="#gui-territory-border"><span class="icon">✦</span> Gebiets-Border</a>
+      <a href="#gui-main"><span class="icon">🏠</span> <span class="lang-de">Hauptmenü</span><span class="lang-en">Main Menu</span></a>
+      <a href="#gui-create"><span class="icon">✨</span> <span class="lang-de">Kingdom erstellen</span><span class="lang-en">Create Kingdom</span></a>
+      <a href="#gui-browser"><span class="icon">🌍</span> <span class="lang-de">Kingdoms erkunden</span><span class="lang-en">Browse Kingdoms</span></a>
+      <a href="#gui-map"><span class="icon">🗺</span> <span class="lang-de">Gebiets-Karte</span><span class="lang-en">Territory Map</span></a>
+      <a href="#gui-bank"><span class="icon">💰</span> <span class="lang-de">Bank</span><span class="lang-en">Bank</span></a>
+      <a href="#gui-members"><span class="icon">👥</span> <span class="lang-de">Mitglieder</span><span class="lang-en">Members</span></a>
+      <a href="#gui-settings"><span class="icon">⚙</span> <span class="lang-de">Einstellungen</span><span class="lang-en">Settings</span></a>
+      <a href="#gui-transfer"><span class="icon">💸</span> <span class="lang-de">Überweisung</span><span class="lang-en">Transfer</span></a>
+      <a href="#gui-debt"><span class="icon">📋</span> <span class="lang-de">Schulden</span><span class="lang-en">Debt</span></a>
+      <a href="#gui-shop"><span class="icon">🛒</span> <span class="lang-de">Shop</span><span class="lang-en">Shop</span></a>
+      <a href="#gui-war"><span class="icon">⚔</span> <span class="lang-de">Krieg</span><span class="lang-en">War</span></a>
+      <a href="#gui-territory-border"><span class="icon">✦</span> <span class="lang-de">Gebiets-Border</span><span class="lang-en">Territory Border</span></a>
     </div>
 
-    <div class="sidebar-section">Konfiguration</div>
+    <div class="sidebar-section"><span class="lang-de">Konfiguration</span><span class="lang-en">Configuration</span></div>
     <div class="sidebar-nav">
       <a href="#config-main"><span class="icon">🔧</span> config.yml</a>
-      <a href="#config-prices"><span class="icon">💰</span> Shop-Preise</a>
-      <a href="#config-border"><span class="icon">✦</span> Territory-Border</a>
-      <a href="#config-lang"><span class="icon">💬</span> Sprache</a>
+      <a href="#config-prices"><span class="icon">💰</span> <span class="lang-de">Shop-Preise</span><span class="lang-en">Shop Prices</span></a>
+      <a href="#config-border"><span class="icon">✦</span> <span class="lang-de">Territory-Border</span><span class="lang-en">Territory Border</span></a>
+      <a href="#config-lang"><span class="icon">💬</span> <span class="lang-de">Sprache</span><span class="lang-en">Language</span></a>
     </div>
 
-    <div class="sidebar-section">Mechaniken</div>
+    <div class="sidebar-section"><span class="lang-de">Mechaniken</span><span class="lang-en">Mechanics</span></div>
     <div class="sidebar-nav">
-      <a href="#mech-bank"><span class="icon">🏦</span> Bank-Block</a>
-      <a href="#mech-claim"><span class="icon">🗺</span> Gebiete</a>
-      <a href="#mech-war"><span class="icon">⚔</span> Kriege</a>
-      <a href="#mech-display"><span class="icon">📊</span> Scoreboard & Tab</a>
+      <a href="#mech-bank"><span class="icon">🏦</span> <span class="lang-de">Bank-Block</span><span class="lang-en">Bank Block</span></a>
+      <a href="#mech-claim"><span class="icon">🗺</span> <span class="lang-de">Gebiete</span><span class="lang-en">Claims</span></a>
+      <a href="#mech-war"><span class="icon">⚔</span> <span class="lang-de">Kriege</span><span class="lang-en">Wars</span></a>
+      <a href="#mech-display"><span class="icon">📊</span> <span class="lang-de">Scoreboard & Tab</span><span class="lang-en">Scoreboard & Tab</span></a>
     </div>
   </div>
 </nav>
@@ -646,133 +678,134 @@
 
   <!-- HERO -->
   <h1 class="page-title">🏰 KingdomsReborn Wiki</h1>
-  <p class="page-subtitle">Vollständige Dokumentation — Befehle · GUIs · Konfiguration · Mechaniken</p>
+  <p class="page-subtitle"><span class="lang-de">Vollständige Dokumentation — Befehle · GUIs · Konfiguration · Mechaniken</span><span class="lang-en">Complete documentation — commands · GUIs · configuration · mechanics</span></p>
 
   <!-- ─── ÜBERBLICK ─── -->
   <section id="overview">
-    <h2>📖 Überblick</h2>
-    <p>KingdomsReborn ist ein PaperMC 1.21-Plugin für Kingdom-basiertes Gruppenspiel. Spieler gründen Kingdoms, beanspruchen Chunks, verwalten eine Bank und führen Kriege gegen andere Kingdoms.</p>
+    <h2>📖 <span class="lang-de">Überblick</span><span class="lang-en">Overview</span></h2>
+    <p><span class="lang-de">KingdomsReborn ist ein PaperMC 1.21-Plugin für Kingdom-basiertes Gruppenspiel. Spieler gründen Kingdoms, beanspruchen Chunks, verwalten eine Bank und führen Kriege gegen andere Kingdoms.</span><span class="lang-en">KingdomsReborn is a territory-based kingdoms plugin for PaperMC 1.21. Players form kingdoms, claim chunks, manage a shared bank, and wage wars against other kingdoms.</span></p>
 
     <div class="mech-grid">
       <div class="mech-card">
         <div class="mech-card-icon">🏰</div>
-        <h4>Kingdoms</h4>
-        <p>Erstelle und verwalte dein eigenes Kingdom mit Mitgliedern, Rollen und eigenem Namen & Farbe.</p>
+        <h4><span class="lang-de">Kingdoms</span><span class="lang-en">Kingdoms</span></h4>
+        <p><span class="lang-de">Erstelle und verwalte dein eigenes Kingdom mit Mitgliedern, Rollen und eigenem Namen & Farbe.</span><span class="lang-en">Create and manage your own kingdom with members, roles, and a unique name & color.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">🗺</div>
-        <h4>Gebiete</h4>
-        <p>Beanspruche Chunks per Karten-GUI. Navigiere zu jedem Chunk um ihn zu sichern.</p>
+        <h4><span class="lang-de">Gebiete</span><span class="lang-en">Territories</span></h4>
+        <p><span class="lang-de">Beanspruche Chunks per Karten-GUI. Navigiere zu jedem Chunk um ihn zu sichern.</span><span class="lang-en">Claim chunks with a map GUI. Navigate to each chunk to secure it.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">💰</div>
-        <h4>Bank</h4>
-        <p>Verwalte Gold mit Barrel-Bank-Blocks, Erweiterungen, Lagerstufen und Überweisungen.</p>
+        <h4><span class="lang-de">Bank</span><span class="lang-en">Bank</span></h4>
+        <p><span class="lang-de">Verwalte Gold mit Barrel-Bank-Blocks, Erweiterungen, Lagerstufen und Überweisungen.</span><span class="lang-en">Manage gold using barrel bank blocks, upgrades, storage levels, and transfers.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">⚔</div>
-        <h4>Kriege</h4>
-        <p>Kämpfe um Chunks feindlicher Kingdoms. Kills entscheiden den Sieger.</p>
+        <h4><span class="lang-de">Kriege</span><span class="lang-en">Wars</span></h4>
+        <p><span class="lang-de">Kämpfe um Chunks feindlicher Kingdoms. Kills entscheiden den Sieger.</span><span class="lang-en">Fight over enemy chunks. Kills determine the winner.</span></p>
       </div>
     </div>
 
     <div class="callout callout-info">
       <span class="callout-icon">ℹ</span>
       <div class="callout-body">
-        <strong>Kein Chat nötig</strong>
-        Alle Texteingaben (Kingdom-Name, Überweisung, Suche, Umbenennen) laufen über einen <strong>Amboss-Dialog</strong> direkt im GUI — der Chat bleibt unberührt.
+        <strong><span class="lang-de">Kein Chat nötig</span><span class="lang-en">No chat needed</span></strong>
+        <span class="lang-de">Alle Texteingaben (Kingdom-Name, Überweisung, Suche, Umbenennen) laufen über einen <strong>Amboss-Dialog</strong> direkt im GUI — der Chat bleibt unberührt.</span>
+        <span class="lang-en">All text input (kingdom name, transfer, search, rename) uses an anvil dialog inside the GUI — the chat remains untouched.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── SCHNELLSTART ─── -->
   <section id="quickstart">
-    <h2>⚡ Schnellstart</h2>
+    <h2>⚡ <span class="lang-de">Schnellstart</span><span class="lang-en">Quickstart</span></h2>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Kingdom gründen:</strong> Tippe <code>/k</code> → klicke <em>Kingdom erstellen</em> → gib einen Namen im Amboss ein.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Bank-Block setzen:</strong> Platziere einen Barrel in deinem Gebiet → klicke ihn als Admin an → Bank ist registriert.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Chunks beanspruchen:</strong> <code>/k claim</code> → Chunks auf der Karte anklicken (grün) → "Beanspruchen" klicken → Navigationspfad folgen.</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Mitglieder einladen:</strong> <code>/k invite &lt;Spieler&gt;</code> — der Spieler nimmt mit <code>/k accept</code> an.</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Gold verdienen:</strong> Mitglieder sind online → passives Einkommen fließt automatisch in die Kingdom-Bank.</div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><strong><span class="lang-de">Kingdom gründen:</span><span class="lang-en">Create a kingdom:</span></strong> <span class="lang-de">Tippe</span><span class="lang-en">Type</span> <code>/k</code> → <span class="lang-de">klicke</span><span class="lang-en">click</span> <em><span class="lang-de">Kingdom erstellen</span><span class="lang-en">Create Kingdom</span></em> → <span class="lang-de">gib einen Namen im Amboss ein.</span><span class="lang-en">enter a name in the anvil.</span></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong><span class="lang-de">Bank-Block setzen:</span><span class="lang-en">Place bank block:</span></strong> <span class="lang-de">Platziere einen Barrel in deinem Gebiet</span><span class="lang-en">Place a barrel in your territory</span> → <span class="lang-de">klicke ihn als Admin an</span><span class="lang-en">right-click it as an admin</span> → <span class="lang-de">Bank ist registriert.</span><span class="lang-en">bank is registered.</span></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><strong><span class="lang-de">Chunks beanspruchen:</span><span class="lang-en">Claim chunks:</span></strong> <code>/k claim</code> → <span class="lang-de">Chunks auf der Karte anklicken (grün)</span><span class="lang-en">click chunks on the map (green)</span> → <span class="lang-de">"Beanspruchen" klicken</span><span class="lang-en">click "Claim"</span> → <span class="lang-de">Navigationspfad folgen.</span><span class="lang-en">follow the navigation path.</span></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><strong><span class="lang-de">Mitglieder einladen:</span><span class="lang-en">Invite members:</span></strong> <code>/k invite &lt;Spieler&gt;</code> — <span class="lang-de">der Spieler nimmt mit</span><span class="lang-en">the player accepts with</span> <code>/k accept</code>.</div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><strong><span class="lang-de">Gold verdienen:</span><span class="lang-en">Earn gold:</span></strong> <span class="lang-de">Mitglieder sind online → passives Einkommen fließt automatisch in die Kingdom-Bank.</span><span class="lang-en">Members online generate passive income automatically into the kingdom bank.</span></div></div>
     </div>
   </section>
 
   <!-- ─── /KINGDOM ─── -->
   <section id="cmd-kingdom">
-    <h2>⚔ Befehl: /kingdom</h2>
-    <p>Alias: <code>/k</code>. Ohne Argumente öffnet sich das <strong>Hauptmenü</strong>.</p>
+    <h2>⚔ <span class="lang-de">Befehl:</span><span class="lang-en">Command:</span> /kingdom</h2>
+    <p><span class="lang-de">Alias:</span><span class="lang-en">Alias:</span> <code>/k</code>. <span class="lang-de">Ohne Argumente öffnet sich das</span><span class="lang-en">Without arguments, opens the</span> <strong><span class="lang-de">Hauptmenü</span><span class="lang-en">main menu</span></strong>.</p>
     <div class="cmd-grid">
 
       <div class="cmd-item">
         <div class="cmd-name">/k</div>
-        <div class="cmd-desc">Öffnet das Kingdom-Hauptmenü (GUI).</div>
-        <div class="cmd-perm"><span class="badge badge-all">Alle Spieler</span></div>
+        <div class="cmd-desc"><span class="lang-de">Öffnet das Kingdom-Hauptmenü (GUI).</span><span class="lang-en">Opens the kingdom main menu (GUI).</span></div>
+        <div class="cmd-perm"><span class="badge badge-all"><span class="lang-de">Alle Spieler</span><span class="lang-en">All players</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k create &lt;Name&gt;</div>
-        <div class="cmd-desc">Gründet ein Kingdom. Name: 3–20 Zeichen, nur <code>[a-zA-Z0-9_]</code>. Alternativ per GUI-Amboss.</div>
-        <div class="cmd-perm"><span class="badge badge-all">Alle · Kein eigenes Kingdom</span></div>
+        <div class="cmd-desc"><span class="lang-de">Gründet ein Kingdom. Name: 3–20 Zeichen, nur <code>[a-zA-Z0-9_]</code>. Alternativ per GUI-Amboss.</span><span class="lang-en">Creates a kingdom. Name: 3–20 chars, only <code>[a-zA-Z0-9_]</code>. Alternatively via the GUI anvil.</span></div>
+        <div class="cmd-perm"><span class="badge badge-all"><span class="lang-de">Alle · Kein eigenes Kingdom</span><span class="lang-en">All · No own kingdom</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k invite &lt;Spieler&gt;</div>
-        <div class="cmd-desc">Lädt einen Online-Spieler ein. Der Empfänger bestätigt mit <code>/k accept</code>. Läuft nach 120 Sekunden ab.</div>
+        <div class="cmd-desc"><span class="lang-de">Lädt einen Online-Spieler ein. Der Empfänger bestätigt mit <code>/k accept</code>. Läuft nach 120 Sekunden ab.</span><span class="lang-en">Invites an online player. Recipient confirms with <code>/k accept</code>. Expires after 120 seconds.</span></div>
         <div class="cmd-perm"><span class="badge badge-owner">Owner</span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k accept</div>
-        <div class="cmd-desc">Nimmt eine ausstehende Kingdom-Einladung an.</div>
-        <div class="cmd-perm"><span class="badge badge-all">Alle · Mit Einladung</span></div>
+        <div class="cmd-desc"><span class="lang-de">Nimmt eine ausstehende Kingdom-Einladung an.</span><span class="lang-en">Accepts a pending kingdom invitation.</span></div>
+        <div class="cmd-perm"><span class="badge badge-all"><span class="lang-de">Alle · Mit Einladung</span><span class="lang-en">All · With invitation</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k leave</div>
-        <div class="cmd-desc">Verlässt das aktuelle Kingdom. Der Owner muss das Kingdom erst übertragen oder auflösen.</div>
-        <div class="cmd-perm"><span class="badge badge-member">Mitglied (nicht Owner)</span></div>
+        <div class="cmd-desc"><span class="lang-de">Verlässt das aktuelle Kingdom. Der Owner muss das Kingdom erst übertragen oder auflösen.</span><span class="lang-en">Leaves the current kingdom. The owner must transfer or dissolve the kingdom first.</span></div>
+        <div class="cmd-perm"><span class="badge badge-member"><span class="lang-de">Mitglied (nicht Owner)</span><span class="lang-en">Member (not owner)</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k info [Name]</div>
-        <div class="cmd-desc">Zeigt Kingdom-Informationen im Chat. Ohne Argument: eigenes Kingdom. Mit Name: beliebiges Kingdom.</div>
-        <div class="cmd-perm"><span class="badge badge-all">Alle</span></div>
+        <div class="cmd-desc"><span class="lang-de">Zeigt Kingdom-Informationen im Chat. Ohne Argument: eigenes Kingdom. Mit Name: beliebiges Kingdom.</span><span class="lang-en">Shows kingdom info in chat. No argument: own kingdom. With name: any kingdom.</span></div>
+        <div class="cmd-perm"><span class="badge badge-all">All</span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k list</div>
-        <div class="cmd-desc">Listet alle Kingdoms mit Anführer und Mitgliederzahl im Chat auf.</div>
-        <div class="cmd-perm"><span class="badge badge-all">Alle</span></div>
+        <div class="cmd-desc"><span class="lang-de">Listet alle Kingdoms mit Anführer und Mitgliederzahl im Chat auf.</span><span class="lang-en">Lists all kingdoms with leader and member count in chat.</span></div>
+        <div class="cmd-perm"><span class="badge badge-all">All</span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k claim</div>
-        <div class="cmd-desc">Öffnet die Gebiets-Karten-GUI auf der aktuellen Position des Spielers.</div>
-        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+        <div class="cmd-desc"><span class="lang-de">Öffnet die Gebiets-Karten-GUI auf der aktuellen Position des Spielers.</span><span class="lang-en">Opens the territory map GUI at the player’s current position.</span></div>
+        <div class="cmd-perm"><span class="badge badge-member"><span class="lang-de">Mitglied</span><span class="lang-en">Member</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k transfer</div>
-        <div class="cmd-desc">Öffnet die Überweisungs-GUI zum Senden von Gold an ein anderes Kingdom.</div>
+        <div class="cmd-desc"><span class="lang-de">Öffnet die Überweisungs-GUI zum Senden von Gold an ein anderes Kingdom.</span><span class="lang-en">Opens the transfer GUI to send gold to another kingdom.</span></div>
         <div class="cmd-perm"><span class="badge badge-admin">Admin+</span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k debt</div>
-        <div class="cmd-desc">Öffnet die Schulden-GUI — zeigt alle offenen Schulden und ermöglicht Rückzahlung.</div>
-        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+        <div class="cmd-desc"><span class="lang-de">Öffnet die Schulden-GUI — zeigt alle offenen Schulden und ermöglicht Rückzahlung.</span><span class="lang-en">Opens the debt GUI — shows outstanding debts and allows repayment.</span></div>
+        <div class="cmd-perm"><span class="badge badge-member"><span class="lang-de">Mitglied</span><span class="lang-en">Member</span></span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k rename [Name]</div>
-        <div class="cmd-desc">Benennt das Kingdom um. Ohne Argument öffnet sich ein Amboss-Dialog mit dem aktuellen Namen vorausgefüllt.</div>
+        <div class="cmd-desc"><span class="lang-de">Benennt das Kingdom um. Ohne Argument öffnet sich ein Amboss-Dialog mit dem aktuellen Namen vorausgefüllt.</span><span class="lang-en">Renames the kingdom. Without argument, opens an anvil dialog with the current name pre-filled.</span></div>
         <div class="cmd-perm"><span class="badge badge-owner">Owner</span></div>
       </div>
 
       <div class="cmd-item">
         <div class="cmd-name">/k admin &lt;Unterbefehl&gt;</div>
-        <div class="cmd-desc">Admin-Befehle (reload, force-claim, etc.). Erfordert die Berechtigung <code>kingdomsreborn.admin.reload</code>.</div>
-        <div class="cmd-perm"><span class="badge badge-owner">Admin-Berechtigung</span></div>
+        <div class="cmd-desc"><span class="lang-de">Admin-Befehle (reload, force-claim, etc.). Erfordert die Berechtigung <code>kingdomsreborn.admin.reload</code>.</span><span class="lang-en">Admin commands (reload, force-claim, etc.). Requires permission <code>kingdomsreborn.admin.reload</code>.</span></div>
+        <div class="cmd-perm"><span class="badge badge-owner"><span class="lang-de">Admin-Berechtigung</span><span class="lang-en">Admin permission</span></span></div>
       </div>
 
     </div>
@@ -780,39 +813,39 @@
 
   <!-- ─── /WAR ─── -->
   <section id="cmd-war">
-    <h2>🔥 Befehl: /war</h2>
+    <h2>🔥 <span class="lang-de">Befehl:</span><span class="lang-en">Command:</span> /war</h2>
     <div class="cmd-grid">
       <div class="cmd-item">
         <div class="cmd-name">/war</div>
-        <div class="cmd-desc">Öffnet das Kriegs-GUI mit allen aktiven Kriegen deines Kingdoms. Als Verteidiger kann man hier kapitulieren.</div>
-        <div class="cmd-perm"><span class="badge badge-member">Mitglied</span></div>
+        <div class="cmd-desc"><span class="lang-de">Öffnet das Kriegs-GUI mit allen aktiven Kriegen deines Kingdoms. Als Verteidiger kann man hier kapitulieren.</span><span class="lang-en">Opens the war GUI with all active wars for your kingdom. Defenders can surrender here.</span></div>
+        <div class="cmd-perm"><span class="badge badge-member"><span class="lang-de">Mitglied</span><span class="lang-en">Member</span></span></div>
       </div>
     </div>
   </section>
 
   <!-- ─── GUI: HAUPTMENÜ ─── -->
   <section id="gui-main">
-    <h2>🏠 GUI: Hauptmenü</h2>
-    <p>Geöffnet per <code>/k</code>. Zentrales Hub für alle Kingdom-Aktionen. Schwarze Glasscheiben füllen alle ungenutzten Slots.</p>
+    <h2>🏠 <span class="lang-de">GUI: Hauptmenü</span><span class="lang-en">GUI: Main Menu</span></h2>
+    <p><span class="lang-de">Geöffnet per</span><span class="lang-en">Opened with</span> <code>/k</code>. <span class="lang-de">Zentrales Hub für alle Kingdom-Aktionen. Schwarze Glasscheiben füllen alle ungenutzten Slots.</span><span class="lang-en">Central hub for all kingdom actions. Black glass panes fill unused slots.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">🏰 &lt;KingdomName&gt; — Kingdom Hub</div>
-        <div class="gui-card-meta">6 Reihen · 54 Slots</div>
+        <div class="gui-card-title">🏰 &lt;KingdomName&gt; — <span class="lang-de">Kingdom Hub</span><span class="lang-en">Kingdom Hub</span></div>
+        <div class="gui-card-meta"><span class="lang-de">6 Reihen · 54 Slots</span><span class="lang-en">6 rows · 54 slots</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Kingdom-Info</strong>: Name, Anführer, eigene Rolle (👑 König / ⚔ Admin / Mitglied), Mitgliederanzahl, Einfluss, beanspruchte Chunks, Gründungsdatum. <span class="slot-note">Kein Klick-Handler — nur Anzeige.</span></td></tr>
-          <tr><td class="slot-num">12</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder</strong>: öffnet die Mitglieder-GUI zum Einladen, Kicken und Befördern.</td></tr>
-          <tr><td class="slot-num">14</td><td class="slot-item">🛢 Barrel</td><td class="slot-desc"><strong>Bank-Info</strong>: Zeigt Guthaben und Schulden. Die Bank selbst wird am registrierten Barrel-Block geöffnet — dieser Slot ist nur Anzeige.</td></tr>
-          <tr><td class="slot-num">16</td><td class="slot-item">💎 Emerald</td><td class="slot-desc"><strong>Kingdom-Shop</strong>: Kaufe Farben, Bank-Erweiterungen und Mitglieder-Slots.</td></tr>
-          <tr><td class="slot-num">28</td><td class="slot-item">🗺 Karte</td><td class="slot-desc"><strong>Gebiete beanspruchen</strong>: Öffnet die Gebiets-Karte zentriert auf die aktuelle Spielerposition.</td></tr>
-          <tr><td class="slot-num">30</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Überweisung</strong>: Gold an ein anderes Kingdom senden (nur Admin+).</td></tr>
-          <tr><td class="slot-num">32</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong>Schulden</strong>: Rot wenn Schulden vorhanden, grün wenn schuldenfrei. Zeigt Gesamtbetrag.</td></tr>
-          <tr><td class="slot-num">38</td><td class="slot-item">⚙ Komparator</td><td class="slot-desc"><strong>Einstellungen</strong>: Farbe ändern, umbenennen, Mitglieder verwalten. <span class="slot-note">Nur sichtbar für Admin+.</span></td></tr>
-          <tr><td class="slot-num">41</td><td class="slot-item">🚪 Tür / 💥 TNT</td><td class="slot-desc">Mitglieder: <strong>Kingdom verlassen</strong> (ohne Bestätigung). Owner: <strong>Kingdom auflösen</strong> (mit Bestätigungs-GUI).</td></tr>
-          <tr><td class="slot-num">44</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Inventar schließen.</td></tr>
+          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong><span class="lang-de">Kingdom-Info</span><span class="lang-en">Kingdom Info</span></strong>: <span class="lang-de">Name, Anführer, eigene Rolle (👑 König / ⚔ Admin / Mitglied), Mitgliederanzahl, Einfluss, beanspruchte Chunks, Gründungsdatum.</span><span class="lang-en">Name, leader, own role (👑 king / ⚔ admin / member), member count, influence, claimed chunks, founded date.</span> <span class="slot-note"><span class="lang-de">Kein Klick-Handler — nur Anzeige.</span><span class="lang-en">No click handler — display only.</span></span></td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong><span class="lang-de">Mitglieder</span><span class="lang-en">Members</span></strong>: <span class="lang-de">öffnet die Mitglieder-GUI zum Einladen, Kicken und Befördern.</span><span class="lang-en">opens the members GUI for invite, kick, and promote.</span></td></tr>
+          <tr><td class="slot-num">14</td><td class="slot-item">🛢 Barrel</td><td class="slot-desc"><strong><span class="lang-de">Bank-Info</span><span class="lang-en">Bank Info</span></strong>: <span class="lang-de">Zeigt Guthaben und Schulden. Die Bank selbst wird am registrierten Barrel-Block geöffnet — dieser Slot ist nur Anzeige.</span><span class="lang-en">Shows balance and debts. The bank itself opens at the registered barrel block — this slot is display only.</span></td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">💎 Emerald</td><td class="slot-desc"><strong><span class="lang-de">Kingdom-Shop</span><span class="lang-en">Kingdom shop</span></strong>: <span class="lang-de">Kaufe Farben, Bank-Erweiterungen und Mitglieder-Slots.</span><span class="lang-en">Buy colors, bank extensions, and member slots.</span></td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">🗺 Karte</td><td class="slot-desc"><strong><span class="lang-de">Gebiete beanspruchen</span><span class="lang-en">Claim territory</span></strong>: <span class="lang-de">Öffnet die Gebiets-Karte zentriert auf die aktuelle Spielerposition.</span><span class="lang-en">Opens the territory map centered on the player's current position.</span></td></tr>
+          <tr><td class="slot-num">30</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong><span class="lang-de">Überweisung</span><span class="lang-en">Transfer</span></strong>: <span class="lang-de">Gold an ein anderes Kingdom senden (nur Admin+).</span><span class="lang-en">Send gold to another kingdom (Admin+ only).</span></td></tr>
+          <tr><td class="slot-num">32</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong><span class="lang-de">Schulden</span><span class="lang-en">Debt</span></strong>: <span class="lang-de">Rot wenn Schulden vorhanden, grün wenn schuldenfrei. Zeigt Gesamtbetrag.</span><span class="lang-en">Red when debt exists, green when debt-free. Shows total amount.</span></td></tr>
+          <tr><td class="slot-num">38</td><td class="slot-item">⚙ Komparator</td><td class="slot-desc"><strong><span class="lang-de">Einstellungen</span><span class="lang-en">Settings</span></strong>: <span class="lang-de">Farbe ändern, umbenennen, Mitglieder verwalten.</span><span class="lang-en">Change color, rename, manage members.</span> <span class="slot-note"><span class="lang-de">Nur sichtbar für Admin+.</span><span class="lang-en">Visible to Admin+ only.</span></span></td></tr>
+          <tr><td class="slot-num">41</td><td class="slot-item">🚪 Tür / 💥 TNT</td><td class="slot-desc"><span class="lang-de">Mitglieder:</span><span class="lang-en">Members:</span> <strong><span class="lang-de">Kingdom verlassen</span><span class="lang-en">Leave kingdom</span></strong> <span class="lang-de">(ohne Bestätigung).</span><span class="lang-en">(no confirmation).</span> <span class="lang-de">Owner:</span><span class="lang-en">Owner:</span> <strong><span class="lang-de">Kingdom auflösen</span><span class="lang-en">Dissolve kingdom</span></strong> <span class="lang-de">(mit Bestätigungs-GUI).</span><span class="lang-en">(with confirmation GUI).</span></td></tr>
+          <tr><td class="slot-num">44</td><td class="slot-item">✗ Barrier</td><td class="slot-desc"><span class="lang-de">Inventar schließen.</span><span class="lang-en">Close inventory.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -820,21 +853,21 @@
 
   <!-- ─── GUI: KINGDOM ERSTELLEN ─── -->
   <section id="gui-create">
-    <h2>✨ GUI: Kingdom erstellen</h2>
-    <p>Erscheint wenn ein Spieler <strong>ohne Kingdom</strong> <code>/k</code> öffnet.</p>
+    <h2>✨ <span class="lang-de">GUI: Kingdom erstellen</span><span class="lang-en">GUI: Create Kingdom</span></h2>
+    <p><span class="lang-de">Erscheint wenn ein Spieler</span> <strong><span class="lang-de">ohne Kingdom</span><span class="lang-en">without a kingdom</span></strong> <code>/k</code> <span class="lang-de">öffnet.</span><span class="lang-en">opens.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">🏰 Kingdoms Reborn — Kein Kingdom</div>
-        <div class="gui-card-meta">3 Reihen · Grauer Hintergrund</div>
+        <div class="gui-card-title">🏰 <span class="lang-de">Kingdoms Reborn — Kein Kingdom</span><span class="lang-en">KingdomsReborn — No Kingdom</span></div>
+        <div class="gui-card-meta"><span class="lang-de">3 Reihen · Grauer Hintergrund</span><span class="lang-en">3 rows · gray background</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">4</td><td class="slot-item">📖 Buch</td><td class="slot-desc">Info: Anzahl aller aktiven Kingdoms auf dem Server. Kein Klick.</td></tr>
-          <tr><td class="slot-num">11</td><td class="slot-item">⭐ Nether-Star (leuchtend)</td><td class="slot-desc"><strong>Kingdom erstellen</strong>: Öffnet Amboss-Dialog. Name eingeben → Ergebnis-Slot anklicken = Bestätigen. Schließen = Abbrechen → zurück zu diesem GUI.</td></tr>
-          <tr><td class="slot-num">15</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong>Kingdoms erkunden</strong>: Öffnet den Kingdom-Browser mit allen aktiven Kingdoms.</td></tr>
-          <tr><td class="slot-num">26</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Inventar schließen.</td></tr>
+          <tr><td class="slot-num">4</td><td class="slot-item">📖 Buch</td><td class="slot-desc"><span class="lang-de">Info: Anzahl aller aktiven Kingdoms auf dem Server. Kein Klick.</span><span class="lang-en">Info: number of active kingdoms on the server. No click.</span></td></tr>
+          <tr><td class="slot-num">11</td><td class="slot-item">⭐ Nether-Star (leuchtend)</td><td class="slot-desc"><strong><span class="lang-de">Kingdom erstellen</span><span class="lang-en">Create kingdom</span></strong>: <span class="lang-de">Öffnet Amboss-Dialog. Name eingeben → Ergebnis-Slot anklicken = Bestätigen. Schließen = Abbrechen → zurück zu diesem GUI.</span><span class="lang-en">Opens anvil dialog. Enter name → click result slot to confirm. Close = cancel → back to this GUI.</span></td></tr>
+          <tr><td class="slot-num">15</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong><span class="lang-de">Kingdoms erkunden</span><span class="lang-en">Browse kingdoms</span></strong>: <span class="lang-de">Öffnet den Kingdom-Browser mit allen aktiven Kingdoms.</span><span class="lang-en">Opens the kingdom browser with all active kingdoms.</span></td></tr>
+          <tr><td class="slot-num">26</td><td class="slot-item">✗ Barrier</td><td class="slot-desc"><span class="lang-de">Inventar schließen.</span><span class="lang-en">Close inventory.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -842,33 +875,34 @@
     <div class="callout callout-tip">
       <span class="callout-icon">✓</span>
       <div class="callout-body">
-        <strong>Amboss-Eingabe für Kingdom-Namen</strong>
-        Das erste Eingabe-Slot enthält ein Papier mit dem Platzhaltertext <em>"Kingdom-Name..."</em>. Tippe den Namen ins Umbenennen-Feld. Beim Klick auf den Ergebnis-Slot (Slot 3 im Amboss) wird validiert und das Kingdom erstellt. Regeln: <strong>3–20 Zeichen, nur a–z, A–Z, 0–9, _</strong>. Name muss einzigartig sein.
+        <strong><span class="lang-de">Amboss-Eingabe für Kingdom-Namen</span><span class="lang-en">Anvil input for kingdom names</span></strong>
+        <span class="lang-de">Das erste Eingabe-Slot enthält ein Papier mit dem Platzhaltertext <em>"Kingdom-Name..."</em>. Tippe den Namen ins Umbenennen-Feld. Beim Klick auf den Ergebnis-Slot (Slot 3 im Amboss) wird validiert und das Kingdom erstellt. Regeln: <strong>3–20 Zeichen, nur a–z, A–Z, 0–9, _</strong>. Name muss einzigartig sein.</span>
+        <span class="lang-en">The first input slot contains paper with placeholder text <em>"Kingdom-Name..."</em>. Type the name into the rename field. Clicking the result slot (slot 3 in the anvil) validates and creates the kingdom. Rules: <strong>3–20 chars, only a–z, A–Z, 0–9, _</strong>. Name must be unique.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── GUI: KINGDOMS ERKUNDEN ─── -->
   <section id="gui-browser">
-    <h2>🌍 GUI: Kingdoms erkunden</h2>
-    <p>Paginierte Übersicht aller Kingdoms, sortiert nach Mitgliederzahl. Klick auf ein Kingdom zeigt Details.</p>
+    <h2>🌍 <span class="lang-de">GUI: Kingdoms erkunden</span><span class="lang-en">GUI: Browse Kingdoms</span></h2>
+    <p><span class="lang-de">Paginierte Übersicht aller Kingdoms, sortiert nach Mitgliederzahl. Klick auf ein Kingdom zeigt Details.</span><span class="lang-en">Paginated overview of all kingdoms, sorted by member count. Click a kingdom to view details.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">🌍 Kingdoms erkunden</div>
-        <div class="gui-card-meta">6 Reihen · 45 Kingdoms/Seite</div>
+        <div class="gui-card-title">🌍 <span class="lang-de">Kingdoms erkunden</span><span class="lang-en">Browse Kingdoms</span></div>
+        <div class="gui-card-meta"><span class="lang-de">6 Reihen · 45 Kingdoms/Seite</span><span class="lang-en">6 rows · 45 kingdoms/page</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong>Kingdom-Items</strong>: Anführer-Kopf mit Kingdom-Farbe. Lore zeigt: Anführer, Mitglieder, Gebiete (Chunks), Einfluss, Kriegsstatus, ob es das eigene Kingdom ist.</td></tr>
-          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc">Vorherige Seite (nur sichtbar wenn Seite &gt; 1).</td></tr>
-          <tr><td class="slot-num">46</td><td class="slot-item">✗ Barrier</td><td class="slot-desc">Filter löschen (nur sichtbar wenn Filter aktiv). Zeigt aktuellen Filter-Text in der Lore.</td></tr>
-          <tr><td class="slot-num">48</td><td class="slot-item">📄 Papier</td><td class="slot-desc">Seitenanzeige "Seite X / Y", Gesamtanzahl Kingdoms, aktiver Filter.</td></tr>
-          <tr><td class="slot-num">49</td><td class="slot-item">🔍 Spyglass</td><td class="slot-desc"><strong>Suchen</strong>: Öffnet Amboss-Dialog mit aktuellem Filter vorausgefüllt. Zurück-Klick = Filter bleibt.</td></tr>
-          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc">Nächste Seite (nur sichtbar wenn weitere Seiten vorhanden).</td></tr>
-          <tr><td class="slot-num">50</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü / Erstell-Menü.</td></tr>
-          <tr><td class="slot-num">51</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong><span class="lang-de">Kingdom-Items</span><span class="lang-en">Kingdom items</span></strong>: <span class="lang-de">Anführer-Kopf mit Kingdom-Farbe. Lore zeigt: Anführer, Mitglieder, Gebiete (Chunks), Einfluss, Kriegsstatus, ob es das eigene Kingdom ist.</span><span class="lang-en">Leader head with kingdom color. Lore shows: leader, members, territory (chunks), influence, war status, whether it is your own kingdom.</span></td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc"><span class="lang-de">Vorherige Seite (nur sichtbar wenn Seite &gt; 1).</span><span class="lang-en">Previous page (visible only when page &gt; 1).</span></td></tr>
+          <tr><td class="slot-num">46</td><td class="slot-item">✗ Barrier</td><td class="slot-desc"><span class="lang-de">Filter löschen (nur sichtbar wenn Filter aktiv). Zeigt aktuellen Filter-Text in der Lore.</span><span class="lang-en">Clears filter (visible only when filter active). Shows current filter text in lore.</span></td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><span class="lang-de">Seitenanzeige "Seite X / Y", Gesamtanzahl Kingdoms, aktiver Filter.</span><span class="lang-en">Page display "Page X / Y", total kingdoms, active filter.</span></td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">🔍 Spyglass</td><td class="slot-desc"><strong><span class="lang-de">Suchen</span><span class="lang-en">Search</span></strong>: <span class="lang-de">Öffnet Amboss-Dialog mit aktuellem Filter vorausgefüllt. Zurück-Klick = Filter bleibt.</span><span class="lang-en">Opens anvil dialog with current filter pre-filled. Back click keeps the filter.</span></td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc"><span class="lang-de">Nächste Seite (nur sichtbar wenn weitere Seiten vorhanden).</span><span class="lang-en">Next page (visible only when more pages exist).</span></td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zum Hauptmenü / Erstell-Menü.</span><span class="lang-en">Back to main menu / creation menu.</span></td></tr>
+          <tr><td class="slot-num">51</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -876,99 +910,100 @@
 
   <!-- ─── GUI: GEBIETS-KARTE ─── -->
   <section id="gui-map">
-    <h2>🗺 GUI: Gebiets-Karte</h2>
-    <p>Geöffnet per <code>/k claim</code> oder über das Hauptmenü. Zeigt eine 9×5-Chunk-Karte um die Spielerposition.</p>
+    <h2>🗺 <span class="lang-de">GUI: Gebiets-Karte</span><span class="lang-en">GUI: Territory Map</span></h2>
+    <p><span class="lang-de">Geöffnet per</span><span class="lang-en">Opened with</span> <code>/k claim</code> <span class="lang-de">oder über das Hauptmenü. Zeigt eine 9×5-Chunk-Karte um die Spielerposition.</span><span class="lang-en">or via the main menu. Shows a 9×5 chunk map around the player position.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">🗺 Gebiets-Karte — Kingdom</div>
-        <div class="gui-card-meta">6 Reihen · Slots 0–44 = Karte · Slots 45–53 = Steuerung</div>
+        <div class="gui-card-title">🗺 <span class="lang-de">Gebiets-Karte — Kingdom</span><span class="lang-en">Territory Map — Kingdom</span></div>
+        <div class="gui-card-meta"><span class="lang-de">6 Reihen · Slots 0–44 = Karte · Slots 45–53 = Steuerung</span><span class="lang-en">6 rows · Slots 0–44 = map · Slots 45–53 = controls</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">0–44</td><td class="slot-item">Karten-Slots</td><td class="slot-desc">9×5 Chunk-Raster. Jeder Slot = ein Chunk. Klick = Auswahl umschalten (nur freie Chunks).</td></tr>
-          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc"><strong>Westen</strong>: Karte 1 Chunk nach links verschoben (centerX − 1).</td></tr>
-          <tr><td class="slot-num">46</td><td class="slot-item">▲ Pfeil</td><td class="slot-desc"><strong>Norden</strong>: Karte 1 Chunk nach oben (centerZ − 1).</td></tr>
-          <tr><td class="slot-num">47</td><td class="slot-item">▼ Pfeil</td><td class="slot-desc"><strong>Süden</strong>: Karte 1 Chunk nach unten (centerZ + 1).</td></tr>
-          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc"><strong>Osten</strong>: Karte 1 Chunk nach rechts (centerX + 1).</td></tr>
-          <tr><td class="slot-num">48</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong>Zu mir</strong>: Karte neu auf die aktuelle Spielerposition zentrieren.</td></tr>
-          <tr><td class="slot-num">49</td><td class="slot-item">⚔ Goldschwert</td><td class="slot-desc"><strong>Beanspruchen (N)</strong>: Startet Navigationspfad für alle ausgewählten Chunks. Zeigt Anzahl der Auswahl.</td></tr>
-          <tr><td class="slot-num">49</td><td class="slot-item">Barrier</td><td class="slot-desc">Kein Klick möglich wenn keine Auswahl vorhanden.</td></tr>
-          <tr><td class="slot-num">50</td><td class="slot-item">💣 TNT</td><td class="slot-desc"><strong>Auswahl löschen</strong>: Alle markierten Chunks abwählen und Karte neu laden.</td></tr>
-          <tr><td class="slot-num">51</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü (löscht Auswahl).</td></tr>
-          <tr><td class="slot-num">52</td><td class="slot-item">✗</td><td class="slot-desc">Schließen (löscht Auswahl).</td></tr>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Karten-Slots</td><td class="slot-desc"><span class="lang-de">9×5 Chunk-Raster. Jeder Slot = ein Chunk. Klick = Auswahl umschalten (nur freie Chunks).</span><span class="lang-en">9×5 chunk grid. Each slot = one chunk. Click toggles selection (free chunks only).</span></td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀ Pfeil</td><td class="slot-desc"><strong><span class="lang-de">Westen</span><span class="lang-en">West</span></strong>: <span class="lang-de">Karte 1 Chunk nach links verschoben (centerX − 1).</span><span class="lang-en">moves the map one chunk left (centerX − 1).</span></td></tr>
+          <tr><td class="slot-num">46</td><td class="slot-item">▲ Pfeil</td><td class="slot-desc"><strong><span class="lang-de">Norden</span><span class="lang-en">North</span></strong>: <span class="lang-de">Karte 1 Chunk nach oben (centerZ − 1).</span><span class="lang-en">moves the map one chunk up (centerZ − 1).</span></td></tr>
+          <tr><td class="slot-num">47</td><td class="slot-item">▼ Pfeil</td><td class="slot-desc"><strong><span class="lang-de">Süden</span><span class="lang-en">South</span></strong>: <span class="lang-de">Karte 1 Chunk nach unten (centerZ + 1).</span><span class="lang-en">moves the map one chunk down (centerZ + 1).</span></td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">Pfeil ▶</td><td class="slot-desc"><strong><span class="lang-de">Osten</span><span class="lang-en">East</span></strong>: <span class="lang-de">Karte 1 Chunk nach rechts (centerX + 1).</span><span class="lang-en">moves the map one chunk right (centerX + 1).</span></td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">🧭 Kompass</td><td class="slot-desc"><strong><span class="lang-de">Zu mir</span><span class="lang-en">To me</span></strong>: <span class="lang-de">Karte neu auf die aktuelle Spielerposition zentrieren.</span><span class="lang-en">Re-center the map on your current player position.</span></td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">⚔ Goldschwert</td><td class="slot-desc"><strong><span class="lang-de">Beanspruchen (N)</span><span class="lang-en">Claim (N)</span></strong>: <span class="lang-de">Startet Navigationspfad für alle ausgewählten Chunks. Zeigt Anzahl der Auswahl.</span><span class="lang-en">Starts a navigation path for all selected chunks. Shows selection count.</span></td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">Barrier</td><td class="slot-desc"><span class="lang-de">Kein Klick möglich wenn keine Auswahl vorhanden.</span><span class="lang-en">No click possible when no selection exists.</span></td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">💣 TNT</td><td class="slot-desc"><strong><span class="lang-de">Auswahl löschen</span><span class="lang-en">Clear selection</span></strong>: <span class="lang-de">Alle markierten Chunks abwählen und Karte neu laden.</span><span class="lang-en">Deselect all marked chunks and reload the map.</span></td></tr>
+          <tr><td class="slot-num">51</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zum Hauptmenü (löscht Auswahl).</span><span class="lang-en">Back to main menu (clears selection).</span></td></tr>
+          <tr><td class="slot-num">52</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen (löscht Auswahl).</span><span class="lang-en">Close (clears selection).</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>Chunk-Farben auf der Karte</h3>
+    <h3><span class="lang-de">Chunk-Farben auf der Karte</span><span class="lang-en">Chunk colors on the map</span></h3>
     <div class="legend-grid">
-      <div class="legend-item"><div class="legend-color" style="background:#d4a017;"></div><div class="legend-label"><strong>Gelb</strong> — Deine Position (Mittelpunkt)</div></div>
-      <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div><div class="legend-label"><strong>Grün (Glas)</strong> — Ausgewählt</div></div>
-      <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div><div class="legend-label"><strong>Blau (Glas)</strong> — Euer Gebiet</div></div>
-      <div class="legend-item"><div class="legend-color" style="background:#dc2626;"></div><div class="legend-label"><strong>Rot (Glas)</strong> — Feindliches Gebiet</div></div>
-      <div class="legend-item"><div class="legend-color" style="background:#84cc16;"></div><div class="legend-label"><strong>Wolle (biom)</strong> — Freies Land</div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#d4a017;"></div><div class="legend-label"><strong><span class="lang-de">Gelb</span><span class="lang-en">Yellow</span></strong> — <span class="lang-de">Deine Position (Mittelpunkt)</span><span class="lang-en">your position (center)</span></div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div><div class="legend-label"><strong><span class="lang-de">Grün (Glas)</span><span class="lang-en">Green (glass)</span></strong> — <span class="lang-de">Ausgewählt</span><span class="lang-en">selected</span></div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div><div class="legend-label"><strong><span class="lang-de">Blau (Glas)</span><span class="lang-en">Blue (glass)</span></strong> — <span class="lang-de">Euer Gebiet</span><span class="lang-en">your territory</span></div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#dc2626;"></div><div class="legend-label"><strong><span class="lang-de">Rot (Glas)</span><span class="lang-en">Red (glass)</span></strong> — <span class="lang-de">Feindliches Gebiet</span><span class="lang-en">enemy territory</span></div></div>
+      <div class="legend-item"><div class="legend-color" style="background:#84cc16;"></div><div class="legend-label"><strong><span class="lang-de">Wolle (biom)</span><span class="lang-en">Wool (biome)</span></strong> — <span class="lang-de">Freies Land</span><span class="lang-en">free land</span></div></div>
     </div>
 
     <div class="callout callout-info">
       <span class="callout-icon">ℹ</span>
       <div class="callout-body">
-        <strong>Deine Position zeigt Besitzstatus</strong>
-        Der gelbe Mittelpunkt-Slot zeigt in seiner Lore immer: <em>"★ Deine Position"</em> + den aktuellen Besitzstatus (frei / euer Gebiet / feindlich besetzt). So siehst du sofort ob du auf eigenem oder fremdem Gebiet stehst.
+        <strong><span class="lang-de">Deine Position zeigt Besitzstatus</span><span class="lang-en">Your position shows ownership status</span></strong>
+        <span class="lang-de">Der gelbe Mittelpunkt-Slot zeigt in seiner Lore immer: <em>"★ Deine Position"</em> + den aktuellen Besitzstatus (frei / euer Gebiet / feindlich besetzt). So siehst du sofort ob du auf eigenem oder fremdem Gebiet stehst.</span>
+        <span class="lang-en">The yellow center slot always shows in its lore: <em>"★ Your position"</em> + the current ownership status (free / your territory / enemy occupied). This helps you see at a glance whether you are on own or enemy land.</span>
       </div>
     </div>
 
-    <h3>Biom-Farben (freie Chunks)</h3>
+    <h3><span class="lang-de">Biom-Farben (freie Chunks)</span><span class="lang-en">Biome colors (free chunks)</span></h3>
     <div class="biome-grid">
-      <div class="biome-item"><div class="biome-swatch" style="background:#2563eb;"></div>Ozean, Fluss, Strand</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#eab308;"></div>Wüste</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#16a34a;"></div>Wald, Dschungel, Taiga</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#84cc16;"></div>Ebene, Savanne, Wiese</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#6b7280;"></div>Berge, Hügel</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#e5e7eb;"></div>Schnee, Eis</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#78350f;"></div>Sumpf, Mangrove</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#dc2626;"></div>Nether</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#7c3aed;"></div>The End</div>
-      <div class="biome-item"><div class="biome-swatch" style="background:#db2777;"></div>Pilzinsel</div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#2563eb;"></div><span class="lang-de">Ozean, Fluss, Strand</span><span class="lang-en">Ocean, river, beach</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#eab308;"></div><span class="lang-de">Wüste</span><span class="lang-en">Desert</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#16a34a;"></div><span class="lang-de">Wald, Dschungel, Taiga</span><span class="lang-en">Forest, jungle, taiga</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#84cc16;"></div><span class="lang-de">Ebene, Savanne, Wiese</span><span class="lang-en">Plains, savanna, meadow</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#6b7280;"></div><span class="lang-de">Berge, Hügel</span><span class="lang-en">Mountains, hills</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#e5e7eb;"></div><span class="lang-de">Schnee, Eis</span><span class="lang-en">Snow, ice</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#78350f;"></div><span class="lang-de">Sumpf, Mangrove</span><span class="lang-en">Swamp, mangrove</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#dc2626;"></div><span class="lang-de">Nether</span><span class="lang-en">Nether</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#7c3aed;"></div><span class="lang-de">The End</span><span class="lang-en">The End</span></div>
+      <div class="biome-item"><div class="biome-swatch" style="background:#db2777;"></div><span class="lang-de">Pilzinsel</span><span class="lang-en">Mushroom island</span></div>
     </div>
 
-    <h3>Chunk-Lore — Was wird angezeigt?</h3>
-    <p>Jeder Chunk zeigt beim Hover:</p>
+    <h3><span class="lang-de">Chunk-Lore — Was wird angezeigt?</span><span class="lang-en">Chunk lore — what is shown?</span></h3>
+    <p><span class="lang-de">Jeder Chunk zeigt beim Hover:</span><span class="lang-en">Each chunk shows on hover:</span></p>
     <ul style="margin: 8px 0 0 20px; color: var(--text2); font-size: 13.5px; line-height: 2;">
-      <li>Koordinaten: <code>X:&lt;cx&gt; Z:&lt;cz&gt;</code></li>
-      <li><strong>Deine Position:</strong> "★ Deine Position" + Besitzstatus</li>
-      <li><strong>Frei:</strong> "Status: Frei" + Klick-Hinweis</li>
-      <li><strong>Euer Gebiet:</strong> "Status: Euer Gebiet (KingdomName)"</li>
-      <li><strong>Feindlich:</strong> "Status: Besetzt von KingdomName"</li>
-      <li><strong>Ausgewählt:</strong> zusätzlich "✔ Ausgewählt"</li>
+      <li><span class="lang-de">Koordinaten:</span><span class="lang-en">Coordinates:</span> <code>X:&lt;cx&gt; Z:&lt;cz&gt;</code></li>
+      <li><strong><span class="lang-de">Deine Position:</span><span class="lang-en">Your position:</span></strong> <span class="lang-de">"★ Deine Position" + Besitzstatus</span><span class="lang-en">"★ Your position" + ownership status</span></li>
+      <li><strong><span class="lang-de">Frei:</span><span class="lang-en">Free:</span></strong> <span class="lang-de">"Status: Frei" + Klick-Hinweis</span><span class="lang-en">"Status: Free" + click hint</span></li>
+      <li><strong><span class="lang-de">Euer Gebiet:</span><span class="lang-en">Your territory:</span></strong> <span class="lang-de">"Status: Euer Gebiet (KingdomName)"</span><span class="lang-en">"Status: Your territory (KingdomName)"</span></li>
+      <li><strong><span class="lang-de">Feindlich:</span><span class="lang-en">Enemy:</span></strong> <span class="lang-de">"Status: Besetzt von KingdomName"</span><span class="lang-en">"Status: Occupied by KingdomName"</span></li>
+      <li><strong><span class="lang-de">Ausgewählt:</span><span class="lang-en">Selected:</span></strong> <span class="lang-de">zusätzlich "✔ Ausgewählt"</span><span class="lang-en">additionally "✔ Selected"</span></li>
     </ul>
   </section>
 
   <!-- ─── GUI: BANK ─── -->
   <section id="gui-bank">
-    <h2>💰 GUI: Bank</h2>
-    <p>Geöffnet durch <strong>Rechtsklick auf den registrierten Barrel-Block</strong> (als Mitglied des Kingdoms). Auch erreichbar über Bank-GUI-Button im Hauptmenü.</p>
+    <h2>💰 <span class="lang-de">GUI: Bank</span><span class="lang-en">GUI: Bank</span></h2>
+    <p><span class="lang-de">Geöffnet durch</span> <strong><span class="lang-de">Rechtsklick auf den registrierten Barrel-Block</span><span class="lang-en">right-click on the registered barrel block</span></strong> <span class="lang-de">(als Mitglied des Kingdoms). Auch erreichbar über Bank-GUI-Button im Hauptmenü.</span><span class="lang-en">(as a kingdom member). Also accessible via the bank GUI button in the main menu.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
         <div class="gui-card-title">💰 &lt;KingdomName&gt; — Bank</div>
-        <div class="gui-card-meta">4 Reihen · 36 Slots</div>
+        <div class="gui-card-meta"><span class="lang-de">4 Reihen · 36 Slots</span><span class="lang-en">4 rows · 36 slots</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">10</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc"><strong>Guthaben</strong>: aktuell / max, Bank-Block-Koordinaten, Einkommens-Multiplikator, Zinsen aktiv/inaktiv.</td></tr>
-          <tr><td class="slot-num">12</td><td class="slot-item">🟢 Grüner Farbstoff</td><td class="slot-desc"><strong>Einzahlen (Stapel)</strong>: Bis zu 64 Gold-Ingots aus dem Inventar einzahlen. Zeigt verfügbare Items und freien Platz.</td></tr>
-          <tr><td class="slot-num">13</td><td class="slot-item">🟢 Grüne Glasscheibe</td><td class="slot-desc"><strong>Alles einzahlen</strong>: Alle Gold-Ingots im Inventar einzahlen (bis Kapazitätsgrenze).</td></tr>
-          <tr><td class="slot-num">15</td><td class="slot-item">🔴 Roter Farbstoff</td><td class="slot-desc"><strong>Auszahlen (Stapel)</strong>: Bis zu 64 Gold-Ingots auszahlen. <span class="slot-note">Nur Admin+.</span></td></tr>
-          <tr><td class="slot-num">16</td><td class="slot-item">🔴 Rote Glasscheibe</td><td class="slot-desc"><strong>Alles auszahlen</strong>: Gesamtes Guthaben abheben. <span class="slot-note">Nur Admin+.</span></td></tr>
-          <tr><td class="slot-num">19</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong>Bank-Erweiterungen</strong>: Verwalte bis zu 5 Extension-Slots für passive Einkommen, Zinsen etc. Zeigt aktuelle Anzahl.</td></tr>
-          <tr><td class="slot-num">21</td><td class="slot-item">📦 Truhe</td><td class="slot-desc"><strong>Lager-Upgrades</strong>: Erhöhe die maximale Bank-Kapazität (bis Level 80, je +1.000 pro Level).</td></tr>
-          <tr><td class="slot-num">23</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Überweisung</strong>: Gold an ein anderes Kingdom überweisen.</td></tr>
-          <tr><td class="slot-num">25</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong>Schulden</strong>: Öffnet Schulden-Übersicht.</td></tr>
-          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
-          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">10</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc"><strong><span class="lang-de">Guthaben</span><span class="lang-en">Balance</span></strong>: <span class="lang-de">aktuell / max, Bank-Block-Koordinaten, Einkommens-Multiplikator, Zinsen aktiv/inaktiv.</span><span class="lang-en">current / max, bank block coordinates, income multiplier, interest active/inactive.</span></td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">🟢 Grüner Farbstoff</td><td class="slot-desc"><strong><span class="lang-de">Einzahlen (Stapel)</span><span class="lang-en">Deposit (stack)</span></strong>: <span class="lang-de">Bis zu 64 Gold-Ingots aus dem Inventar einzahlen. Zeigt verfügbare Items und freien Platz.</span><span class="lang-en">Deposit up to 64 gold ingots from your inventory. Shows available items and free space.</span></td></tr>
+          <tr><td class="slot-num">13</td><td class="slot-item">🟢 Grüne Glasscheibe</td><td class="slot-desc"><strong><span class="lang-de">Alles einzahlen</span><span class="lang-en">Deposit all</span></strong>: <span class="lang-de">Alle Gold-Ingots im Inventar einzahlen (bis Kapazitätsgrenze).</span><span class="lang-en">Deposit all gold ingots in the inventory (up to capacity).</span></td></tr>
+          <tr><td class="slot-num">15</td><td class="slot-item">🔴 Roter Farbstoff</td><td class="slot-desc"><strong><span class="lang-de">Auszahlen (Stapel)</span><span class="lang-en">Withdraw (stack)</span></strong>: <span class="lang-de">Bis zu 64 Gold-Ingots auszahlen.</span><span class="lang-en">Withdraw up to 64 gold ingots.</span> <span class="slot-note"><span class="lang-de">Nur Admin+.</span><span class="lang-en">Admin+ only.</span></span></td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">🔴 Rote Glasscheibe</td><td class="slot-desc"><strong><span class="lang-de">Alles auszahlen</span><span class="lang-en">Withdraw all</span></strong>: <span class="lang-de">Gesamtes Guthaben abheben.</span><span class="lang-en">Withdraw entire balance.</span> <span class="slot-note"><span class="lang-de">Nur Admin+.</span><span class="lang-en">Admin+ only.</span></span></td></tr>
+          <tr><td class="slot-num">19</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong><span class="lang-de">Bank-Erweiterungen</span><span class="lang-en">Bank extensions</span></strong>: <span class="lang-de">Verwalte bis zu 5 Extension-Slots für passives Einkommen, Zinsen etc. Zeigt aktuelle Anzahl.</span><span class="lang-en">Manage up to 5 extension slots for passive income, interest, etc. Shows current count.</span></td></tr>
+          <tr><td class="slot-num">21</td><td class="slot-item">📦 Truhe</td><td class="slot-desc"><strong><span class="lang-de">Lager-Upgrades</span><span class="lang-en">Storage upgrades</span></strong>: <span class="lang-de">Erhöhe die maximale Bank-Kapazität (bis Level 80, je +1.000 pro Level).</span><span class="lang-en">Increase max bank capacity (up to level 80, +1,000 per level).</span></td></tr>
+          <tr><td class="slot-num">23</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong><span class="lang-de">Überweisung</span><span class="lang-en">Transfer</span></strong>: <span class="lang-de">Gold an ein anderes Kingdom überweisen.</span><span class="lang-en">Transfer gold to another kingdom.</span></td></tr>
+          <tr><td class="slot-num">25</td><td class="slot-item">🟥/🟩 Beton</td><td class="slot-desc"><strong><span class="lang-de">Schulden</span><span class="lang-en">Debt</span></strong>: <span class="lang-de">Öffnet Schulden-Übersicht.</span><span class="lang-en">Opens debt overview.</span></td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zum Hauptmenü.</span><span class="lang-en">Back to main menu.</span></td></tr>
+          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -976,62 +1011,62 @@
     <div class="callout callout-warn">
       <span class="callout-icon">⚠</span>
       <div class="callout-body">
-        <strong>Bank-Block erforderlich</strong>
-        Einzahlen und Auszahlen funktionieren nur wenn ein Barrel-Block als Bank registriert wurde. Kein registrierter Block → Slots sind grau und deaktiviert.
+        <strong><span class="lang-de">Bank-Block erforderlich</span><span class="lang-en">Bank block required</span></strong>
+        <span class="lang-de">Einzahlen und Auszahlen funktionieren nur wenn ein Barrel-Block als Bank registriert wurde. Kein registrierter Block → Slots sind grau und deaktiviert.</span><span class="lang-en">Deposits and withdrawals only work if a barrel block is registered as the bank. No registered block → slots are gray and disabled.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── GUI: MITGLIEDER ─── -->
   <section id="gui-members">
-    <h2>👥 GUI: Mitglieder</h2>
+    <h2>👥 <span class="lang-de">GUI: Mitglieder</span><span class="lang-en">GUI: Members</span></h2>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">👥 &lt;KingdomName&gt; — Mitglieder</div>
-        <div class="gui-card-meta">6 Reihen · bis 28 Mitglieder sichtbar</div>
+        <div class="gui-card-title">👥 &lt;KingdomName&gt; — <span class="lang-de">Mitglieder</span><span class="lang-en">Members</span></div>
+        <div class="gui-card-meta"><span class="lang-de">6 Reihen · bis 28 Mitglieder sichtbar</span><span class="lang-en">6 rows · up to 28 members visible</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">4</td><td class="slot-item">📄 Papier</td><td class="slot-desc">Info: Mitgliederanzahl, Tipp zur Verwaltung, Rollen-Legende (👑 / ⚔ / ·).</td></tr>
-          <tr><td class="slot-num">8</td><td class="slot-item">💚 Emerald</td><td class="slot-desc"><strong>Einladen</strong>: Zeigt alle Online-Spieler ohne Kingdom im Chat. Einladen per <code>/k invite &lt;Name&gt;</code>. <span class="slot-note">Nur Admin+.</span></td></tr>
-          <tr><td class="slot-num">9–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong>Mitglieder</strong>: Jeder Kopf zeigt Rollen-Icon, Name, Online-Status. Als Admin: Klick öffnet Aktions-Menü.</td></tr>
-          <tr><td class="slot-num">52</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
-          <tr><td class="slot-num">53</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">4</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><span class="lang-de">Info: Mitgliederanzahl, Tipp zur Verwaltung, Rollen-Legende (👑 / ⚔ / ·).</span><span class="lang-en">Info: member count, management tip, role legend (👑 / ⚔ / ·).</span></td></tr>
+          <tr><td class="slot-num">8</td><td class="slot-item">💚 Emerald</td><td class="slot-desc"><strong><span class="lang-de">Einladen</span><span class="lang-en">Invite</span></strong>: <span class="lang-de">Zeigt alle Online-Spieler ohne Kingdom im Chat. Einladen per <code>/k invite &lt;Name&gt;</code>.</span><span class="lang-en">Shows all online players without a kingdom in chat. Invite using <code>/k invite &lt;Name&gt;</code>.</span> <span class="slot-note"><span class="lang-de">Nur Admin+.</span><span class="lang-en">Admin+ only.</span></span></td></tr>
+          <tr><td class="slot-num">9–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><strong><span class="lang-de">Mitglieder</span><span class="lang-en">Members</span></strong>: <span class="lang-de">Jeder Kopf zeigt Rollen-Icon, Name, Online-Status. Als Admin: Klick öffnet Aktions-Menü.</span><span class="lang-en">Each head shows role icon, name, online status. As an admin: click opens action menu.</span></td></tr>
+          <tr><td class="slot-num">52</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zum Hauptmenü.</span><span class="lang-en">Back to main menu.</span></td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>Mitglieder-Aktionen (Admin-Klick auf Spielerkopf)</h3>
-    <p>Öffnet das <strong>MemberAction-GUI</strong> mit:</p>
+    <h3><span class="lang-de">Mitglieder-Aktionen (Admin-Klick auf Spielerkopf)</span><span class="lang-en">Member actions (admin click on player head)</span></h3>
+    <p><span class="lang-de">Öffnet das</span> <strong><span class="lang-de">MemberAction-GUI</span><span class="lang-en">member action GUI</span></strong> <span class="lang-de">mit:</span><span class="lang-en">with:</span></p>
     <ul style="margin: 8px 0 0 20px; color: var(--text2); font-size: 13.5px; line-height: 2;">
-      <li>👢 <strong>Kicken</strong> → Bestätigungs-GUI</li>
-      <li>⬆ <strong>Befördern</strong> (Mitglied → Admin / Admin → Owner-Transfer)</li>
-      <li>⬇ <strong>Degradieren</strong> (Admin → Mitglied)</li>
-      <li>👑 <strong>Ownership übertragen</strong> → Bestätigungs-GUI (nur Owner)</li>
+      <li>👢 <strong><span class="lang-de">Kicken</span><span class="lang-en">Kick</span></strong> → <span class="lang-de">Bestätigungs-GUI</span><span class="lang-en">confirmation GUI</span></li>
+      <li>⬆ <strong><span class="lang-de">Befördern</span><span class="lang-en">Promote</span></strong> (<span class="lang-de">Mitglied → Admin / Admin → Owner-Transfer</span><span class="lang-en">member → admin / admin → owner transfer</span>)</li>
+      <li>⬇ <strong><span class="lang-de">Degradieren</span><span class="lang-en">Demote</span></strong> (<span class="lang-de">Admin → Mitglied</span><span class="lang-en">admin → member</span>)</li>
+      <li>👑 <strong><span class="lang-de">Ownership übertragen</span><span class="lang-en">Transfer ownership</span></strong> → <span class="lang-de">Bestätigungs-GUI (nur Owner)</span><span class="lang-en">confirmation GUI (owner only)</span></li>
     </ul>
   </section>
 
   <!-- ─── GUI: EINSTELLUNGEN ─── -->
   <section id="gui-settings">
-    <h2>⚙ GUI: Einstellungen</h2>
-    <p>Nur für Admin und Owner. Geöffnet über Slot 38 im Hauptmenü.</p>
+    <h2>⚙ <span class="lang-de">GUI: Einstellungen</span><span class="lang-en">GUI: Settings</span></h2>
+    <p><span class="lang-de">Nur für Admin und Owner. Geöffnet über Slot 38 im Hauptmenü.</span><span class="lang-en">Admin and owner only. Opened via slot 38 in the main menu.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">⚙ &lt;KingdomName&gt; — Einstellungen</div>
-        <div class="gui-card-meta">4 Reihen · 36 Slots</div>
+        <div class="gui-card-title">⚙ &lt;KingdomName&gt; — <span class="lang-de">Einstellungen</span><span class="lang-en">Settings</span></div>
+        <div class="gui-card-meta"><span class="lang-de">4 Reihen · 36 Slots</span><span class="lang-en">4 rows · 36 slots</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong>Kingdom-Übersicht</strong>: Name, Mitglieder, Guthaben, eigene Rolle. Nur Anzeige.</td></tr>
-          <tr><td class="slot-num">12</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong>Farbe ändern</strong>: Zeigt aktuelle Farbe → öffnet Farb-Shop-GUI. <span class="slot-note">Admin+.</span></td></tr>
-          <tr><td class="slot-num">14</td><td class="slot-item">🏷 Namensschild</td><td class="slot-desc"><strong>Kingdom umbenennen</strong>: Öffnet Amboss mit aktuellem Namen vorausgefüllt. <span class="slot-note">Nur Owner.</span></td></tr>
-          <tr><td class="slot-num">16</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder verwalten</strong>: Öffnet die Mitglieder-GUI.</td></tr>
-          <tr><td class="slot-num">34</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zum Hauptmenü.</td></tr>
-          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">10</td><td class="slot-item">📄 Papier</td><td class="slot-desc"><strong><span class="lang-de">Kingdom-Übersicht</span><span class="lang-en">Kingdom overview</span></strong>: <span class="lang-de">Name, Mitglieder, Guthaben, eigene Rolle. Nur Anzeige.</span><span class="lang-en">Name, members, balance, own role. Display only.</span></td></tr>
+          <tr><td class="slot-num">12</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong><span class="lang-de">Farbe ändern</span><span class="lang-en">Change color</span></strong>: <span class="lang-de">Zeigt aktuelle Farbe → öffnet Farb-Shop-GUI.</span><span class="lang-en">Shows current color → opens color shop GUI.</span> <span class="slot-note"><span class="lang-de">Admin+.</span><span class="lang-en">Admin+.</span></span></td></tr>
+          <tr><td class="slot-num">14</td><td class="slot-item">🏷 Namensschild</td><td class="slot-desc"><strong><span class="lang-de">Kingdom umbenennen</span><span class="lang-en">Rename kingdom</span></strong>: <span class="lang-de">Öffnet Amboss mit aktuellem Namen vorausgefüllt.</span><span class="lang-en">Opens anvil with current name pre-filled.</span> <span class="slot-note"><span class="lang-de">Nur Owner.</span><span class="lang-en">Owner only.</span></span></td></tr>
+          <tr><td class="slot-num">16</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong><span class="lang-de">Mitglieder verwalten</span><span class="lang-en">Manage members</span></strong>: <span class="lang-de">Öffnet die Mitglieder-GUI.</span><span class="lang-en">Opens the members GUI.</span></td></tr>
+          <tr><td class="slot-num">34</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zum Hauptmenü.</span><span class="lang-en">Back to main menu.</span></td></tr>
+          <tr><td class="slot-num">35</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1039,32 +1074,32 @@
     <div class="callout callout-tip">
       <span class="callout-icon">✓</span>
       <div class="callout-body">
-        <strong>Umbenennen per Amboss</strong>
-        Klick auf "Kingdom umbenennen" öffnet den Amboss mit dem <em>aktuellen Kingdom-Namen vorausgefüllt</em>. Einfach ändern und Ergebnis-Slot anklicken. Gleiche Validierung: 3–20 Zeichen, [a–z A–Z 0–9 _], Name muss einzigartig sein.
+        <strong><span class="lang-de">Umbenennen per Amboss</span><span class="lang-en">Rename via anvil</span></strong>
+        <span class="lang-de">Klick auf "Kingdom umbenennen" öffnet den Amboss mit dem <em>aktuellen Kingdom-Namen vorausgefüllt</em>. Einfach ändern und Ergebnis-Slot anklicken. Gleiche Validierung: 3–20 Zeichen, [a–z A–Z 0–9 _], Name muss einzigartig sein.</span><span class="lang-en">Clicking "Rename kingdom" opens the anvil with the <em>current kingdom name pre-filled</em>. Just edit and click the result slot. Same validation: 3–20 chars, [a–z A–Z 0–9 _], name must be unique.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── GUI: ÜBERWEISUNG ─── -->
   <section id="gui-transfer">
-    <h2>💸 GUI: Überweisung</h2>
-    <p>Paginierte Liste aller anderen Kingdoms. Klick auf ein Kingdom öffnet Amboss-Betragseingabe.</p>
+    <h2>💸 <span class="lang-de">GUI: Überweisung</span><span class="lang-en">GUI: Transfer</span></h2>
+    <p><span class="lang-de">Paginierte Liste aller anderen Kingdoms. Klick auf ein Kingdom öffnet Amboss-Betragseingabe.</span><span class="lang-en">Paginated list of all other kingdoms. Clicking a kingdom opens anvil amount input.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">💸 Überweisung — &lt;KingdomName&gt;</div>
-        <div class="gui-card-meta">6 Reihen · 45 Kingdoms/Seite</div>
+        <div class="gui-card-title">💸 <span class="lang-de">Überweisung</span><span class="lang-en">Transfer</span> — &lt;KingdomName&gt;</div>
+        <div class="gui-card-meta"><span class="lang-de">6 Reihen · 45 Kingdoms/Seite</span><span class="lang-en">6 rows · 45 kingdoms per page</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc">Alle anderen Kingdoms: Guthaben, freier Platz. Klick → Amboss für Betrag (Zahlen eingeben → bestätigen).</td></tr>
-          <tr><td class="slot-num">45</td><td class="slot-item">◀</td><td class="slot-desc">Vorherige Seite.</td></tr>
-          <tr><td class="slot-num">47</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc">Eigenes Guthaben — nur Anzeige.</td></tr>
-          <tr><td class="slot-num">48</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zur Bank.</td></tr>
-          <tr><td class="slot-num">49</td><td class="slot-item">📄 Seite</td><td class="slot-desc">Seitenanzeige + Klick zum Suchen (Amboss-Eingabe für Filter).</td></tr>
-          <tr><td class="slot-num">50</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
-          <tr><td class="slot-num">53</td><td class="slot-item">▶</td><td class="slot-desc">Nächste Seite.</td></tr>
+          <tr><td class="slot-num">0–44</td><td class="slot-item">Spielerköpfe</td><td class="slot-desc"><span class="lang-de">Alle anderen Kingdoms: Guthaben, freier Platz. Klick → Amboss für Betrag (Zahlen eingeben → bestätigen).</span><span class="lang-en">All other kingdoms: balance, free slots. Click → anvil for amount (enter numbers → confirm).</span></td></tr>
+          <tr><td class="slot-num">45</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Vorherige Seite.</span><span class="lang-en">Previous page.</span></td></tr>
+          <tr><td class="slot-num">47</td><td class="slot-item">🪙 Goldblock</td><td class="slot-desc"><span class="lang-de">Eigenes Guthaben — nur Anzeige.</span><span class="lang-en">Own balance — display only.</span></td></tr>
+          <tr><td class="slot-num">48</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zur Bank.</span><span class="lang-en">Back to bank.</span></td></tr>
+          <tr><td class="slot-num">49</td><td class="slot-item">📄 Seite</td><td class="slot-desc"><span class="lang-de">Seitenanzeige + Klick zum Suchen (Amboss-Eingabe für Filter).</span><span class="lang-en">Page display + click to search (anvil input for filter).</span></td></tr>
+          <tr><td class="slot-num">50</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
+          <tr><td class="slot-num">53</td><td class="slot-item">▶</td><td class="slot-desc"><span class="lang-de">Nächste Seite.</span><span class="lang-en">Next page.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1072,47 +1107,47 @@
 
   <!-- ─── GUI: SCHULDEN ─── -->
   <section id="gui-debt">
-    <h2>📋 GUI: Schulden</h2>
+    <h2>📋 <span class="lang-de">GUI: Schulden</span><span class="lang-en">GUI: Debt</span></h2>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">📋 Schulden — &lt;KingdomName&gt;</div>
-        <div class="gui-card-meta">4 Reihen</div>
+        <div class="gui-card-title">📋 <span class="lang-de">Schulden</span><span class="lang-en">Debt</span> — &lt;KingdomName&gt;</div>
+        <div class="gui-card-meta"><span class="lang-de">4 Reihen</span><span class="lang-en">4 rows</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">10</td><td class="slot-item">📖 Buch</td><td class="slot-desc"><strong>Übersicht</strong>: Gesamtschulden + Bank-Guthaben.</td></tr>
-          <tr><td class="slot-num">12–16</td><td class="slot-item">🟥 Roter Beton</td><td class="slot-desc">Je eine Schuld: Gläubiger, Betrag. Als Admin mit genug Guthaben: Klick = sofort begleichen.</td></tr>
-          <tr><td class="slot-num">13</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc">Erscheint wenn keine Schulden vorhanden.</td></tr>
-          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc">Zurück zur Bank.</td></tr>
-          <tr><td class="slot-num">34</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">10</td><td class="slot-item">📖 Buch</td><td class="slot-desc"><strong><span class="lang-de">Übersicht</span><span class="lang-en">Overview</span></strong>: <span class="lang-de">Gesamtschulden + Bank-Guthaben.</span><span class="lang-en">Total debt + bank balance.</span></td></tr>
+          <tr><td class="slot-num">12–16</td><td class="slot-item">🟥 Roter Beton</td><td class="slot-desc"><span class="lang-de">Je eine Schuld: Gläubiger, Betrag. Als Admin mit genug Guthaben: Klick = sofort begleichen.</span><span class="lang-en">Each debt: creditor, amount. As admin with enough balance: click to repay instantly.</span></td></tr>
+          <tr><td class="slot-num">13</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc"><span class="lang-de">Erscheint wenn keine Schulden vorhanden.</span><span class="lang-en">Appears when no debt exists.</span></td></tr>
+          <tr><td class="slot-num">28</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück zur Bank.</span><span class="lang-en">Back to bank.</span></td></tr>
+          <tr><td class="slot-num">34</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <p>Schulden entstehen wenn ein Chunk im Kriegsgebiet abgebaut wird. Jeder Block hat einen konfigurierbaren Wert (siehe <a href="#config-main" style="color: var(--gold);">config.yml</a>).</p>
+    <p><span class="lang-de">Schulden entstehen wenn ein Chunk im Kriegsgebiet abgebaut wird. Jeder Block hat einen konfigurierbaren Wert (siehe</span><span class="lang-en">Debt occurs when a chunk is mined in war territory. Each block has a configurable value (see</span> <a href="#config-main" style="color: var(--gold);"><span class="lang-de">config.yml</span><span class="lang-en">config.yml</span></a><span class="lang-de">).</span><span class="lang-en">).</span></p>
   </section>
 
   <!-- ─── GUI: SHOP ─── -->
   <section id="gui-shop">
-    <h2>🛒 GUI: Shop</h2>
+    <h2>🛒 <span class="lang-de">GUI: Shop</span><span class="lang-en">GUI: Shop</span></h2>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">🛒 &lt;KingdomName&gt; — Shop</div>
-        <div class="gui-card-meta">5 Reihen</div>
+        <div class="gui-card-title">🛒 &lt;KingdomName&gt; — <span class="lang-de">Shop</span><span class="lang-en">Shop</span></div>
+        <div class="gui-card-meta"><span class="lang-de">5 Reihen</span><span class="lang-en">5 rows</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">4</td><td class="slot-item">Goldnugget</td><td class="slot-desc">Aktuelles Kingdom-Guthaben — nur Anzeige.</td></tr>
-          <tr><td class="slot-num">20</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong>Farben kaufen</strong> (50–600 Gold). Öffnet Farb-Shop mit allen verfügbaren Farben. <span class="slot-note">Admin+.</span></td></tr>
-          <tr><td class="slot-num">22</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong>Bank-Erweiterungen</strong>: Bis zu 5 Extensions kaufbar (Einkommen, Zinsen, etc.). <span class="slot-note">Admin+.</span></td></tr>
-          <tr><td class="slot-num">24</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong>Mitglieder-Slots</strong>: +10 Slots für 1.000 Gold. Zeigt aktuelles Maximum und Bonus. <span class="slot-note">Admin+.</span></td></tr>
-          <tr><td class="slot-num">31</td><td class="slot-item">📖 Buch</td><td class="slot-desc">Shop-Info: Wie verdient man Kingdom-Gold.</td></tr>
-          <tr><td class="slot-num">43</td><td class="slot-item">◀</td><td class="slot-desc">Zurück.</td></tr>
-          <tr><td class="slot-num">44</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">4</td><td class="slot-item">Goldnugget</td><td class="slot-desc"><span class="lang-de">Aktuelles Kingdom-Guthaben — nur Anzeige.</span><span class="lang-en">Current kingdom balance — display only.</span></td></tr>
+          <tr><td class="slot-num">20</td><td class="slot-item">🎨 Farbstoff</td><td class="slot-desc"><strong><span class="lang-de">Farben kaufen</span><span class="lang-en">Buy colors</span></strong> (<span class="lang-de">50–600 Gold</span><span class="lang-en">50–600 gold</span>). <span class="lang-de">Öffnet Farb-Shop mit allen verfügbaren Farben.</span><span class="lang-en">Opens color shop with all available colors.</span> <span class="slot-note"><span class="lang-de">Admin+.</span><span class="lang-en">Admin+.</span></span></td></tr>
+          <tr><td class="slot-num">22</td><td class="slot-item">🏦 Ender-Truhe</td><td class="slot-desc"><strong><span class="lang-de">Bank-Erweiterungen</span><span class="lang-en">Bank upgrades</span></strong>: <span class="lang-de">Bis zu 5 Extensions kaufbar (Einkommen, Zinsen, etc.).</span><span class="lang-en">Up to 5 extensions purchasable (income, interest, etc.).</span> <span class="slot-note"><span class="lang-de">Admin+.</span><span class="lang-en">Admin+.</span></span></td></tr>
+          <tr><td class="slot-num">24</td><td class="slot-item">👥 Spielerkopf</td><td class="slot-desc"><strong><span class="lang-de">Mitglieder-Slots</span><span class="lang-en">Member slots</span></strong>: <span class="lang-de">+10 Slots für 1.000 Gold. Zeigt aktuelles Maximum und Bonus.</span><span class="lang-en">+10 slots for 1,000 gold. Shows current maximum and bonus.</span> <span class="slot-note"><span class="lang-de">Admin+.</span><span class="lang-en">Admin+.</span></span></td></tr>
+          <tr><td class="slot-num">31</td><td class="slot-item">📖 Buch</td><td class="slot-desc"><span class="lang-de">Shop-Info: Wie verdient man Kingdom-Gold.</span><span class="lang-en">Shop info: how to earn kingdom gold.</span></td></tr>
+          <tr><td class="slot-num">43</td><td class="slot-item">◀</td><td class="slot-desc"><span class="lang-de">Zurück.</span><span class="lang-en">Back.</span></td></tr>
+          <tr><td class="slot-num">44</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1120,150 +1155,150 @@
 
   <!-- ─── GUI: KRIEG ─── -->
   <section id="gui-war">
-    <h2>⚔ GUI: Krieg</h2>
+    <h2>⚔ <span class="lang-de">GUI: Krieg</span><span class="lang-en">GUI: War</span></h2>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">⚔ Kriegs-Übersicht</div>
-        <div class="gui-card-meta">5 Reihen</div>
+        <div class="gui-card-title">⚔ <span class="lang-de">Kriegs-Übersicht</span><span class="lang-en">War overview</span></div>
+        <div class="gui-card-meta"><span class="lang-de">5 Reihen</span><span class="lang-en">5 rows</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Slot</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Slot</span><span class="lang-en">Slot</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">10, 19, 28</td><td class="slot-item">⚔ Netherit-Schwert (leuchtend)</td><td class="slot-desc">Je ein aktiver Krieg: Angreifer vs Verteidiger, aktuelle Kill-Stände beider Seiten.</td></tr>
-          <tr><td class="slot-num">12, 21, 30</td><td class="slot-item">🏳 Weißes Banner</td><td class="slot-desc"><strong>Aufgeben</strong>: Nur als Verteidiger (Admin+). Alle umkämpften Chunks gehen an den Angreifer.</td></tr>
-          <tr><td class="slot-num">22</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc">Erscheint wenn kein aktiver Krieg vorhanden.</td></tr>
-          <tr><td class="slot-num">40</td><td class="slot-item">✗</td><td class="slot-desc">Schließen.</td></tr>
+          <tr><td class="slot-num">10, 19, 28</td><td class="slot-item">⚔ Netherit-Schwert (leuchtend)</td><td class="slot-desc"><span class="lang-de">Je ein aktiver Krieg: Angreifer vs Verteidiger, aktuelle Kill-Stände beider Seiten.</span><span class="lang-en">One active war each: attacker vs defender, current kill counts for both sides.</span></td></tr>
+          <tr><td class="slot-num">12, 21, 30</td><td class="slot-item">🏳 Weißes Banner</td><td class="slot-desc"><strong><span class="lang-de">Aufgeben</span><span class="lang-en">Surrender</span></strong>: <span class="lang-de">Nur als Verteidiger (Admin+). Alle umkämpften Chunks gehen an den Angreifer.</span><span class="lang-en">Defender only (Admin+). All contested chunks go to attacker.</span></td></tr>
+          <tr><td class="slot-num">22</td><td class="slot-item">🟩 Grüner Beton</td><td class="slot-desc"><span class="lang-de">Erscheint wenn kein aktiver Krieg vorhanden.</span><span class="lang-en">Appears when no active war exists.</span></td></tr>
+          <tr><td class="slot-num">40</td><td class="slot-item">✗</td><td class="slot-desc"><span class="lang-de">Schließen.</span><span class="lang-en">Close.</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <p>Während eines Krieges läuft oben eine <strong>Action-Bar</strong> und eine <strong>Boss-Bar</strong> mit Kill-Ständen und Timer für alle beteiligten Spieler.</p>
+    <p><span class="lang-de">Während eines Krieges läuft oben eine</span> <strong><span class="lang-de">Action-Bar</span><span class="lang-en">action bar</span></strong> <span class="lang-de">und eine</span> <strong><span class="lang-de">Boss-Bar</span><span class="lang-en">boss bar</span></strong> <span class="lang-de">mit Kill-Ständen und Timer für alle beteiligten Spieler.</span><span class="lang-en">and a <strong>boss bar</strong> display above with kill counts and timer for all involved players.</span></p>
   </section>
 
   <!-- ─── GUI: GEBIETS-BORDER ─── -->
   <section id="gui-territory-border">
-    <h2>✦ GUI: Gebiets-Border</h2>
-    <p>Der Button <strong>✦ Gebiets-Border</strong> im Hauptmenü (<code>/k</code>) schaltet eine Partikel-Umrandung aller beanspruchten Chunks des eigenen Kingdoms ein oder aus. Ist die Border aktiv, leuchtet der Button grün.</p>
+    <h2>✦ <span class="lang-de">GUI: Gebiets-Border</span><span class="lang-en">GUI: Territory Border</span></h2>
+    <p><span class="lang-de">Der Button</span> <strong><span class="lang-de">✦ Gebiets-Border</span><span class="lang-en">✦ Territory Border</span></strong> <span class="lang-de">im Hauptmenü (<code>/k</code>) schaltet eine Partikel-Umrandung aller beanspruchten Chunks des eigenen Kingdoms ein oder aus. Ist die Border aktiv, leuchtet der Button grün.</span><span class="lang-en">in the main menu (<code>/k</code>) toggles a particle outline around all claimed chunks of your kingdom. When active, the button glows green.</span></p>
 
     <div class="gui-card">
       <div class="gui-card-header">
-        <div class="gui-card-title">✦ Gebiets-Border Toggle</div>
-        <div class="gui-card-meta">Slot 34 im Hauptmenü</div>
+        <div class="gui-card-title">✦ <span class="lang-de">Gebiets-Border Toggle</span><span class="lang-en">Territory Border Toggle</span></div>
+        <div class="gui-card-meta"><span class="lang-de">Slot 34 im Hauptmenü</span><span class="lang-en">Slot 34 in main menu</span></div>
       </div>
       <table class="slot-table">
-        <thead><tr><th>Zustand</th><th>Item</th><th>Beschreibung</th></tr></thead>
+        <thead><tr><th><span class="lang-de">Zustand</span><span class="lang-en">State</span></th><th><span class="lang-de">Item</span><span class="lang-en">Item</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
         <tbody>
-          <tr><td class="slot-num">AUS</td><td class="slot-item">🪄 Magenta Dye</td><td class="slot-desc">Border ist deaktiviert. Klicken zum Einschalten.</td></tr>
-          <tr><td class="slot-num">AN</td><td class="slot-item">✦ Lime Dye</td><td class="slot-desc">Border ist aktiv. Klicken zum Ausschalten.</td></tr>
+          <tr><td class="slot-num"><span class="lang-de">AUS</span><span class="lang-en">OFF</span></td><td class="slot-item">🪄 Magenta Dye</td><td class="slot-desc"><span class="lang-de">Border ist deaktiviert. Klicken zum Einschalten.</span><span class="lang-en">Border is disabled. Click to enable.</span></td></tr>
+          <tr><td class="slot-num"><span class="lang-de">AN</span><span class="lang-en">ON</span></td><td class="slot-item">✦ Lime Dye</td><td class="slot-desc"><span class="lang-de">Border ist aktiv. Klicken zum Ausschalten.</span><span class="lang-en">Border is active. Click to disable.</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>Verhalten</h3>
+    <h3><span class="lang-de">Verhalten</span><span class="lang-en">Behavior</span></h3>
     <ul>
-      <li>Partikel werden entlang aller vier Kanten jedes beanspruchten Chunks gezeichnet.</li>
-      <li>Vertikal erscheinen Ringe von <code>y-min</code> bis <code>y-max</code> mit konfigurierbarem Abstand (<code>y-spacing</code>, Standard: alle 5 Blöcke).</li>
-      <li>Nur Chunks innerhalb von <code>render-chunks</code> Chunks um den Spieler werden gerendert (Standard: 5 Chunks Radius).</li>
-      <li>Die Border blendet sich nach <code>duration-seconds</code> Sekunden automatisch aus (Standard: 60 s).</li>
-      <li>Nur der jeweilige Spieler sieht die Partikel — andere Spieler sind nicht betroffen.</li>
+      <li><span class="lang-de">Partikel werden entlang aller vier Kanten jedes beanspruchten Chunks gezeichnet.</span><span class="lang-en">Particles are drawn along all four edges of each claimed chunk.</span></li>
+      <li><span class="lang-de">Vertikal erscheinen Ringe von</span> <code>y-min</code> <span class="lang-de">bis</span> <code>y-max</code> <span class="lang-de">mit konfigurierbarem Abstand</span> (<code>y-spacing</code>, <span class="lang-de">Standard:</span> <span class="lang-en">default:</span> <span class="lang-de">alle 5 Blöcke</span><span class="lang-en">every 5 blocks</span>).</span><span class="lang-en">Vertical rings appear from <code>y-min</code> to <code>y-max</code> with configurable spacing (<code>y-spacing</code>, default: every 5 blocks).</span></li>
+      <li><span class="lang-de">Nur Chunks innerhalb von</span> <code>render-chunks</code> <span class="lang-de">Chunks um den Spieler werden gerendert</span> <span class="lang-en">chunks around the player are rendered</span> (<span class="lang-de">Standard:</span> <span class="lang-en">default:</span> 5 Chunks Radius).</span><span class="lang-en">Only chunks within <code>render-chunks</code> of the player are rendered (default: radius 5 chunks).</span></li>
+      <li><span class="lang-de">Die Border blendet sich nach</span> <code>duration-seconds</code> <span class="lang-de">Sekunden automatisch aus</span> <span class="lang-en">seconds automatically fades out</span> (<span class="lang-de">Standard:</span> 60 s).</span><span class="lang-en">The border automatically fades out after <code>duration-seconds</code> seconds (default: 60 s).</span></li>
+      <li><span class="lang-de">Nur der jeweilige Spieler sieht die Partikel — andere Spieler sind nicht betroffen.</span><span class="lang-en">Only the viewing player sees the particles — other players are not affected.</span></li>
     </ul>
 
     <div class="callout callout-warn">
       <span class="callout-icon">⚠</span>
       <div class="callout-body">
-        <strong>Leistungshinweis</strong>
-        Bei vielen beanspruchten Chunks und kleinem <code>y-spacing</code> oder <code>edge-spacing</code> entstehen viele Partikel. Empfehlung: <code>render-chunks: 3–5</code> und <code>y-spacing: 5–10</code>. Alle Parameter sind in der <code>config.yml</code> anpassbar — siehe <a href="#config-border">Territory-Border Config</a>.
+        <strong><span class="lang-de">Leistungshinweis</span><span class="lang-en">Performance note</span></strong>
+        <span class="lang-de">Bei vielen beanspruchten Chunks und kleinem</span> <code>y-spacing</code> <span class="lang-de">oder</span> <code>edge-spacing</code> <span class="lang-de">entstehen viele Partikel. Empfehlung:</span> <code>render-chunks: 3–5</code> <span class="lang-de">und</span> <code>y-spacing: 5–10</code>. <span class="lang-de">Alle Parameter sind in der</span> <code>config.yml</code> <span class="lang-de">anpassbar — siehe</span> <a href="#config-border"><span class="lang-de">Territory-Border Config</span><span class="lang-en">Territory-Border Config</span></a>.</span><span class="lang-en">With many claimed chunks and low <code>y-spacing</code> or <code>edge-spacing</code>, many particles are generated. Recommended: <code>render-chunks: 3–5</code> and <code>y-spacing: 5–10</code>. All parameters are configurable in <code>config.yml</code> — see <a href="#config-border">Territory-Border Config</a>.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── KONFIGURATION ─── -->
   <section id="config-main">
-    <h2>🔧 Konfiguration: config.yml</h2>
-    <p>Alle Einstellungen befinden sich in <code>plugins/KingdomsReborn/config.yml</code>.</p>
+    <h2>🔧 <span class="lang-de">Konfiguration: config.yml</span><span class="lang-en">Configuration: config.yml</span></h2>
+    <p><span class="lang-de">Alle Einstellungen befinden sich in</span> <code>plugins/KingdomsReborn/config.yml</code><span class="lang-de">.</span><span class="lang-en">All settings are located in</span> <code>plugins/KingdomsReborn/config.yml</code><span class="lang-en">.</span></p>
 
-    <h3>Allgemein</h3>
+    <h3><span class="lang-de">Allgemein</span><span class="lang-en">General</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">language</td><td class="config-val">de_DE</td><td class="config-desc">Sprachdatei. Optionen: <code>de_DE</code>, <code>en_EN</code></td></tr>
-        <tr><td class="config-key">storage.type</td><td class="config-val">sqlite</td><td class="config-desc">Speichertyp: <code>sqlite</code> oder <code>yaml</code></td></tr>
+        <tr><td class="config-key">language</td><td class="config-val">de_DE</td><td class="config-desc"><span class="lang-de">Sprachdatei. Optionen:</span> <code>de_DE</code>, <code>en_EN</code></td></tr>
+        <tr><td class="config-key">storage.type</td><td class="config-val">sqlite</td><td class="config-desc"><span class="lang-de">Speichertyp:</span> <code>sqlite</code> <span class="lang-de">oder</span> <code>yaml</code>.</td></tr>
       </tbody>
     </table>
 
-    <h3>Wirtschaft</h3>
+    <h3><span class="lang-de">Wirtschaft</span><span class="lang-en">Economy</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">economy.name</td><td class="config-val">"Gold"</td><td class="config-desc">Name der Währung</td></tr>
-        <tr><td class="config-key">economy.symbol</td><td class="config-val">"⛃"</td><td class="config-desc">Symbol der Währung in GUIs</td></tr>
-        <tr><td class="config-key">economy.currency-item</td><td class="config-val">GOLD_INGOT</td><td class="config-desc">Minecraft-Item das als Währung gilt. Beim Einzahlen wird es aus dem Inventar entfernt.</td></tr>
-        <tr><td class="config-key">economy.income-per-member</td><td class="config-val">1</td><td class="config-desc">Passives Einkommen pro Online-Mitglied pro Minute</td></tr>
-        <tr><td class="config-key">economy.bank-block</td><td class="config-val">BARREL</td><td class="config-desc">Block-Typ der als Bank registriert wird</td></tr>
-        <tr><td class="config-key">economy.storage.max-level</td><td class="config-val">80</td><td class="config-desc">Maximales Lager-Upgrade-Level</td></tr>
-        <tr><td class="config-key">economy.storage.capacity-per-level</td><td class="config-val">1000</td><td class="config-desc">Kapazitäts-Bonus pro Lager-Level</td></tr>
-        <tr><td class="config-key">economy.storage.base-upgrade-cost</td><td class="config-val">200</td><td class="config-desc">Basiskosten für Level 0 → 1</td></tr>
-        <tr><td class="config-key">economy.storage.cost-increment</td><td class="config-val">150</td><td class="config-desc">Zusatzkosten pro bestehendem Level</td></tr>
+        <tr><td class="config-key">economy.name</td><td class="config-val">"Gold"</td><td class="config-desc"><span class="lang-de">Name der Währung</span><span class="lang-en">Currency name</span></td></tr>
+        <tr><td class="config-key">economy.symbol</td><td class="config-val">"⛃"</td><td class="config-desc"><span class="lang-de">Symbol der Währung in GUIs</span><span class="lang-en">Currency symbol in GUIs</span></td></tr>
+        <tr><td class="config-key">economy.currency-item</td><td class="config-val">GOLD_INGOT</td><td class="config-desc"><span class="lang-de">Minecraft-Item das als Währung gilt. Beim Einzahlen wird es aus dem Inventar entfernt.</span><span class="lang-en">Minecraft item used as currency. Deposited items are removed from inventory.</span></td></tr>
+        <tr><td class="config-key">economy.income-per-member</td><td class="config-val">1</td><td class="config-desc"><span class="lang-de">Passives Einkommen pro Online-Mitglied pro Minute</span><span class="lang-en">Passive income per online member per minute</span></td></tr>
+        <tr><td class="config-key">economy.bank-block</td><td class="config-val">BARREL</td><td class="config-desc"><span class="lang-de">Block-Typ der als Bank registriert wird</span><span class="lang-en">Block type registered as bank</span></td></tr>
+        <tr><td class="config-key">economy.storage.max-level</td><td class="config-val">80</td><td class="config-desc"><span class="lang-de">Maximales Lager-Upgrade-Level</span><span class="lang-en">Maximum storage upgrade level</span></td></tr>
+        <tr><td class="config-key">economy.storage.capacity-per-level</td><td class="config-val">1000</td><td class="config-desc"><span class="lang-de">Kapazitäts-Bonus pro Lager-Level</span><span class="lang-en">Capacity bonus per storage level</span></td></tr>
+        <tr><td class="config-key">economy.storage.base-upgrade-cost</td><td class="config-val">200</td><td class="config-desc"><span class="lang-de">Basiskosten für Level 0 → 1</span><span class="lang-en">Base cost for level 0 → 1</span></td></tr>
+        <tr><td class="config-key">economy.storage.cost-increment</td><td class="config-val">150</td><td class="config-desc"><span class="lang-de">Zusatzkosten pro bestehendem Level</span><span class="lang-en">Additional cost per existing level</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Kingdom</h3>
+    <h3><span class="lang-de">Kingdom</span><span class="lang-en">Kingdom</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">kingdom.min-name-length</td><td class="config-val">3</td><td class="config-desc">Minimale Kingdom-Namenslänge</td></tr>
-        <tr><td class="config-key">kingdom.max-name-length</td><td class="config-val">20</td><td class="config-desc">Maximale Kingdom-Namenslänge</td></tr>
-        <tr><td class="config-key">kingdom.max-members</td><td class="config-val">50</td><td class="config-desc">Maximale Mitgliederzahl (ohne Shop-Erweiterungen)</td></tr>
-        <tr><td class="config-key">kingdom.invite-expiry-seconds</td><td class="config-val">120</td><td class="config-desc">Sekunden bis eine Einladung abläuft</td></tr>
+        <tr><td class="config-key">kingdom.min-name-length</td><td class="config-val">3</td><td class="config-desc"><span class="lang-de">Minimale Kingdom-Namenslänge</span><span class="lang-en">Minimum kingdom name length</span></td></tr>
+        <tr><td class="config-key">kingdom.max-name-length</td><td class="config-val">20</td><td class="config-desc"><span class="lang-de">Maximale Kingdom-Namenslänge</span><span class="lang-en">Maximum kingdom name length</span></td></tr>
+        <tr><td class="config-key">kingdom.max-members</td><td class="config-val">50</td><td class="config-desc"><span class="lang-de">Maximale Mitgliederzahl (ohne Shop-Erweiterungen)</span><span class="lang-en">Maximum members (without shop upgrades)</span></td></tr>
+        <tr><td class="config-key">kingdom.invite-expiry-seconds</td><td class="config-val">120</td><td class="config-desc"><span class="lang-de">Sekunden bis eine Einladung abläuft</span><span class="lang-en">Seconds until an invite expires</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Einfluss</h3>
+    <h3><span class="lang-de">Einfluss</span><span class="lang-en">Influence</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">influence.block-place-gain</td><td class="config-val">2</td><td class="config-desc">Einfluss pro platziertem Block</td></tr>
-        <tr><td class="config-key">influence.move-gain</td><td class="config-val">1</td><td class="config-desc">Einfluss pro Beweg-Tick (gedrosselt)</td></tr>
-        <tr><td class="config-key">influence.decay-interval-seconds</td><td class="config-val">300</td><td class="config-desc">Sekunden zwischen Einfluss-Verfall-Ticks</td></tr>
-        <tr><td class="config-key">influence.decay-amount</td><td class="config-val">1</td><td class="config-desc">Einfluss-Verfall pro Tick</td></tr>
-        <tr><td class="config-key">influence.move-throttle-ms</td><td class="config-val">5000</td><td class="config-desc">Millisekunden zwischen Bewegungs-Einfluss-Events pro Spieler</td></tr>
+        <tr><td class="config-key">influence.block-place-gain</td><td class="config-val">2</td><td class="config-desc"><span class="lang-de">Einfluss pro platziertem Block</span><span class="lang-en">Influence per placed block</span></td></tr>
+        <tr><td class="config-key">influence.move-gain</td><td class="config-val">1</td><td class="config-desc"><span class="lang-de">Einfluss pro Beweg-Tick (gedrosselt)</span><span class="lang-en">Influence per movement tick (throttled)</span></td></tr>
+        <tr><td class="config-key">influence.decay-interval-seconds</td><td class="config-val">300</td><td class="config-desc"><span class="lang-de">Sekunden zwischen Einfluss-Verfall-Ticks</span><span class="lang-en">Seconds between influence decay ticks</span></td></tr>
+        <tr><td class="config-key">influence.decay-amount</td><td class="config-val">1</td><td class="config-desc"><span class="lang-de">Einfluss-Verfall pro Tick</span><span class="lang-en">Influence decay per tick</span></td></tr>
+        <tr><td class="config-key">influence.move-throttle-ms</td><td class="config-val">5000</td><td class="config-desc"><span class="lang-de">Millisekunden zwischen Bewegungs-Einfluss-Events pro Spieler</span><span class="lang-en">Milliseconds between movement influence events per player</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Krieg</h3>
+    <h3><span class="lang-de">Krieg</span><span class="lang-en">War</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">war.duration-minutes</td><td class="config-val">5</td><td class="config-desc">Kriegsdauer in Minuten (danach automatisches Ende)</td></tr>
-        <tr><td class="config-key">war.timer-interval-seconds</td><td class="config-val">10</td><td class="config-desc">Prüfintervall für abgelaufene Kriege</td></tr>
-        <tr><td class="config-key">war.influence-transfer-per-chunk</td><td class="config-val">50</td><td class="config-desc">Einfluss-Transfer pro Chunk bei Kriegsende</td></tr>
+        <tr><td class="config-key">war.duration-minutes</td><td class="config-val">5</td><td class="config-desc"><span class="lang-de">Kriegsdauer in Minuten (danach automatisches Ende)</span><span class="lang-en">War duration in minutes (then auto-end)</span></td></tr>
+        <tr><td class="config-key">war.timer-interval-seconds</td><td class="config-val">10</td><td class="config-desc"><span class="lang-de">Prüfintervall für abgelaufene Kriege</span><span class="lang-en">Check interval for expired wars</span></td></tr>
+        <tr><td class="config-key">war.influence-transfer-per-chunk</td><td class="config-val">50</td><td class="config-desc"><span class="lang-de">Einfluss-Transfer pro Chunk bei Kriegsende</span><span class="lang-en">Influence transfer per chunk at war end</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Gebiete</h3>
+    <h3><span class="lang-de">Gebiete</span><span class="lang-en">Territories</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">claim.contest-duration-seconds</td><td class="config-val">300</td><td class="config-desc">Dauer eines Chunk-Kampfes (Walk-to-Claim auf feindlichem Gebiet)</td></tr>
+        <tr><td class="config-key">claim.contest-duration-seconds</td><td class="config-val">300</td><td class="config-desc"><span class="lang-de">Dauer eines Chunk-Kampfes (Walk-to-Claim auf feindlichem Gebiet)</span><span class="lang-en">Duration of a chunk contest (walk-to-claim on enemy territory)</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Anzeige</h3>
+    <h3><span class="lang-de">Anzeige</span><span class="lang-en">Display</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">display.enabled</td><td class="config-val">true</td><td class="config-desc">Schaltet Scoreboard, TAB und Nametags global ein/aus</td></tr>
-        <tr><td class="config-key">display.refresh-ticks</td><td class="config-val">40</td><td class="config-desc">Aktualisierungsrate (Ticks; 40 = 2 Sekunden)</td></tr>
-        <tr><td class="config-key">display.scoreboard.enabled</td><td class="config-val">true</td><td class="config-desc">Sidebar-Scoreboard</td></tr>
-        <tr><td class="config-key">display.tab.enabled</td><td class="config-val">true</td><td class="config-desc">Tab-Liste mit Kingdom-Prefix</td></tr>
-        <tr><td class="config-key">display.nametag.enabled</td><td class="config-val">true</td><td class="config-desc">Nametags über Spielerköpfen</td></tr>
-        <tr><td class="config-key">chat.enabled</td><td class="config-val">true</td><td class="config-desc">Chat-Format-Plugin. false = Chat unverändert lassen</td></tr>
+        <tr><td class="config-key">display.enabled</td><td class="config-val">true</td><td class="config-desc"><span class="lang-de">Schaltet Scoreboard, TAB und Nametags global ein/aus</span><span class="lang-en">Toggle scoreboard, TAB and nametags globally</span></td></tr>
+        <tr><td class="config-key">display.refresh-ticks</td><td class="config-val">40</td><td class="config-desc"><span class="lang-de">Aktualisierungsrate (Ticks; 40 = 2 Sekunden)</span><span class="lang-en">Refresh rate (ticks; 40 = 2 seconds)</span></td></tr>
+        <tr><td class="config-key">display.scoreboard.enabled</td><td class="config-val">true</td><td class="config-desc"><span class="lang-de">Sidebar-Scoreboard</span><span class="lang-en">Sidebar scoreboard</span></td></tr>
+        <tr><td class="config-key">display.tab.enabled</td><td class="config-val">true</td><td class="config-desc"><span class="lang-de">Tab-Liste mit Kingdom-Prefix</span><span class="lang-en">Tab list with kingdom prefix</span></td></tr>
+        <tr><td class="config-key">display.nametag.enabled</td><td class="config-val">true</td><td class="config-desc"><span class="lang-de">Nametags über Spielerköpfen</span><span class="lang-en">Nametags above player heads</span></td></tr>
+        <tr><td class="config-key">chat.enabled</td><td class="config-val">true</td><td class="config-desc"><span class="lang-de">Chat-Format-Plugin. false = Chat unverändert lassen</span><span class="lang-en">Chat formatting plugin. false = leave chat unchanged</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Block-Werte (Schulden)</h3>
-    <p>Unter <code>debt.block-values</code> steht für jeden Block-Typ der Gold-Wert bei Zerstörung im Kriegsgebiet.</p>
+    <h3><span class="lang-de">Block-Werte (Schulden)</span><span class="lang-en">Block values (debt)</span></h3>
+    <p><span class="lang-de">Unter</span> <code>debt.block-values</code> <span class="lang-de">steht für jeden Block-Typ der Gold-Wert bei Zerstörung im Kriegsgebiet.</span><span class="lang-en">contains the gold value for each block type when destroyed in war territory.</span></p>
     <pre><span class="code-comment"># Beispiel-Einträge</span>
 <span class="code-key">debt</span>:
   <span class="code-key">block-values</span>:
@@ -1277,9 +1312,9 @@
 
   <!-- ─── SPRACHE ─── -->
   <section id="config-lang">
-    <h2>💬 Sprachdatei</h2>
-    <p>Alle Nachrichten, GUI-Titel und Lore-Texte befinden sich in <code>plugins/KingdomsReborn/language/de_DE.yml</code> (oder <code>en_EN.yml</code>).</p>
-    <p>Format: <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). Platzhalter in <code>{geschweifte Klammern}</code>.</p>
+    <h2>💬 <span class="lang-de">Sprachdatei</span><span class="lang-en">Language file</span></h2>
+    <p><span class="lang-de">Alle Nachrichten, GUI-Titel und Lore-Texte befinden sich in</span> <code>plugins/KingdomsReborn/language/de_DE.yml</code> <span class="lang-de">(oder</span> <code>en_EN.yml</code><span class="lang-de">).</span><span class="lang-en">All messages, GUI titles, and lore texts are stored in</span> <code>plugins/KingdomsReborn/language/de_DE.yml</code> <span class="lang-en">(or</span> <code>en_EN.yml</code><span class="lang-en">).</span></p>
+    <p><span class="lang-de">Format:</span> <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). <span class="lang-de">Platzhalter in</span> <code>{geschweifte Klammern}</code><span class="lang-de">.</span><span class="lang-en">Format:</span> <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). <span class="lang-en">Placeholders in</span> <code>{curly braces}</code><span class="lang-en">.</span></p>
 
     <pre><span class="code-comment"># Beispiel — Sprache ändern</span>
 <span class="code-key">bank</span>:
@@ -1294,144 +1329,144 @@
 
   <!-- ─── SHOP PREISE ─── -->
   <section id="config-prices">
-    <h2>💰 Shop-Preise</h2>
-    <p>Alle Shop-Preise sind in der <code>config.yml</code> unter dem Schlüssel <code>shop</code> konfigurierbar. Änderungen werden nach einem Server-Neustart oder <code>/kingdom admin reload</code> wirksam.</p>
+    <h2>💰 <span class="lang-de">Shop-Preise</span><span class="lang-en">Shop prices</span></h2>
+    <p><span class="lang-de">Alle Shop-Preise sind in der</span> <code>config.yml</code> <span class="lang-de">unter dem Schlüssel</span> <code>shop</code> <span class="lang-de">konfigurierbar. Änderungen werden nach einem Server-Neustart oder</span> <code>/kingdom admin reload</code> <span class="lang-de">wirksam.</span><span class="lang-en">All shop prices are configurable in</span> <code>config.yml</code> <span class="lang-en">under the</span> <code>shop</code> <span class="lang-en">key. Changes take effect after a server restart or</span> <code>/kingdom admin reload</code><span class="lang-en">.</span></p>
 
-    <h3>Mitglieder-Slots</h3>
+    <h3><span class="lang-de">Mitglieder-Slots</span><span class="lang-en">Member slots</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">shop.member-slots.cost</td><td class="config-val">1000</td><td class="config-desc">Gold-Kosten pro Kauf</td></tr>
-        <tr><td class="config-key">shop.member-slots.amount</td><td class="config-val">10</td><td class="config-desc">Zusätzliche Member-Slots pro Kauf</td></tr>
+        <tr><td class="config-key">shop.member-slots.cost</td><td class="config-val">1000</td><td class="config-desc"><span class="lang-de">Gold-Kosten pro Kauf</span><span class="lang-en">Gold cost per purchase</span></td></tr>
+        <tr><td class="config-key">shop.member-slots.amount</td><td class="config-val">10</td><td class="config-desc"><span class="lang-de">Zusätzliche Member-Slots pro Kauf</span><span class="lang-en">Additional member slots per purchase</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Kingdom-Farben</h3>
+    <h3><span class="lang-de">Kingdom-Farben</span><span class="lang-en">Kingdom colors</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Farbe</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Farbe</span><span class="lang-en">Color</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">shop.colors.gray</td><td class="config-val">0</td><td class="config-desc">§7 Grau — Standard (kostenlos)</td></tr>
-        <tr><td class="config-key">shop.colors.white</td><td class="config-val">50</td><td class="config-desc">§f Weiß</td></tr>
-        <tr><td class="config-key">shop.colors.dark_gray</td><td class="config-val">100</td><td class="config-desc">§8 Dunkelgrau</td></tr>
-        <tr><td class="config-key">shop.colors.yellow</td><td class="config-val">100</td><td class="config-desc">§e Gelb</td></tr>
-        <tr><td class="config-key">shop.colors.green</td><td class="config-val">100</td><td class="config-desc">§a Grün</td></tr>
-        <tr><td class="config-key">shop.colors.aqua</td><td class="config-val">100</td><td class="config-desc">§b Aqua</td></tr>
-        <tr><td class="config-key">shop.colors.gold</td><td class="config-val">150</td><td class="config-desc">§6 Gold</td></tr>
-        <tr><td class="config-key">shop.colors.blue</td><td class="config-val">150</td><td class="config-desc">§9 Blau</td></tr>
-        <tr><td class="config-key">shop.colors.red</td><td class="config-val">200</td><td class="config-desc">§c Rot</td></tr>
-        <tr><td class="config-key">shop.colors.light_purple</td><td class="config-val">200</td><td class="config-desc">§d Pink</td></tr>
-        <tr><td class="config-key">shop.colors.dark_purple</td><td class="config-val">250</td><td class="config-desc">§5 Lila</td></tr>
-        <tr><td class="config-key">shop.colors.dark_green</td><td class="config-val">250</td><td class="config-desc">§2 Dunkelgrün</td></tr>
-        <tr><td class="config-key">shop.colors.dark_aqua</td><td class="config-val">250</td><td class="config-desc">§3 Dunkelaqua</td></tr>
-        <tr><td class="config-key">shop.colors.dark_red</td><td class="config-val">300</td><td class="config-desc">§4 Dunkelrot</td></tr>
-        <tr><td class="config-key">shop.colors.dark_blue</td><td class="config-val">400</td><td class="config-desc">§1 Dunkelblau</td></tr>
-        <tr><td class="config-key">shop.colors.black</td><td class="config-val">500</td><td class="config-desc">§0 Schwarz</td></tr>
+        <tr><td class="config-key">shop.colors.gray</td><td class="config-val">0</td><td class="config-desc">§7 <span class="lang-de">Grau — Standard (kostenlos)</span><span class="lang-en">Gray — default (free)</span></td></tr>
+        <tr><td class="config-key">shop.colors.white</td><td class="config-val">50</td><td class="config-desc">§f <span class="lang-de">Weiß</span><span class="lang-en">White</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_gray</td><td class="config-val">100</td><td class="config-desc">§8 <span class="lang-de">Dunkelgrau</span><span class="lang-en">Dark gray</span></td></tr>
+        <tr><td class="config-key">shop.colors.yellow</td><td class="config-val">100</td><td class="config-desc">§e <span class="lang-de">Gelb</span><span class="lang-en">Yellow</span></td></tr>
+        <tr><td class="config-key">shop.colors.green</td><td class="config-val">100</td><td class="config-desc">§a <span class="lang-de">Grün</span><span class="lang-en">Green</span></td></tr>
+        <tr><td class="config-key">shop.colors.aqua</td><td class="config-val">100</td><td class="config-desc">§b <span class="lang-de">Aqua</span><span class="lang-en">Aqua</span></td></tr>
+        <tr><td class="config-key">shop.colors.gold</td><td class="config-val">150</td><td class="config-desc">§6 <span class="lang-de">Gold</span><span class="lang-en">Gold</span></td></tr>
+        <tr><td class="config-key">shop.colors.blue</td><td class="config-val">150</td><td class="config-desc">§9 <span class="lang-de">Blau</span><span class="lang-en">Blue</span></td></tr>
+        <tr><td class="config-key">shop.colors.red</td><td class="config-val">200</td><td class="config-desc">§c <span class="lang-de">Rot</span><span class="lang-en">Red</span></td></tr>
+        <tr><td class="config-key">shop.colors.light_purple</td><td class="config-val">200</td><td class="config-desc">§d <span class="lang-de">Pink</span><span class="lang-en">Pink</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_purple</td><td class="config-val">250</td><td class="config-desc">§5 <span class="lang-de">Lila</span><span class="lang-en">Purple</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_green</td><td class="config-val">250</td><td class="config-desc">§2 <span class="lang-de">Dunkelgrün</span><span class="lang-en">Dark green</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_aqua</td><td class="config-val">250</td><td class="config-desc">§3 <span class="lang-de">Dunkelaqua</span><span class="lang-en">Dark aqua</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_red</td><td class="config-val">300</td><td class="config-desc">§4 <span class="lang-de">Dunkelrot</span><span class="lang-en">Dark red</span></td></tr>
+        <tr><td class="config-key">shop.colors.dark_blue</td><td class="config-val">400</td><td class="config-desc">§1 <span class="lang-de">Dunkelblau</span><span class="lang-en">Dark blue</span></td></tr>
+        <tr><td class="config-key">shop.colors.black</td><td class="config-val">500</td><td class="config-desc">§0 <span class="lang-de">Schwarz</span><span class="lang-en">Black</span></td></tr>
       </tbody>
     </table>
 
-    <h3>Bank-Erweiterungen</h3>
+    <h3><span class="lang-de">Bank-Erweiterungen</span><span class="lang-en">Bank extensions</span></h3>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Erweiterung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Erweiterung</span><span class="lang-en">Upgrade</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">shop.extensions.income_boost</td><td class="config-val">500</td><td class="config-desc">💰 Einkommens-Boost (+20% passives Einkommen)</td></tr>
-        <tr><td class="config-key">shop.extensions.storage_boost</td><td class="config-val">300</td><td class="config-desc">🧱 Lager-Erweiterung (+5.000 Max-Gold)</td></tr>
-        <tr><td class="config-key">shop.extensions.fast_deposit</td><td class="config-val">400</td><td class="config-desc">⚡ Schnell-Einzahlung</td></tr>
-        <tr><td class="config-key">shop.extensions.interest</td><td class="config-val">600</td><td class="config-desc">🏦 Zins-System (+5% tägliche Zinsen)</td></tr>
-        <tr><td class="config-key">shop.extensions.tax_shield</td><td class="config-val">800</td><td class="config-desc">🛡 Steuer-Schutz (-25% Kriegskosten)</td></tr>
+        <tr><td class="config-key">shop.extensions.income_boost</td><td class="config-val">500</td><td class="config-desc">💰 <span class="lang-de">Einkommens-Boost (+20% passives Einkommen)</span><span class="lang-en">Income boost (+20% passive income)</span></td></tr>
+        <tr><td class="config-key">shop.extensions.storage_boost</td><td class="config-val">300</td><td class="config-desc">🧱 <span class="lang-de">Lager-Erweiterung (+5.000 Max-Gold)</span><span class="lang-en">Storage upgrade (+5,000 max gold)</span></td></tr>
+        <tr><td class="config-key">shop.extensions.fast_deposit</td><td class="config-val">400</td><td class="config-desc">⚡ <span class="lang-de">Schnell-Einzahlung</span><span class="lang-en">Fast deposit</span></td></tr>
+        <tr><td class="config-key">shop.extensions.interest</td><td class="config-val">600</td><td class="config-desc">🏦 <span class="lang-de">Zins-System (+5% tägliche Zinsen)</span><span class="lang-en">Interest system (+5% daily interest)</span></td></tr>
+        <tr><td class="config-key">shop.extensions.tax_shield</td><td class="config-val">800</td><td class="config-desc">🛡 <span class="lang-de">Steuer-Schutz (-25% Kriegskosten)</span><span class="lang-en">Tax shield (-25% war costs)</span></td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ─── TERRITORY BORDER CONFIG ─── -->
   <section id="config-border">
-    <h2>✦ Territory-Border Config</h2>
-    <p>Alle Einstellungen für die Partikel-Gebietsumrandung befinden sich unter <code>territory-border</code> in der <code>config.yml</code>.</p>
+    <h2>✦ <span class="lang-de">Territory-Border Config</span><span class="lang-en">Territory Border Config</span></h2>
+    <p><span class="lang-de">Alle Einstellungen für die Partikel-Gebietsumrandung befinden sich unter</span> <code>territory-border</code> <span class="lang-de">in der</span> <code>config.yml</code><span class="lang-de">.</span><span class="lang-en">All settings for the particle territory outline are under</span> <code>territory-border</code> <span class="lang-en">in</span> <code>config.yml</code><span class="lang-en">.</span></p>
     <table class="config-table">
-      <thead><tr><th>Schlüssel</th><th>Standard</th><th>Beschreibung</th></tr></thead>
+      <thead><tr><th><span class="lang-de">Schlüssel</span><span class="lang-en">Key</span></th><th><span class="lang-de">Standard</span><span class="lang-en">Default</span></th><th><span class="lang-de">Beschreibung</span><span class="lang-en">Description</span></th></tr></thead>
       <tbody>
-        <tr><td class="config-key">territory-border.particle</td><td class="config-val">HAPPY_VILLAGER</td><td class="config-desc">Partikel-Typ. Alle Bukkit Particle-Namen erlaubt, z. B. <code>FLAME</code>, <code>END_ROD</code>, <code>DUST</code>.</td></tr>
-        <tr><td class="config-key">territory-border.dust-color</td><td class="config-val">255,215,0</td><td class="config-desc">RGB-Farbe für DUST-Partikel (R,G,B). Nur bei <code>particle: DUST</code> aktiv.</td></tr>
-        <tr><td class="config-key">territory-border.dust-size</td><td class="config-val">1.5</td><td class="config-desc">Partikelgröße für DUST-Partikel.</td></tr>
-        <tr><td class="config-key">territory-border.edge-spacing</td><td class="config-val">1.0</td><td class="config-desc">Horizontaler Abstand zwischen Partikeln entlang der Chunk-Kante (Blöcke).</td></tr>
-        <tr><td class="config-key">territory-border.y-spacing</td><td class="config-val">5</td><td class="config-desc">Vertikaler Abstand zwischen Partikelringen (Blöcke).</td></tr>
-        <tr><td class="config-key">territory-border.y-min</td><td class="config-val">Welt-Minimum</td><td class="config-desc">Unterste Y-Position. Auskommentiert lassen = Welt-Minimum (z. B. −64 im Overworld).</td></tr>
-        <tr><td class="config-key">territory-border.y-max</td><td class="config-val">Welt-Maximum</td><td class="config-desc">Oberste Y-Position. Auskommentiert lassen = Welt-Maximum (z. B. 320 im Overworld).</td></tr>
-        <tr><td class="config-key">territory-border.refresh-ticks</td><td class="config-val">20</td><td class="config-desc">Wie oft die Border neu gezeichnet wird (Ticks; 20 = 1 Sekunde).</td></tr>
-        <tr><td class="config-key">territory-border.duration-seconds</td><td class="config-val">60</td><td class="config-desc">Sekunden bis zur automatischen Ausblendung. 0 = nie.</td></tr>
-        <tr><td class="config-key">territory-border.render-chunks</td><td class="config-val">5</td><td class="config-desc">Chunk-Radius um den Spieler, der gerendert wird (Leistungs-Begrenzung).</td></tr>
+        <tr><td class="config-key">territory-border.particle</td><td class="config-val">HAPPY_VILLAGER</td><td class="config-desc"><span class="lang-de">Partikel-Typ. Alle Bukkit Particle-Namen erlaubt, z. B.</span> <code>FLAME</code>, <code>END_ROD</code>, <code>DUST</code>.<span class="lang-en">Particle type. Any Bukkit particle name allowed, e.g.</span> <code>FLAME</code>, <code>END_ROD</code>, <code>DUST</code>.</td></tr>
+        <tr><td class="config-key">territory-border.dust-color</td><td class="config-val">255,215,0</td><td class="config-desc"><span class="lang-de">RGB-Farbe für DUST-Partikel (R,G,B). Nur bei</span> <code>particle: DUST</code> <span class="lang-de">aktiv.</span><span class="lang-en">RGB color for DUST particles (R,G,B). Only active for</span> <code>particle: DUST</code>.</td></tr>
+        <tr><td class="config-key">territory-border.dust-size</td><td class="config-val">1.5</td><td class="config-desc"><span class="lang-de">Partikelgröße für DUST-Partikel.</span><span class="lang-en">Particle size for DUST particles.</span></td></tr>
+        <tr><td class="config-key">territory-border.edge-spacing</td><td class="config-val">1.0</td><td class="config-desc"><span class="lang-de">Horizontaler Abstand zwischen Partikeln entlang der Chunk-Kante (Blöcke).</span><span class="lang-en">Horizontal spacing between particles along the chunk edge (blocks).</span></td></tr>
+        <tr><td class="config-key">territory-border.y-spacing</td><td class="config-val">5</td><td class="config-desc"><span class="lang-de">Vertikaler Abstand zwischen Partikelringen (Blöcke).</span><span class="lang-en">Vertical spacing between particle rings (blocks).</span></td></tr>
+        <tr><td class="config-key">territory-border.y-min</td><td class="config-val">Welt-Minimum</td><td class="config-desc"><span class="lang-de">Unterste Y-Position. Auskommentiert lassen = Welt-Minimum (z. B. −64 im Overworld).</span><span class="lang-en">Lowest Y position. Leave commented to use world minimum (e.g. −64 in Overworld).</span></td></tr>
+        <tr><td class="config-key">territory-border.y-max</td><td class="config-val">Welt-Maximum</td><td class="config-desc"><span class="lang-de">Oberste Y-Position. Auskommentiert lassen = Welt-Maximum (z. B. 320 im Overworld).</span><span class="lang-en">Highest Y position. Leave commented to use world maximum (e.g. 320 in Overworld).</span></td></tr>
+        <tr><td class="config-key">territory-border.refresh-ticks</td><td class="config-val">20</td><td class="config-desc"><span class="lang-de">Wie oft die Border neu gezeichnet wird (Ticks; 20 = 1 Sekunde).</span><span class="lang-en">How often the border is redrawn (ticks; 20 = 1 second).</span></td></tr>
+        <tr><td class="config-key">territory-border.duration-seconds</td><td class="config-val">60</td><td class="config-desc"><span class="lang-de">Sekunden bis zur automatischen Ausblendung. 0 = nie.</span><span class="lang-en">Seconds until automatic fade-out. 0 = never.</span></td></tr>
+        <tr><td class="config-key">territory-border.render-chunks</td><td class="config-val">5</td><td class="config-desc"><span class="lang-de">Chunk-Radius um den Spieler, der gerendert wird (Leistungs-Begrenzung).</span><span class="lang-en">Chunk radius around the player that is rendered (performance limit).</span></td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ─── MECHANIKEN: BANK-BLOCK ─── -->
   <section id="mech-bank">
-    <h2>🏦 Mechanik: Bank-Block registrieren</h2>
+    <h2>🏦 <span class="lang-de">Mechanik: Bank-Block registrieren</span><span class="lang-en">Mechanic: register bank block</span></h2>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Barrel platzieren</strong> in eurem beanspruchten Gebiet (oder dem Gebiet das ihr gleich beansprucht).</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Als Admin oder Owner</strong> den Barrel mit Rechtsklick anklicken → Bank wird registriert. Bestätigung im Chat.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-content">Ab sofort kann <strong>jedes Mitglied</strong> Gold einzahlen, Admins können abheben.</div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><strong><span class="lang-de">Barrel platzieren</span><span class="lang-en">Place a barrel</span></strong> <span class="lang-de">in eurem beanspruchten Gebiet (oder dem Gebiet das ihr gleich beansprucht).</span><span class="lang-en">in your claimed territory (or the territory you are about to claim).</span></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong><span class="lang-de">Als Admin oder Owner</span><span class="lang-en">As admin or owner</span></strong> <span class="lang-de">den Barrel mit Rechtsklick anklicken → Bank wird registriert. Bestätigung im Chat.</span><span class="lang-en">right-click the barrel → bank is registered. Confirmation in chat.</span></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><span class="lang-de">Ab sofort kann</span> <strong><span class="lang-de">jedes Mitglied</span><span class="lang-en">any member</span></strong> <span class="lang-de">Gold einzahlen, Admins können abheben.</span><span class="lang-en">deposit gold, and admins can withdraw.</span></div></div>
     </div>
 
     <div class="callout callout-warn">
       <span class="callout-icon">⚠</span>
       <div class="callout-body">
-        <strong>Bank stehlen</strong>
-        Feindliche Spieler können im Krieg den Bank-Block stehlen. Sichert euren Barrel gut!
+        <strong><span class="lang-de">Bank stehlen</span><span class="lang-en">Steal bank</span></strong>
+        <span class="lang-de">Feindliche Spieler können im Krieg den Bank-Block stehlen. Sichert euren Barrel gut!</span><span class="lang-en">Enemy players can steal the bank block during war. Secure your barrel carefully!</span>
       </div>
     </div>
   </section>
 
   <!-- ─── MECHANIKEN: GEBIETE ─── -->
   <section id="mech-claim">
-    <h2>🗺 Mechanik: Gebiete beanspruchen</h2>
+    <h2>🗺 <span class="lang-de">Mechanik: Gebiete beanspruchen</span><span class="lang-en">Mechanic: claim territories</span></h2>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-content">Öffne <code>/k claim</code> — die Karte zentriert sich auf deine Position.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-content">Klicke auf <strong>freie Chunks</strong> (Wolle/Grasblock) um sie zu markieren (grüne Glasscheibe). Mehrere möglich.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-content">Klicke auf <strong>"⚔ Beanspruchen (N)"</strong> — ein Navigations-Partikel-Pfad startet.</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Laufe zu jedem markierten Chunk</strong> — sobald du in den Chunk eintrittst wird er automatisch beansprucht. Broadcast an alle Spieler.</div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><span class="lang-de">Öffne</span> <code>/k claim</code> <span class="lang-de">— die Karte zentriert sich auf deine Position.</span><span class="lang-en">— the map centers on your position.</span></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><span class="lang-de">Klicke auf</span> <strong><span class="lang-de">freie Chunks</span><span class="lang-en">free chunks</span></strong> <span class="lang-de">(Wolle/Grasblock) um sie zu markieren (grüne Glasscheibe). Mehrere möglich.</span><span class="lang-en">(wool/grass block) to mark them (green glass pane). Multiple selection possible.</span></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><span class="lang-de">Klicke auf</span> <strong><span class="lang-de">"⚔ Beanspruchen (N)"</span><span class="lang-en">"⚔ Claim (N)"</span></strong> <span class="lang-de">— ein Navigations-Partikel-Pfad startet.</span><span class="lang-en">— a navigation particle path starts.</span></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><strong><span class="lang-de">Laufe zu jedem markierten Chunk</span><span class="lang-en">Walk to each marked chunk</span></strong> <span class="lang-de">— sobald du in den Chunk eintrittst wird er automatisch beansprucht. Broadcast an alle Spieler.</span><span class="lang-en">— when you enter the chunk it is claimed automatically. Broadcast to all players.</span></div></div>
     </div>
 
     <div class="callout callout-info">
       <span class="callout-icon">ℹ</span>
       <div class="callout-body">
-        Die Pfeiltasten in der Karte verschieben die Ansicht jeweils <strong>1 Chunk</strong> in die gewählte Himmelsrichtung. Mit dem 🧭 Kompass springst du jederzeit zurück zu deiner aktuellen Position.
+        <span class="lang-de">Die Pfeiltasten in der Karte verschieben die Ansicht jeweils</span> <strong><span class="lang-de">1 Chunk</span><span class="lang-en">1 chunk</span></strong> <span class="lang-de">in die gewählte Himmelsrichtung. Mit dem 🧭 Kompass springst du jederzeit zurück zu deiner aktuellen Position.</span><span class="lang-en">Arrow keys on the map move the view one chunk in the chosen direction. Use the compass to jump back to your current position at any time.</span>
       </div>
     </div>
   </section>
 
   <!-- ─── MECHANIKEN: KRIEGE ─── -->
   <section id="mech-war">
-    <h2>⚔ Mechanik: Kriege</h2>
-    <p>Kriege starten automatisch wenn ein Spieler eines Kingdoms in ein beanspruchtes Gebiet eines anderen Kingdoms eindringt und dessen Einfluss angreift.</p>
+    <h2>⚔ <span class="lang-de">Mechanik: Kriege</span><span class="lang-en">Mechanic: wars</span></h2>
+    <p><span class="lang-de">Kriege starten automatisch wenn ein Spieler eines Kingdoms in ein beanspruchtes Gebiet eines anderen Kingdoms eindringt und dessen Einfluss angreift.</span><span class="lang-en">Wars start automatically when a kingdom player enters another kingdom's claimed territory and attacks its influence.</span></p>
     <div class="mech-grid">
       <div class="mech-card">
         <div class="mech-card-icon">⏱</div>
-        <h4>Kriegsdauer</h4>
-        <p>Standard: 5 Minuten. Konfigurierbar. Danach endet der Krieg automatisch.</p>
+        <h4><span class="lang-de">Kriegsdauer</span><span class="lang-en">War duration</span></h4>
+        <p><span class="lang-de">Standard: 5 Minuten. Konfigurierbar. Danach endet der Krieg automatisch.</span><span class="lang-en">Default: 5 minutes. Configurable. Then the war ends automatically.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">🏆</div>
-        <h4>Sieger</h4>
-        <p>Mehr Kills gewinnt. Bei Gleichstand: Unentschieden. Der Sieger bekommt Einfluss pro Chunk.</p>
+        <h4><span class="lang-de">Sieger</span><span class="lang-en">Winner</span></h4>
+        <p><span class="lang-de">Mehr Kills gewinnt. Bei Gleichstand: Unentschieden. Der Sieger bekommt Einfluss pro Chunk.</span><span class="lang-en">More kills wins. Tie = draw. Winner gains influence per chunk.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">🏳</div>
-        <h4>Kapitulation</h4>
-        <p>Verteidiger-Admins können über <code>/war</code> aufgeben. Alle umkämpften Chunks gehen an den Angreifer.</p>
+        <h4><span class="lang-de">Kapitulation</span><span class="lang-en">Surrender</span></h4>
+        <p><span class="lang-de">Verteidiger-Admins können über <code>/war</code> aufgeben. Alle umkämpften Chunks gehen an den Angreifer.</span><span class="lang-en">Defender admins can surrender with <code>/war</code>. All contested chunks go to the attacker.</span></p>
       </div>
       <div class="mech-card">
         <div class="mech-card-icon">💸</div>
-        <h4>Schulden</h4>
-        <p>Blöcke abbauen im Kriegsgebiet generiert Schulden. Wert pro Block-Typ konfigurierbar.</p>
+        <h4><span class="lang-de">Schulden</span><span class="lang-en">Debt</span></h4>
+        <p><span class="lang-de">Blöcke abbauen im Kriegsgebiet generiert Schulden. Wert pro Block-Typ konfigurierbar.</span><span class="lang-en">Mining blocks in war territory generates debt. Value per block type is configurable.</span></p>
       </div>
     </div>
   </section>
 
   <section id="mech-display">
-    <h2>📊 Scoreboard, TAB & Chat</h2>
+    <h2>📊 <span class="lang-de">Scoreboard, TAB & Chat</span><span class="lang-en">Scoreboard, TAB & chat</span></h2>
 
-    <h3>Scoreboard (Sidebar)</h3>
-    <p>Permanent sichtbar für alle Spieler in einem Kingdom. Zeigt:</p>
+    <h3><span class="lang-de">Scoreboard (Sidebar)</span><span class="lang-en">Scoreboard (sidebar)</span></h3>
+    <p><span class="lang-de">Permanent sichtbar für alle Spieler in einem Kingdom. Zeigt:</span><span class="lang-en">Always visible for all kingdom players. Shows:</span></p>
     <pre><span class="code-comment"># Sidebar-Zeilen (konfigurierbar via config.yml)</span>
 Name:    %player_name%
 Kingdom: %kingdom_color%%kingdom_name%
@@ -1441,20 +1476,20 @@ KD:      %stats_kd%
 Chunk:   %chunk_x%, %chunk_z%
 Gebiet:  %chunk_owner%</pre>
 
-    <h3>TAB-Liste</h3>
-    <p>Format: <code>[KingdomName] SpielerName</code> in der Kingdom-Farbe.</p>
+    <h3><span class="lang-de">TAB-Liste</span><span class="lang-en">TAB list</span></h3>
+    <p><span class="lang-de">Format:</span> <code>[KingdomName] SpielerName</code> <span class="lang-de">in der Kingdom-Farbe.</span><span class="lang-en">in kingdom color.</span></p>
 
-    <h3>Nametags</h3>
-    <p>Über Spielerköpfen: <code>[KingdomName]</code> in der Kingdom-Farbe.</p>
+    <h3><span class="lang-de">Nametags</span><span class="lang-en">Nametags</span></h3>
+    <p><span class="lang-de">Über Spielerköpfen:</span> <code>[KingdomName]</code> <span class="lang-de">in der Kingdom-Farbe.</span><span class="lang-en">above player heads in kingdom color.</span></p>
 
-    <h3>Chat</h3>
-    <p>Format: <code>[LuckPerms-Prefix] [⚔ KingdomName] SpielerName: Nachricht</code>. Konfigurierbar in <code>config.yml</code> unter <code>chat.format</code>.</p>
+    <h3><span class="lang-de">Chat</span><span class="lang-en">Chat</span></h3>
+    <p><span class="lang-de">Format:</span> <code>[LuckPerms-Prefix] [⚔ KingdomName] SpielerName: Nachricht</code>. <span class="lang-de">Konfigurierbar in</span> <code>config.yml</code> <span class="lang-de">unter</span> <code>chat.format</code><span class="lang-de">.</span><span class="lang-en">Configurable in</span> <code>config.yml</code> <span class="lang-en">under</span> <code>chat.format</code><span class="lang-en">.</span></p>
   </section>
 
   <!-- FOOTER -->
   <div class="page-footer">
     <span>🏰 KingdomsReborn · PaperMC 1.21 · v1.0.0-MVP</span>
-    <span>Letzte Aktualisierung: 2026-06-07</span>
+    <span><span class="lang-de">Letzte Aktualisierung:</span><span class="lang-en">Last updated:</span> 2026-06-07</span>
   </div>
 
 </main>
@@ -1489,6 +1524,16 @@ function filterNav(query) {
     const visible = Array.from(next.querySelectorAll('a')).some(a => a.style.display !== 'none');
     sec.style.display = visible ? '' : 'none';
   });
+}
+
+function setLanguage(lang) {
+  document.body.classList.remove('lang-de', 'lang-en');
+  document.body.classList.add(`lang-${lang}`);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  const placeholder = lang === 'en' ? 'Search…' : 'Suchen…';
+  document.getElementById('searchInput').placeholder = placeholder;
 }
 
 // ── SMOOTH SCROLL OFFSET FIX ──
