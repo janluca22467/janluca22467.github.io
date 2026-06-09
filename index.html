@@ -563,8 +563,8 @@
   .search-input:focus { border-color: var(--gold-dim); }
   .search-input::placeholder { color: var(--text3); }
 
-  .lang-de, .lang-en { display: none !important; }
-  body.lang-de .lang-de, body.lang-en .lang-en { display: revert !important; }
+  :not(body).lang-de, :not(body).lang-en { display: none !important; }
+  body.lang-de .lang-de, body.lang-en .lang-en { display: inline !important; }
 
   .lang-switch {
     display: flex;
