@@ -876,8 +876,8 @@
       <span class="callout-icon">✓</span>
       <div class="callout-body">
         <strong><span class="lang-de">Amboss-Eingabe für Kingdom-Namen</span><span class="lang-en">Anvil input for kingdom names</span></strong>
-        <span class="lang-de">Das erste Eingabe-Slot enthält ein Papier mit dem Platzhaltertext <em>"Kingdom-Name..."</em>. Tippe den Namen ins Umbenennen-Feld. Beim Klick auf den Ergebnis-Slot (Slot 3 im Amboss) wird validiert und das Kingdom erstellt. Regeln: <strong>3–20 Zeichen, nur a–z, A–Z, 0–9, _</strong>. Name muss einzigartig sein.</span>
-        <span class="lang-en">The first input slot contains paper with placeholder text <em>"Kingdom-Name..."</em>. Type the name into the rename field. Clicking the result slot (slot 3 in the anvil) validates and creates the kingdom. Rules: <strong>3–20 chars, only a–z, A–Z, 0–9, _</strong>. Name must be unique.</span>
+        <span class="lang-de">Das erste Eingabe-Slot enthält ein Papier mit dem Platzhaltertext <em>"Kingdom-Name..."</em>. Tippe den Namen ins <span class="lang-de">Umbenennen-Feld</span><span class="lang-en">rename field</span>. Beim Klick auf den Ergebnis-Slot (Slot 3 im Amboss) wird <span class="lang-de">validiert</span><span class="lang-en">validated</span> und das Kingdom erstellt. Regeln: <strong>3–20 Zeichen, nur a–z, A–Z, 0–9, _</strong>. Name muss einzigartig sein.</span>
+        <span class="lang-en">The first input slot contains paper with placeholder text <em>"Kingdom-Name..."</em>. Type the name into the <span class="lang-de">Umbenennen-Feld</span><span class="lang-en">rename field</span>. Clicking the result slot (slot 3 in the anvil) validates and creates the kingdom. Rules: <strong>3–20 chars, only a–z, A–Z, 0–9, _</strong>. Name must be unique.</span>
       </div>
     </div>
   </section>
@@ -1299,7 +1299,7 @@
 
     <h3><span class="lang-de">Block-Werte (Schulden)</span><span class="lang-en">Block values (debt)</span></h3>
     <p><span class="lang-de">Unter</span> <code>debt.block-values</code> <span class="lang-de">steht für jeden Block-Typ der Gold-Wert bei Zerstörung im Kriegsgebiet.</span><span class="lang-en">contains the gold value for each block type when destroyed in war territory.</span></p>
-    <pre><span class="code-comment"># Beispiel-Einträge</span>
+    <pre><span class="code-comment"><span class="lang-de"># Beispiel-Einträge</span><span class="lang-en"># Example entries</span></span>
 <span class="code-key">debt</span>:
   <span class="code-key">block-values</span>:
     <span class="code-key">STONE</span>: <span class="code-val">1</span>
@@ -1316,7 +1316,7 @@
     <p><span class="lang-de">Alle Nachrichten, GUI-Titel und Lore-Texte befinden sich in</span> <code>plugins/KingdomsReborn/language/de_DE.yml</code> <span class="lang-de">(oder</span> <code>en_EN.yml</code><span class="lang-de">).</span><span class="lang-en">All messages, GUI titles, and lore texts are stored in</span> <code>plugins/KingdomsReborn/language/de_DE.yml</code> <span class="lang-en">(or</span> <code>en_EN.yml</code><span class="lang-en">).</span></p>
     <p><span class="lang-de">Format:</span> <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). <span class="lang-de">Platzhalter in</span> <code>{geschweifte Klammern}</code><span class="lang-de">.</span><span class="lang-en">Format:</span> <strong>MiniMessage</strong> (<code>&lt;gold&gt;Text&lt;/gold&gt;</code>, <code>&lt;red&gt;</code>, <code>&lt;bold&gt;</code> etc.). <span class="lang-en">Placeholders in</span> <code>{curly braces}</code><span class="lang-en">.</span></p>
 
-    <pre><span class="code-comment"># Beispiel — Sprache ändern</span>
+    <pre><span class="code-comment"><span class="lang-de"># Beispiel — Sprache ändern</span><span class="lang-en"># Example — change language</span></span>
 <span class="code-key">bank</span>:
   <span class="code-key">deposit-success</span>: <span class="code-str">"&lt;green&gt;+{amount} {currency} eingezahlt. Guthaben: &lt;gold&gt;{balance}"</span>
 
@@ -1512,6 +1512,79 @@ const observer = new IntersectionObserver(entries => {
 sections.forEach(s => observer.observe(s));
 
 // ── SEARCH / FILTER ──
+const looseSlotItemTranslations = new Map([
+  ['📄 Papier', { de: '📄 Papier', en: '📄 Paper' }],
+  ['📄 Paper', { de: '📄 Papier', en: '📄 Paper' }],
+  ['👥 Spielerkopf', { de: '👥 Spielerkopf', en: '👥 Player head' }],
+  ['👥 Player head', { de: '👥 Spielerkopf', en: '👥 Player head' }],
+  ['🗺 Karte', { de: '🗺 Karte', en: '🗺 Map' }],
+  ['🗺 Map', { de: '🗺 Karte', en: '🗺 Map' }],
+  ['📖 Buch', { de: '📖 Buch', en: '📖 Book' }],
+  ['📖 Book', { de: '📖 Buch', en: '📖 Book' }],
+  ['⭐ Nether-Star (leuchtend)', { de: '⭐ Nether-Star (leuchtend)', en: '⭐ Nether star (glowing)' }],
+  ['⭐ Nether star (glowing)', { de: '⭐ Nether-Star (leuchtend)', en: '⭐ Nether star (glowing)' }],
+  ['🧭 Kompass', { de: '🧭 Kompass', en: '🧭 Compass' }],
+  ['🧭 Compass', { de: '🧭 Kompass', en: '🧭 Compass' }],
+  ['Spielerköpfe', { de: 'Spielerköpfe', en: 'Player heads' }],
+  ['Player heads', { de: 'Spielerköpfe', en: 'Player heads' }],
+  ['◀ Pfeil', { de: '◀ Pfeil', en: '◀ Arrow' }],
+  ['◀ Arrow', { de: '◀ Pfeil', en: '◀ Arrow' }],
+  ['Pfeil ▶', { de: 'Pfeil ▶', en: 'Arrow ▶' }],
+  ['Arrow ▶', { de: 'Pfeil ▶', en: 'Arrow ▶' }],
+  ['🟢 Grüner Farbstoff', { de: '🟢 Grüner Farbstoff', en: '🟢 Green dye' }],
+  ['🟢 Green dye', { de: '🟢 Grüner Farbstoff', en: '🟢 Green dye' }],
+  ['🟢 Grüne Glasscheibe', { de: '🟢 Grüne Glasscheibe', en: '🟢 Green glass pane' }],
+  ['🟢 Green glass pane', { de: '🟢 Grüne Glasscheibe', en: '🟢 Green glass pane' }],
+  ['🔴 Roter Farbstoff', { de: '🔴 Roter Farbstoff', en: '🔴 Red dye' }],
+  ['🔴 Red dye', { de: '🔴 Roter Farbstoff', en: '🔴 Red dye' }],
+  ['🔴 Rote Glasscheibe', { de: '🔴 Rote Glasscheibe', en: '🔴 Red glass pane' }],
+  ['🔴 Red glass pane', { de: '🔴 Rote Glasscheibe', en: '🔴 Red glass pane' }],
+  ['🏦 Ender-Truhe', { de: '🏦 Ender-Truhe', en: '🏦 Ender chest' }],
+  ['🏦 Ender chest', { de: '🏦 Ender-Truhe', en: '🏦 Ender chest' }],
+  ['📦 Truhe', { de: '📦 Truhe', en: '📦 Chest' }],
+  ['📦 Chest', { de: '📦 Truhe', en: '📦 Chest' }],
+  ['⚔ Netherit-Schwert (leuchtend)', { de: '⚔ Netherit-Schwert (leuchtend)', en: '⚔ Netherite sword (glowing)' }],
+  ['⚔ Netherite sword (glowing)', { de: '⚔ Netherit-Schwert (leuchtend)', en: '⚔ Netherite sword (glowing)' }],
+  ['🏳 Weißes Banner', { de: '🏳 Weißes Banner', en: '🏳 White banner' }],
+  ['🏳 White banner', { de: '🏳 Weißes Banner', en: '🏳 White banner' }],
+  ['🟩 Grüner Beton', { de: '🟩 Grüner Beton', en: '🟩 Green concrete' }],
+  ['🟩 Green concrete', { de: '🟩 Grüner Beton', en: '🟩 Green concrete' }],
+  ['🟥 Roter Beton', { de: '🟥 Roter Beton', en: '🟥 Red concrete' }],
+  ['🟥 Red concrete', { de: '🟥 Roter Beton', en: '🟥 Red concrete' }],
+  ['🚪 Tür / 💥 TNT', { de: '🚪 Tür / 💥 TNT', en: '🚪 Door / 💥 TNT' }],
+  ['🚪 Door / 💥 TNT', { de: '🚪 Tür / 💥 TNT', en: '🚪 Door / 💥 TNT' }],
+  ['⚙ Komparator', { de: '⚙ Komparator', en: '⚙ Comparator' }],
+  ['⚙ Comparator', { de: '⚙ Komparator', en: '⚙ Comparator' }],
+  ['🟥/🟩 Beton', { de: '🟥/🟩 Beton', en: '🟥/🟩 Concrete' }],
+  ['🟥/🟩 Concrete', { de: '🟥/🟩 Beton', en: '🟥/🟩 Concrete' }],
+  ['🪙 Goldblock', { de: '🪙 Goldblock', en: '🪙 Gold block' }],
+  ['🪙 Gold block', { de: '🪙 Goldblock', en: '🪙 Gold block' }],
+  ['🎨 Farbstoff', { de: '🎨 Farbstoff', en: '🎨 Dye' }],
+  ['🎨 Dye', { de: '🎨 Farbstoff', en: '🎨 Dye' }],
+  ['🏷 Namensschild', { de: '🏷 Namensschild', en: '🏷 Name tag' }],
+  ['🏷 Name tag', { de: '🏷 Namensschild', en: '🏷 Name tag' }],
+  ['Karten-Slots', { de: 'Karten-Slots', en: 'Map slots' }],
+  ['Map slots', { de: 'Karten-Slots', en: 'Map slots' }],
+  ['▲ Pfeil', { de: '▲ Pfeil', en: '▲ Arrow' }],
+  ['▲ Arrow', { de: '▲ Pfeil', en: '▲ Arrow' }],
+  ['▼ Pfeil', { de: '▼ Pfeil', en: '▼ Arrow' }],
+  ['▼ Arrow', { de: '▼ Pfeil', en: '▼ Arrow' }],
+  ['⚔ Goldschwert', { de: '⚔ Goldschwert', en: '⚔ Gold sword' }],
+  ['⚔ Gold sword', { de: '⚔ Goldschwert', en: '⚔ Gold sword' }],
+  ['Goldnugget', { de: 'Goldnugget', en: 'Gold nugget' }],
+  ['Gold nugget', { de: 'Goldnugget', en: 'Gold nugget' }],
+  ['📄 Seite', { de: '📄 Seite', en: '📄 Page' }],
+  ['📄 Page', { de: '📄 Seite', en: '📄 Page' }]
+]);
+
+function translateLooseSlotItems(lang) {
+  document.querySelectorAll('.slot-item').forEach(el => {
+    const text = el.textContent.trim();
+    const translation = looseSlotItemTranslations.get(text);
+    if (translation) el.textContent = translation[lang] || text;
+  });
+}
+
 function filterNav(query) {
   const q = query.toLowerCase().trim();
   navLinks.forEach(a => {
@@ -1534,7 +1607,10 @@ function setLanguage(lang) {
   });
   const placeholder = lang === 'en' ? 'Search…' : 'Suchen…';
   document.getElementById('searchInput').placeholder = placeholder;
+  translateLooseSlotItems(lang);
 }
+
+translateLooseSlotItems(document.body.classList.contains('lang-en') ? 'en' : 'de');
 
 // ── SMOOTH SCROLL OFFSET FIX ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
